@@ -1,4 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
     id("org.springframework.boot") version "2.4.4" apply false
@@ -23,9 +25,18 @@ allprojects {
 subprojects {
     apply(plugin = "io.spring.dependency-management")
 
-    the<io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension>().apply {
+    dependencies {
+
+        /**
+         * Dependencies without Bill-Of-Materials
+         */
+        constraints {
+        }
+    }
+
+    the<DependencyManagementExtension>().apply {
         imports {
-            mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+            mavenBom(SpringBootPlugin.BOM_COORDINATES)
         }
     }
 
