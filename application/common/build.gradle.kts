@@ -1,0 +1,1 @@
+val moduleName: String by project
