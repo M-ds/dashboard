@@ -1,7 +1,13 @@
 plugins {
-    id("kotlin")
+    kotlin("jvm")
 }
 
 dependencies {
-//    runtimeOnly("org.postgresql:postgresql")
+    implementation(project(":application:common"))
+    implementation(project(":application:core"))
+
+    implementation(kotlin("stdlib-jdk8"))
+    implementation(kotlin("reflect"))
+
+    runtimeOnly("org.postgresql:postgresql")
 }
