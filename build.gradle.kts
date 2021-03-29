@@ -1,5 +1,5 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
@@ -31,6 +31,7 @@ subprojects {
          * Dependencies without Bill-Of-Materials
          */
         constraints {
+            implementation("org.jaco:org.jacoco.core:0.8.5")
         }
     }
 
