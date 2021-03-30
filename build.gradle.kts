@@ -31,7 +31,7 @@ subprojects {
          * Dependencies without Bill-Of-Materials
          */
         constraints {
-            implementation("org.jaco:org.jacoco.core:0.8.5")
+//            implementation("org.jaco:org.jacoco.core:0.8.5")
         }
     }
 
