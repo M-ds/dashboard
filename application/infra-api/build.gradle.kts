@@ -10,4 +10,6 @@ dependencies {
     implementation(kotlin("reflect"))
 
     runtimeOnly("org.postgresql:postgresql")
+
+    implementation("org.junit.jupiter:junit-jupiter:5.4.2")
 }
