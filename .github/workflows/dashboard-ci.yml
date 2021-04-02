@@ -3,11 +3,11 @@ name: Dashboard CI
 on:
   push:
     branches:
-      - master
+      - main
       - develop
   pull_request:
     branches:
-      - master
+      - mail
       - develop
 
 jobs:
