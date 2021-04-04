@@ -23,9 +23,10 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build
+      - name: Execute tests and codeCoverages
+        run: ./gradlew test codeCoverageRport
       - name: Codacy Coverage Reporter
         uses: codacy/codacy-coverage-reporter-action@0.2.0
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          # Optional comma separated list of coverage reports to send to Codacy
-          # coverage-reports: # optional, default is
+          coverage-reports: codeCoverageReport/codeCoverageRport.xml
