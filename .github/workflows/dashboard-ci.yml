@@ -24,7 +24,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
       - name: Execute tests and codeCoverages
-        run: ./gradlew test codeCoverageRport
+        run: ./gradlew test codeCoverageReport
       - name: Codacy Coverage Reporter
         uses: codacy/codacy-coverage-reporter-action@0.2.0
         with:
