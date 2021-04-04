@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm")
+    jacoco
 }
 
 dependencies {
@@ -8,4 +9,11 @@ dependencies {
 
     implementation("org.liquibase:liquibase-core")
     implementation("org.junit.jupiter:junit-jupiter:5.4.2")
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.isEnabled = true
+        html.isEnabled = true
+    }
 }

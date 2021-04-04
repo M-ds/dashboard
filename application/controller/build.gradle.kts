@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm")
+    jacoco
 }
 
 dependencies {
@@ -14,4 +15,11 @@ dependencies {
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 //    implementation("org.junit.jupiter:junit-jupiter:5.4.2")
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.isEnabled = true
+        html.isEnabled = true
+    }
 }

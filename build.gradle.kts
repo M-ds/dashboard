@@ -6,6 +6,8 @@ plugins {
     id("org.springframework.boot") version "2.4.4" apply false
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
 
+    jacoco
+
     kotlin("jvm") version "1.4.31"
     kotlin("plugin.spring") version "1.4.31"
 }
@@ -57,3 +59,16 @@ configurations {
         resolutionStrategy.failOnVersionConflict()
     }
 }
+
+//task jacocoRootReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
+//    dependsOn = subprojects.test
+//    additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
+//    sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+//    classDirectories =  files(subprojects.sourceSets.main.output)
+//    executionData = files(subprojects.jacocoTestReport.executionData)
+//    reports {
+//        html.enabled = true
+//        xml.enabled = true
+//        csv.enabled = false
+//    }
+//}
