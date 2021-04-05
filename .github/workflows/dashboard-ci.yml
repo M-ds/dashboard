@@ -30,3 +30,7 @@ jobs:
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           coverage-reports: build/reports/jacoco/codeCoverageReport/codeCoverageRport.xml
+      
+      - name: Step two
+        run: env | sort
+        
