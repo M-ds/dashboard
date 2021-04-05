@@ -19,18 +19,17 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
       - name: Build with Gradle
         run: ./gradlew build
+
       - name: Execute tests and codeCoverages
         run: ./gradlew test codeCoverageReport
+
       - name: Codacy Coverage Reporter
         uses: codacy/codacy-coverage-reporter-action@0.2.0
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          coverage-reports: build/reports/jacoco/codeCoverageReport/codeCoverageRport.xml
-      
-      - name: Step two
-        run: env | sort
-        

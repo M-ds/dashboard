@@ -60,7 +60,6 @@ configurations {
     }
 }
 
-
 // task to gather code coverage from multiple subprojects
 // NOTE: the `JacocoReport` tasks do *not* depend on the `test` task by default. Meaning you have to ensure
 // that `test` (or other tasks generating code coverage) run before generating the report.
@@ -98,4 +97,3 @@ tasks.register<JacocoReport>("codeCoverageReport") {
         html.isEnabled = true
     }
 }
-
