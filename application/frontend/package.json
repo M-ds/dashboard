@@ -1,15 +1,16 @@
 {
   "name": "frontend",
   "version": "0.0.1",
+  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
     "axios": "^0.21.1",
-    "vue": "^2.6.12",
+    "core-js": "^3.6.5",
+    "vue": "^2.6.11",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2"
   },
