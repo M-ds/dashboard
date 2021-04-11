@@ -1,29 +1,32 @@
 <template>
-  <div id="login-container">
-    <h1>Login</h1>
-    <div>
-      <label>
-        Username
-        <input type="text"
-               name="userName"
-               v-model="input.userName"
-               placeholder="Username"
-        />
-      </label>
-      <br/><br/>
-      <label>
-        Password
-        <input type="password"
-               name="password"
-               v-model="input.password"
-               placeholder="Password"
-        />
-      </label>
+  <div class="container center">
+    <div class="row">
+      <div class="eight columns offset-by-four">
+        <h1>Login</h1>
+        <div>
+          <label>
+            Username
+            <input type="text"
+                   name="userName"
+                   v-model="input.userName"
+                   placeholder="Username"
+                   class="u-cf"
+            />
+          </label>
+        </div>
+        <label>
+          Password
+          <input type="password"
+                 name="password"
+                 v-model="input.password"
+                 placeholder="Password"
+                 class="u-cf"
+          />
+        </label>
+        <button class="button u-cf" @click="login()">Log in</button>
+        <router-link :to="{name: 'NewUser'}" tag="button" class="button u-cf">New User</router-link>
+      </div>
     </div>
-    <br><br>
-    <button @click="login()">Log in</button>
-    <br><br>
-    <router-link :to="{name: 'NewUser'}" tag="button">New User</router-link>
   </div>
 </template>
 

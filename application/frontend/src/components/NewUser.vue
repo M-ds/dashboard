@@ -1,43 +1,47 @@
 <template>
-  <div>
-    <h1>Create new user</h1>
-    <label>
-      Username
-      <input type="text"
-             name="userName"
-             v-model="user.userName"
-             placeholder="Username"
-      />
-    </label>
-    <br><br>
-    <label>
-      Email
-      <input type="text"
-             name="email"
-             v-model="user.email"
-             placeholder="example@email.com"
-      />
-    </label>
-    <br><br>
-    <label>
-      Password
-      <input type="text"
-             name="password"
-             v-model="user.password"
-             placeholder="Password"
-      />
-    </label>
-    <br><br>
-    <label>
-      Repeat password
-      <input type="text"
-             name="passwordConformation"
-             v-model="user.passwordConformation"
-             placeholder="Password"
-      />
-    </label>
-    <br><br>
-    <button @click="signup()">Sign up!</button>
+  <div class="container center">
+    <div class="row">
+      <div class="twelve columns offset-by-four">
+        <h1>Create new user</h1>
+        <label>
+          Username
+          <input type="text"
+                 name="userName"
+                 v-model="user.userName"
+                 placeholder="Username"
+                 class="u-cf"
+          />
+        </label>
+        <label>
+          Email
+          <input type="text"
+                 name="email"
+                 v-model="user.email"
+                 placeholder="example@email.com"
+                 class="u-cf"
+          />
+        </label>
+        <label>
+          Password
+          <input type="text"
+                 name="password"
+                 v-model="user.password"
+                 placeholder="Password"
+                 class="u-cf"
+          />
+        </label>
+        <label>
+          Repeat password
+          <input type="text"
+                 name="passwordConformation"
+                 v-model="user.passwordConformation"
+                 placeholder="Password"
+                 class="u-cf"
+          />
+        </label>
+        <button class="u-cf" @click="signup()">Sign up!</button>
+      </div>
+    </div>
   </div>
 </template>
 
