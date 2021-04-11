@@ -1,5 +1,5 @@
 <template>
-  <div class="container center">
+  <div class="container">
     <div class="row">
       <div class="twelve columns offset-by-four">
         <h1>Create new user</h1>

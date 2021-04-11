@@ -1,5 +1,5 @@
 <template>
-  <div class="container center">
+  <div class="container">
     <div class="row">
       <div class="eight columns offset-by-four">
         <h1>Login</h1>
