@@ -38,3 +38,6 @@ out/
 
 ### Application.properties ###
 application/configuration/src/main/resources/application.properties
+
+### Frontend related stuff ###
+/application/frontend/node_modules
