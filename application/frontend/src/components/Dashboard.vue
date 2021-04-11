@@ -3,8 +3,7 @@
     <h1>Welcome! This is your personal Dashboard!</h1>
     <div class="row">
       <div class="one column">
-        <!-- navigation bar -->
-        <router-link tag="button" :to="{name: 'Login'}" class="u-cf">Login</router-link>
+        <Navigation/>
       </div>
       <div class="eleven columns">
         <grid-layout :layout.sync="layout"
@@ -33,11 +32,13 @@
 </template>
 
 <script>
+import Navigation from "@/components/Navigation";
 import VueGridLayout from 'vue-grid-layout';
 
 export default {
   name: "Dashboard",
   components: {
+    Navigation,
     GridLayout: VueGridLayout.GridLayout,
     GridItem: VueGridLayout.GridItem
   },
@@ -88,7 +89,7 @@ h1 {
 }
 
 .vue-grid-layout {
-  background: #eee;
+  /*background: #eee;*/
 }
 
 .vue-grid-item:not(.vue-grid-placeholder) {
