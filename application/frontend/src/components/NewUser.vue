@@ -36,6 +36,8 @@
              placeholder="Password"
       />
     </label>
+    <br><br>
+    <button @click="signup()">Sign up!</button>
   </div>
 </template>
 
@@ -50,7 +52,11 @@ export default {
         password: "",
         passwordConformation: "",
       }
-
+    }
+  },
+  methods: {
+    signup: function () {
+      this.$router.push({name: 'Dashboard'});
     }
   }
 }

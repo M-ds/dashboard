@@ -17,6 +17,12 @@ export default new Router({
       name: "NewUser",
       props: false,
       component: () => import(/* webpackChuckName: "newUser" */ "./components/NewUser")
+    },
+    {
+      path: "/dashboard",
+      name: "Dashboard",
+      props: false,
+      component: () => import(/* webpackChuckName: "dashboard" */ "./components/Dashboard")
     }
   ]
 })

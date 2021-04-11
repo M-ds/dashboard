@@ -23,8 +23,7 @@
     <br><br>
     <button @click="login()">Log in</button>
     <br><br>
-    <router-link :to="{name: 'NewUser'}">Create new User</router-link>
-    <!-- Create new user -->
+    <router-link :to="{name: 'NewUser'}" tag="button">New User</router-link>
   </div>
 </template>
 
@@ -40,9 +39,11 @@ export default {
     }
   },
   methods: {
-    login: function() {
+    login: function () {
       const message = `Username: ${this.input.userName} & Password: ${this.input.password}`;
       alert(message);
+      // if correct redirect otherwise error
+      this.$router.push({name: 'Dashboard'});
     }
   }
 }
