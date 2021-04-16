@@ -21,7 +21,7 @@ open class RepositoryConfig {
     private val password: String = ""
 
     @Bean
-    open fun userRepository(): UserRepository {
+    open fun initUserRepository(): UserRepository {
         return UserRepositoryImpl(createDataSource())
     }
 

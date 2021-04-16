@@ -27,6 +27,7 @@ export const DashboardStore = {
     resizable: true,
     index: 0
   }),
+  // Business logic actions are stored here
   actions: {},
   //These only modify the state
   mutations: {},

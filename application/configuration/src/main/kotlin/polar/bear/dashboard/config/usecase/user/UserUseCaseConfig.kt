@@ -10,7 +10,7 @@ import polar.bear.dashboard.user.usecase.impl.UserProfileUseCaseImpl
 open class UserUseCaseConfig {
 
     @Bean
-    open fun userProfileUseCase(
+    open fun initUserProfileUseCase(
         userRepository: UserRepository
     ): UserProfileUseCase {
         return UserProfileUseCaseImpl(
