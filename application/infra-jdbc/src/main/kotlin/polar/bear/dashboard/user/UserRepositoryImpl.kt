@@ -18,7 +18,7 @@ class UserRepositoryImpl(
     override fun getUserProfile(userId: Int): Optional<UserProfile> {
         val getUserProfileQuery = """
             SELECT username, password, email
-            FROM User u
+            FROM user u
             WHERE u.id = ?
         """.trimIndent()
 
@@ -29,7 +29,7 @@ class UserRepositoryImpl(
                 userId
             )
 
-            Optional.ofNullable(result)
+            return Optional.ofNullable(result)
 
         } catch (exception: DataAccessException) {
             Optional.empty()
