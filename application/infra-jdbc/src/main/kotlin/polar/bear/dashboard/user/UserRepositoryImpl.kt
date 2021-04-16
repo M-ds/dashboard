@@ -18,8 +18,8 @@ class UserRepositoryImpl(
     override fun getUserProfile(userId: Int): Optional<UserProfile> {
         val getUserProfileQuery = """
             SELECT username, password, email
-            FROM user u
-            WHERE u.id = ?
+            FROM person p
+            WHERE p.id = ?
         """.trimIndent()
 
         return try {
