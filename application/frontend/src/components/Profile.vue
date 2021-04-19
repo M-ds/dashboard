@@ -6,6 +6,33 @@
         <Navigation/>
       </div>
       <div class="eleven columns">
+        <label>
+          Username
+          <input type="text"
+                 name="userName"
+                 v-model="user.userName"
+                 :placeholder="user.userName"
+                 class="u-cf"
+          />
+        </label>
+        <label>
+          Email
+          <input type="text"
+                 name="email"
+                 v-model="user.email"
+                 :placeholder="user.email"
+                 class="u-cf"
+          />
+        </label>
+        <label>
+          Password
+          <input type="password"
+                 name="password"
+                 v-model="user.password"
+                 :placeholder="user.password"
+                 class="u-cf"
+          />
+        </label>
       </div>
     </div>
   </div>
@@ -19,9 +46,14 @@ export default {
   components: {
     Navigation
   },
+  data() {
+    return {
+      user: Object
+    }
+  },
   async created() {
     await this.$store.dispatch("UserStore/getUserProfile", 1);
-    console.log(this.$store.getters["UserStore/user"]);
+    this.user = this.$store.getters["UserStore/user"];
   }
 }
 </script>
