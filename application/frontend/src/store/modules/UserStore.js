@@ -18,14 +18,14 @@ export const UserStore = {
       let rawData = await userService.getUserProfile(userId);
       if (rawData.valid) {
         let convertedUser = new Person(rawData.model);
-        context.commit("setUser", convertedUser)
+        context.commit("setUser", convertedUser);
       }
       return Promise.resolve();
     }
   },
   getters: {
     user: state => {
-      return state.user
+      return state.user;
     }
   }
-}
+};

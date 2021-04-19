@@ -42,14 +42,14 @@ export default {
     }
   },
   methods: {
-    login: function () {
+    login() {
       const message = `Username: ${this.input.userName} & Password: ${this.input.password}`;
       alert(message);
       // if correct redirect otherwise error
-      this.$router.push({name: 'Dashboard'});
+      this.$router.push({name: "Dashboard"});
     }
   }
-}
+};
 </script>
 
 <style scoped>

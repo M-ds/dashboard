@@ -1,6 +1,6 @@
 export const DashboardStore = {
   namespaced: true,
-  state: () => ({
+  state: {
     layout: [
       {"x": 0, "y": 0, "w": 2, "h": 2, "i": "0", static: false},
       {"x": 2, "y": 0, "w": 2, "h": 4, "i": "1", static: true},
@@ -26,15 +26,23 @@ export const DashboardStore = {
     draggable: true,
     resizable: true,
     index: 0
-  }),
+  },
   // Business logic actions are stored here
   actions: {},
   //These only modify the state
   mutations: {},
   getters: {
-    layout: state => state.layout,
-    draggable: state => state.draggable,
-    resizable: state => state.resizable,
-    index: state => state.index
+    layout: state => {
+      return state.layout;
+    },
+    draggable: state => {
+      return state.draggable;
+    },
+    resizable: state => {
+      return state.resizable;
+    },
+    index: state => {
+      return state.index;
+    }
   }
-}
+};

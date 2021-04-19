@@ -480,7 +480,6 @@ li {
   margin-bottom: 1rem;
 }
 
-
 /* Code
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 code {
@@ -498,7 +497,6 @@ pre > code {
   padding: 1rem 1.5rem;
   white-space: pre;
 }
-
 
 /* Tables
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -518,7 +516,6 @@ th:last-child,
 td:last-child {
   padding-right: 0;
 }
-
 
 /* Spacing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -546,7 +543,6 @@ form {
   margin-bottom: 2.5rem;
 }
 
-
 /* Utilities
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .u-full-width {
@@ -567,7 +563,6 @@ form {
   float: left;
 }
 
-
 /* Misc
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 hr {
@@ -576,7 +571,6 @@ hr {
   border-width: 0;
   border-top: 1px solid #E1E1E1;
 }
-
 
 /* Clearing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -590,7 +584,6 @@ hr {
   clear: both;
 }
 
-
 /* Media Queries
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 /*
@@ -599,7 +592,6 @@ near the relevant code. For example, if you wanted to change the styles for butt
 on small devices, paste the mobile query code up in the buttons section and style it
 there.
 */
-
 
 /* Larger than mobile */
 @media (min-width: 400px) {

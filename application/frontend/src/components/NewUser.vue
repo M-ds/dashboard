@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     signup: function () {
-      this.$router.push({name: 'Dashboard'});
+      this.$router.push({name: "Dashboard"});
     }
   }
 }
