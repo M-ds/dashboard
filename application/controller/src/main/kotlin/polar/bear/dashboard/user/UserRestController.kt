@@ -4,10 +4,12 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.CrossOrigin
 import polar.bear.dashboard.common.reply.user.JsonUserReply
 import polar.bear.dashboard.user.dto.UserProfileDto
 import polar.bear.dashboard.user.usecase.UserProfileUseCase
 
+@CrossOrigin(origins = ["http://localhost:1994"])
 @RestController
 @RequestMapping("/rest/user")
 class UserRestController(

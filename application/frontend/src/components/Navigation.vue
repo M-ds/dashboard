@@ -14,6 +14,13 @@
     >
       New User
     </router-link>
+    <router-link
+        :to="{name: 'Profile'}"
+        tag="button"
+        class="button u-cf"
+    >
+      Profile
+    </router-link>
   </div>
 </template>
 

@@ -1,4 +1,5 @@
 import userService from "@/service/user/UserService";
+import {Person} from "@/domain/User";
 
 export const UserStore = {
   namespaced: true,
@@ -13,13 +14,16 @@ export const UserStore = {
   },
   // Business logic actions are stored here
   actions: {
-    getUserProfile(state, userId) {
-      let rawUser = userService.getUserProfile(userId)
-      let convertedUser = new User(rawUser);
-      state.commit('setUser', convertedUser)
+    async getUserProfile(state, userId) {
+      let rawData = await userService.getUserProfile(userId);
+      if (rawData.valid) {
+        let convertedUser = new Person(rawData.model);
+        state.commit('setUser', convertedUser)
+      }
+      return Promise.resolve();
     }
   },
   getters: {
-    user: state => state.user,
+    user: state => state.user
   }
 }
