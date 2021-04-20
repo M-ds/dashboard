@@ -2,10 +2,10 @@
   <div>
     <h1>Welcome! This is your personal Dashboard!</h1>
     <div class="row">
-      <div class="one column">
+      <div class="two columns">
         <Navigation/>
       </div>
-      <div class="eleven columns">
+      <div class="ten columns">
         <grid-layout :layout.sync="layout"
                      :col-num="12"
                      :row-height="30"

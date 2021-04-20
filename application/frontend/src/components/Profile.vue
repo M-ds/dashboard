@@ -2,10 +2,10 @@
   <div>
     <h1>Profile</h1>
     <div class="row">
-      <div class="one column">
+      <div class="two columns">
         <Navigation/>
       </div>
-      <div class="eleven columns">
+      <div class="ten columns">
         <label>
           Username
           <input type="text"

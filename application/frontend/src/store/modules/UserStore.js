@@ -24,7 +24,7 @@ export const UserStore = {
     }
   },
   getters: {
-    user: state => {
+    user: (state) => {
       return state.user;
     }
   }

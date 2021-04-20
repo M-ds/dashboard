@@ -27,21 +27,21 @@ export const DashboardStore = {
     resizable: true,
     index: 0
   },
-  // Business logic actions are stored here
-  actions: {},
   //These only modify the state
   mutations: {},
+  // Business logic actions are stored here
+  actions: {},
   getters: {
-    layout: state => {
+    layout: (state) => {
       return state.layout;
     },
-    draggable: state => {
+    draggable: (state) => {
       return state.draggable;
     },
-    resizable: state => {
+    resizable: (state) => {
       return state.resizable;
     },
-    index: state => {
+    index: (state) => {
       return state.index;
     }
   }

@@ -23,8 +23,16 @@
                  class="u-cf"
           />
         </label>
-        <button class="button u-cf" @click="login()">Log in</button>
-        <router-link :to="{name: 'NewUser'}" tag="button" class="button u-cf">New User</router-link>
+        <button
+            class="button u-cf"
+            @click="login()"
+        >Log in</button>
+        <router-link
+            :to="{name: 'NewUser'}"
+            tag="button"
+            class="button u-cf"
+        >New User
+        </router-link>
       </div>
     </div>
   </div>

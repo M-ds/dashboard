@@ -1,23 +1,23 @@
 <template>
   <div>
     <router-link
-        :to="{name: 'Login'}"
+        :to="{name: 'Dashboard'}"
         tag="button"
-        class="button u-cf"
+        class="button u-cf nav-button"
     >
-      Login
+      Dashboard
     </router-link>
     <router-link
         :to="{name: 'NewUser'}"
         tag="button"
-        class="button u-cf"
+        class="button u-cf nav-button"
     >
       New User
     </router-link>
     <router-link
         :to="{name: 'Profile'}"
         tag="button"
-        class="button u-cf"
+        class="button u-cf nav-button"
     >
       Profile
     </router-link>
@@ -31,5 +31,7 @@ export default {
 </script>
 
 <style scoped>
-
+.nav-button{
+  width: 100%;
+}
 </style>
