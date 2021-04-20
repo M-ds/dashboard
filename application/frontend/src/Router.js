@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Login from "@/components/Login"
+import Login from "@/components/Login";
 
 Vue.use(Router);
 
@@ -23,6 +23,12 @@ export default new Router({
       name: "Dashboard",
       props: false,
       component: () => import(/* webpackChuckName: "dashboard" */ "./components/Dashboard")
+    },
+    {
+      path: "/profile",
+      name: "Profile",
+      props: false,
+      component: () => import(/* webpackChuckName: "dashboard" */ "./components/Profile")
     }
   ]
-})
+});

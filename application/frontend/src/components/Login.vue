@@ -23,8 +23,16 @@
                  class="u-cf"
           />
         </label>
-        <button class="button u-cf" @click="login()">Log in</button>
-        <router-link :to="{name: 'NewUser'}" tag="button" class="button u-cf">New User</router-link>
+        <button
+            class="button u-cf"
+            @click="login()"
+        >Log in</button>
+        <router-link
+            :to="{name: 'NewUser'}"
+            tag="button"
+            class="button u-cf"
+        >New User
+        </router-link>
       </div>
     </div>
   </div>
@@ -42,14 +50,14 @@ export default {
     }
   },
   methods: {
-    login: function () {
+    login() {
       const message = `Username: ${this.input.userName} & Password: ${this.input.password}`;
       alert(message);
       // if correct redirect otherwise error
-      this.$router.push({name: 'Dashboard'});
+      this.$router.push({name: "Dashboard"});
     }
   }
-}
+};
 </script>
 
 <style scoped>
