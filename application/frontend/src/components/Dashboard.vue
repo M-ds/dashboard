@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="container">
     <h1>Welcome! This is your personal Dashboard!</h1>
     <div class="row">
-      <div class="two columns">
+      <div class="col-sm-1">
         <Navigation/>
       </div>
-      <div class="ten columns">
+      <div class="col-sm-11">
         <grid-layout :layout.sync="layout"
                      :col-num="12"
                      :row-height="30"

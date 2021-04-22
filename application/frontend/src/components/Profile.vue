@@ -1,39 +1,45 @@
 <template>
-  <div>
+  <div class="container">
     <h1>Profile</h1>
     <div class="row">
-      <div class="two columns">
+      <div class="col-sm-1">
         <Navigation/>
       </div>
-      <div class="ten columns">
-        <label>
-          Username
-          <input type="text"
-                 name="userName"
-                 v-model="user.userName"
-                 :placeholder="user.userName"
-                 class="u-cf"
-          />
-        </label>
-        <label>
-          Email
-          <input type="text"
-                 name="email"
-                 v-model="user.email"
-                 :placeholder="user.email"
-                 class="u-cf"
-          />
-        </label>
-        <label>
-          Password
-          <input type="password"
-                 name="password"
-                 v-model="user.password"
-                 :placeholder="user.password"
-                 class="u-cf"
-          />
-        </label>
-      </div>
+      <form class="row centered">
+        <div class="col-sm-12 col-md-12">
+          <label class="input-group vertical">
+            Username
+            <input type="text"
+                   name="userName"
+                   v-model="user.userName"
+                   :placeholder="user.userName"
+                   readonly=""
+            />
+          </label>
+        </div>
+        <div class="col-sm-12 col-md-12">
+          <label class="input-group vertical">
+            Email
+            <input type="text"
+                   name="email"
+                   v-model="user.email"
+                   :placeholder="user.email"
+                   readonly=""
+            />
+          </label>
+        </div>
+        <div class="col-sm-12 col-md-12">
+          <label class="input-group vertical">
+            Password
+            <input type="password"
+                   name="password"
+                   v-model="user.password"
+                   :placeholder="user.password"
+                   readonly=""
+            />
+          </label>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -61,5 +67,13 @@ export default {
 <style scoped>
 h1 {
   text-align: center;
+}
+
+.centered {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 </style>

@@ -1,38 +1,31 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="eight columns offset-by-four">
-        <h1>Login</h1>
-        <div>
-          <label>
-            Username
-            <input type="text"
-                   name="userName"
-                   v-model="input.userName"
-                   placeholder="Username"
-                   class="u-cf"
-            />
-          </label>
-        </div>
-        <label>
-          Password
+      <div class="col-sm-12">
+        <div class="card large centered">
+          <h1>Login</h1>
+          <input type="text"
+                 name="userName"
+                 v-model="input.userName"
+                 placeholder="Username"
+          />
           <input type="password"
                  name="password"
                  v-model="input.password"
                  placeholder="Password"
-                 class="u-cf"
           />
-        </label>
-        <button
-            class="button u-cf"
-            @click="login()"
-        >Log in</button>
-        <router-link
-            :to="{name: 'NewUser'}"
-            tag="button"
-            class="button u-cf"
-        >New User
-        </router-link>
+          <button
+              class="button"
+              @click="login()"
+          >Log in
+          </button>
+          <router-link
+              :to="{name: 'NewUser'}"
+              tag="button"
+              class="button"
+          >New User
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -61,5 +54,20 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  text-align: center;
+}
 
+input {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.centered {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
 </style>
