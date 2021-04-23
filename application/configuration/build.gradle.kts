@@ -2,7 +2,8 @@ plugins {
     id("org.springframework.boot")
 
     kotlin("jvm")
-    jacoco
+    // Uncomment jacoco when tests are present in this module
+//    jacoco
 }
 
 dependencies {
