@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import polar.bear.dashboard.user.infra.UserRepository
 import polar.bear.dashboard.user.usecase.UserProfileUseCase
-import polar.bear.dashboard.user.usecase.impl.UserProfileUseCaseImpl
+import polar.bear.dashboard.impl.UserProfileUseCaseImpl
 
 @Configuration
 open class UserUseCaseConfig {
