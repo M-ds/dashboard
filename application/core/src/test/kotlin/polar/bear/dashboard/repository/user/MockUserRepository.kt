@@ -10,7 +10,7 @@ class MockUserRepository : UserRepository {
 
     fun getUser(userProfile: UserProfile?) {
         if (userProfile == null) {
-            this.userProfile.isEmpty
+            this.userProfile = Optional.empty()
         } else {
             this.userProfile = Optional.of(userProfile)
         }
