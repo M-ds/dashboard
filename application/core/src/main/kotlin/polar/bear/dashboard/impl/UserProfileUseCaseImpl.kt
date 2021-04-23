@@ -1,4 +1,4 @@
-package polar.bear.dashboard.user.usecase.impl
+package polar.bear.dashboard.impl
 
 import polar.bear.dashboard.user.domain.UserProfile
 import polar.bear.dashboard.user.infra.UserRepository
