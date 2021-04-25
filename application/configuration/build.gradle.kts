@@ -18,7 +18,7 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-security")
 
-    implementation("org.junit.jupiter:junit-jupiter:5.4.2")
+    testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
 }
