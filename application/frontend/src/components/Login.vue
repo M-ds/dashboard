@@ -45,7 +45,7 @@ export default {
   methods: {
     login() {
       const message = `Username: ${this.input.userName} & Password: ${this.input.password}`;
-      alert(message);
+      console.log(message);
       // if correct redirect otherwise error
       this.$router.push({name: "Dashboard"});
     }

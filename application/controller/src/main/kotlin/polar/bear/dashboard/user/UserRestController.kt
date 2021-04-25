@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.CrossOrigin
-import polar.bear.dashboard.common.reply.user.JsonUserReply
+import polar.bear.dashboard.common.reply.user.JsonUserReplyModel
 import polar.bear.dashboard.user.dto.UserProfileDto
 import polar.bear.dashboard.user.usecase.UserProfileUseCase
 
@@ -19,13 +19,22 @@ class UserRestController(
     @GetMapping("/{userId}/profile")
     fun getUserProfile(
         @PathVariable(value = "userId") userId: String
-    ): JsonUserReply {
+    ): JsonUserReplyModel {
         val userProfile = userProfileUseCase.getUserProfile(userId)
         val userProfileDto = UserProfileDto.fromDomainModel(userProfile)
-        return JsonUserReply(
+        return JsonUserReplyModel(
             valid = true,
             error = null,
             model = userProfileDto
+        )
+    }
+
+    @GetMapping("/admin")
+    fun getAdmin(): JsonUserReplyModel {
+        return JsonUserReplyModel(
+                valid = true,
+                error = null,
+                model = UserProfileDto("ADMIN", "ADMIN", "ADMIN@GMAIL.COM")
         )
     }
 

@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Login from "@/components/Login";
 
 Vue.use(Router);
 
@@ -10,7 +9,7 @@ export default new Router({
     {
       path: "/",
       name: "Login",
-      component: Login
+      component: () => import(/* webpackChuckName: "newUser" */ "./components/Login")
     },
     {
       path: "/newUser",
@@ -21,14 +20,20 @@ export default new Router({
     {
       path: "/dashboard",
       name: "Dashboard",
-      props: false,
+      props: true,
       component: () => import(/* webpackChuckName: "dashboard" */ "./components/Dashboard")
     },
     {
       path: "/profile",
       name: "Profile",
-      props: false,
+      props: true,
       component: () => import(/* webpackChuckName: "dashboard" */ "./components/Profile")
+    },
+    {
+      path: "/marketplace",
+      name: "Marketplace",
+      props: true,
+      component: () => import(/* webpackChuckName: "dashboard" */ "./components/Marketplace")
     }
   ]
 });

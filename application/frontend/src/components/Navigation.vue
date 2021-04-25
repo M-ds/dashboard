@@ -21,6 +21,13 @@
     >
       Profile
     </router-link>
+    <router-link
+        :to="{name: 'Marketplace'}"
+        tag="button"
+        class="button u-cf nav-button"
+    >
+      Marketplace
+    </router-link>
   </div>
 </template>
 
