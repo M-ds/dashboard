@@ -1,10 +1,10 @@
-package polar.bear.dashboard.common.reply.user
+package polar.bear.dashboard.person.signIn.reply
 
 import polar.bear.dashboard.common.reply.JsonError
 import polar.bear.dashboard.common.reply.JsonReplyModel
 import polar.bear.dashboard.person.signIn.dto.SignInResponseDto
 
-class LoginReply(
+class JsonLoginReplyModel(
     valid: Boolean,
     error: JsonError?,
     model: SignInResponseDto

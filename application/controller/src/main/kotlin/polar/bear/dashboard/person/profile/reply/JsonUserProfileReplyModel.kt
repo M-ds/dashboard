@@ -1,10 +1,10 @@
-package polar.bear.dashboard.common.reply.user
+package polar.bear.dashboard.person.profile.reply
 
 import polar.bear.dashboard.common.reply.JsonError
 import polar.bear.dashboard.common.reply.JsonReplyModel
-import polar.bear.dashboard.person.dto.UserProfileDto
+import polar.bear.dashboard.person.profile.dto.UserProfileDto
 
-class JsonUserReplyModel(
+class JsonUserProfileReplyModel(
     valid: Boolean,
     error: JsonError?,
     model: UserProfileDto

@@ -1,4 +1,4 @@
-package polar.bear.dashboard.person.dto
+package polar.bear.dashboard.person.profile.dto
 
 import polar.bear.dashboard.person.domain.PersonProfile
 

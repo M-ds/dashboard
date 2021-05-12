@@ -2,7 +2,7 @@ package polar.bear.dashboard.marketplace
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
-import polar.bear.dashboard.common.reply.marketplace.JsonMarketplaceReply
+import polar.bear.dashboard.marketplace.reply.JsonMarketplaceReply
 import polar.bear.dashboard.marketplace.dto.MarketPlaceInteractablesDto
 
 @RestController

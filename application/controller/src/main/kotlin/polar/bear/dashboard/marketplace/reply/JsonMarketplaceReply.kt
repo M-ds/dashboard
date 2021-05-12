@@ -1,4 +1,4 @@
-package polar.bear.dashboard.common.reply.marketplace
+package polar.bear.dashboard.marketplace.reply
 
 import polar.bear.dashboard.common.reply.JsonError
 import polar.bear.dashboard.common.reply.JsonReplyModel
