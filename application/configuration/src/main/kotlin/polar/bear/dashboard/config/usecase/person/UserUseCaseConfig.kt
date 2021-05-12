@@ -2,11 +2,13 @@ package polar.bear.dashboard.config.usecase.person
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.security.authentication.AuthenticationManager
 import polar.bear.dashboard.person.impl.SignInUseCaseImpl
 import polar.bear.dashboard.person.infra.PersonRepository
 import polar.bear.dashboard.person.usecase.UserProfileUseCase
 import polar.bear.dashboard.person.impl.UserProfileUseCaseImpl
 import polar.bear.dashboard.person.usecase.SignInUseCase
+import polar.bear.dashboard.util.jwt.JwtUtil
 
 @Configuration
 open class UserUseCaseConfig {
@@ -22,10 +24,12 @@ open class UserUseCaseConfig {
 
     @Bean
     open fun initSignInUseCase(
-        personRepository: PersonRepository
+        authenticationManager: AuthenticationManager,
+        jwtUtil: JwtUtil
     ): SignInUseCase {
         return SignInUseCaseImpl(
-            personRepository
+            authenticationManager = authenticationManager,
+            jwtUtil = jwtUtil
         )
     }
 

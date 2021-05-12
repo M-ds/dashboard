@@ -2,7 +2,7 @@ package polar.bear.dashboard.person.infra
 
 import polar.bear.dashboard.person.domain.PersonDetail
 import polar.bear.dashboard.person.domain.PersonProfile
-import java.util.*
+import java.util.Optional
 
 interface PersonRepository {
 
