@@ -1,38 +1,41 @@
 package polar.bear.dashboard.person.auth
 
 import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
-import polar.bear.dashboard.person.domain.Person
+import polar.bear.dashboard.person.domain.PersonDetail
 
 class PersonDetails(
-    private val person: Person
+    private val personDetail: PersonDetail
 ): UserDetails {
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        TODO("Not yet implemented")
+        return personDetail.role.map { role ->
+            SimpleGrantedAuthority(role.name)
+        }.toMutableList()
     }
 
     override fun getPassword(): String {
-        TODO("Not yet implemented")
+        return personDetail.password
     }
 
     override fun getUsername(): String {
-        TODO("Not yet implemented")
+        return personDetail.username
     }
 
     override fun isAccountNonExpired(): Boolean {
-        TODO("Not yet implemented")
+        return personDetail.isActive
     }
 
     override fun isAccountNonLocked(): Boolean {
-        TODO("Not yet implemented")
+        return personDetail.isActive
     }
 
     override fun isCredentialsNonExpired(): Boolean {
-        TODO("Not yet implemented")
+        return personDetail.isActive
     }
 
     override fun isEnabled(): Boolean {
-        TODO("Not yet implemented")
+        return personDetail.isActive
     }
 }

@@ -28,14 +28,4 @@ class UserRestController(
             model = userProfileDto
         )
     }
-
-    @GetMapping("/admin")
-    fun getAdmin(): JsonUserReplyModel {
-        return JsonUserReplyModel(
-                valid = true,
-                error = null,
-                model = UserProfileDto("ADMIN", "ADMIN", "ADMIN@GMAIL.COM")
-        )
-    }
-
 }

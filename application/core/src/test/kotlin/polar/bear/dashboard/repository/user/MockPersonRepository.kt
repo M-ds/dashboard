@@ -1,5 +1,6 @@
 package polar.bear.dashboard.repository.user
 
+import polar.bear.dashboard.person.domain.PersonDetail
 import polar.bear.dashboard.person.domain.PersonProfile
 import polar.bear.dashboard.person.infra.PersonRepository
 import java.util.*
@@ -16,7 +17,7 @@ class MockPersonRepository : PersonRepository {
         }
     }
 
-    override fun loadUserByUsername(username: String) {
+    override fun loadUserByUsername(username: String): Optional<PersonDetail> {
         TODO("Not yet implemented")
     }
 
