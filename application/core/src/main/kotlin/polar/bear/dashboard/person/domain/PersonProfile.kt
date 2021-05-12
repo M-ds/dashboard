@@ -1,6 +1,6 @@
-package polar.bear.dashboard.user.domain
+package polar.bear.dashboard.person.domain
 
-data class UserProfile(
+data class PersonProfile(
     val userName: String,
     val password: String,
     val email: String

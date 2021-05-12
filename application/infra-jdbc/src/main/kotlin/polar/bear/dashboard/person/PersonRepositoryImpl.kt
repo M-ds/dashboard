@@ -1,21 +1,21 @@
-package polar.bear.dashboard.user
+package polar.bear.dashboard.person
 
 import org.springframework.dao.DataAccessException
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
-import polar.bear.dashboard.user.domain.UserProfile
-import polar.bear.dashboard.user.infra.UserRepository
+import polar.bear.dashboard.person.domain.PersonProfile
+import polar.bear.dashboard.person.infra.PersonRepository
 import java.sql.ResultSet
 import java.util.*
 import javax.sql.DataSource
 
-class UserRepositoryImpl(
+class PersonRepositoryImpl(
     dataSource: DataSource
-) : UserRepository {
+) : PersonRepository {
 
     private val jdbcTemplate = JdbcTemplate(dataSource)
 
-    override fun getUserProfile(userId: Int): Optional<UserProfile> {
+    override fun getPersonProfile(personId: Int): Optional<PersonProfile> {
         val getUserProfileQuery = """
             SELECT username, password, email
             FROM person p
@@ -26,7 +26,7 @@ class UserRepositoryImpl(
             val result = jdbcTemplate.queryForObject(
                 getUserProfileQuery,
                 userProfileRowMapper(),
-                userId
+                personId
             )
 
             return Optional.ofNullable(result)
@@ -36,9 +36,9 @@ class UserRepositoryImpl(
         }
     }
 
-    private fun userProfileRowMapper(): RowMapper<UserProfile> {
-        return RowMapper<UserProfile> { rs: ResultSet, _: Int ->
-            UserProfile(
+    private fun userProfileRowMapper(): RowMapper<PersonProfile> {
+        return RowMapper<PersonProfile> { rs: ResultSet, _: Int ->
+            PersonProfile(
                 userName = rs.getString("username"),
                 password = rs.getString("password"),
                 email = rs.getString("email")

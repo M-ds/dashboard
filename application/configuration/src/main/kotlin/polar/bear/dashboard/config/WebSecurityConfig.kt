@@ -9,10 +9,15 @@ import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
+import polar.bear.dashboard.security.JwtAuthEntryPoint
 
 @Configuration
 @EnableWebSecurity
-open class WebSecurityConfig : WebSecurityConfigurerAdapter() {
+open class WebSecurityConfig(
+    private val jwtAuthEntryPoint: JwtAuthEntryPoint,
+    private val jwtRequestFilter: JwtRequestFilter,
+    private val myUserDetailsService: MyUserDetailsService
+) : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
         http.authorizeRequests().antMatchers("/")
