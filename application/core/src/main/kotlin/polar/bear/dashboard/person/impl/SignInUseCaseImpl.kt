@@ -2,7 +2,7 @@ package polar.bear.dashboard.person.impl
 
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import polar.bear.dashboard.person.domain.PersonDetail
+import polar.bear.dashboard.person.auth.PersonDetails
 import polar.bear.dashboard.person.domain.SignInPerson
 import polar.bear.dashboard.person.usecase.SignInUseCase
 import polar.bear.dashboard.util.jwt.JwtUtil
@@ -10,7 +10,7 @@ import polar.bear.dashboard.util.jwt.JwtUtil
 class SignInUseCaseImpl(
     private val authenticationManager: AuthenticationManager,
     private val jwtUtil: JwtUtil
-): SignInUseCase {
+) : SignInUseCase {
 
     override fun signIn(request: SignInUseCase.SignInRequest): SignInUseCase.SignInResponse {
         val username = request.username
@@ -21,10 +21,10 @@ class SignInUseCaseImpl(
         )
 
         val jwtToken = jwtUtil.generateToken(authentication.name)
-        val personDetail = authentication.principal as PersonDetail
+        val personDetail = authentication.principal as PersonDetails
 
-        val roles = personDetail.role.map { role ->
-            role.name
+        val roles = personDetail.authorities.map { role ->
+            role.authority
         }.toList()
 
         val signInPerson = SignInPerson(
@@ -36,5 +36,6 @@ class SignInUseCaseImpl(
         return SignInUseCase.SignInResponse(
             signInPerson = signInPerson
         )
+
     }
 }

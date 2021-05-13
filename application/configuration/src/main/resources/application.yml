@@ -1,0 +1,18 @@
+spring:
+  # Database
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5555/dashboard-dev?currentSchema=dashboard
+    username: adminPostgres
+    password: superSexyWachtwoord
+
+  liquibase:
+    change-log: classpath:db/changelog/changelog-master.xml
+
+dashboard:
+  jwt:
+    # used for hashing
+    secret: EQ229k=@Tq`Y4SS*gV@;LU$4!h5bHM
+    # 10 min
+    expiration: 600000
+

@@ -13,7 +13,7 @@ class JwtTokenProperties {
     @Value("\${dashboard.jwt.secret}")
     private val jwtSecret: String = ""
 
-    @Value("\${dashboard.jwt.expiration.time}")
+    @Value("\${dashboard.jwt.expiration}")
     private val jwtTokenExpirationTime: Int = 0
 
     @Bean

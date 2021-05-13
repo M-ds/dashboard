@@ -20,7 +20,7 @@ class UserSignInController(
     @PostMapping("/user/auth/_log-in")
     fun login(
         @RequestBody loginRequest: LoginRequest
-    ): ResponseEntity<JsonLoginReplyModel> {
+    ): ResponseEntity<SignInResponseDto> {
         val request = SignInUseCase.SignInRequest(
             username = loginRequest.username,
             password = loginRequest.password
@@ -37,11 +37,7 @@ class UserSignInController(
                 HttpHeaders.AUTHORIZATION,
                 response.signInPerson.token
             ).body(
-                JsonLoginReplyModel(
-                    valid = true,
-                    error = null,
-                    model = signInResponseDto
-                )
+                signInResponseDto
             )
     }
 }

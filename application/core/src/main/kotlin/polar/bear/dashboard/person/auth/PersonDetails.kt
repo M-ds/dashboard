@@ -10,7 +10,7 @@ class PersonDetails(
 ): UserDetails {
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        return personDetail.role.map { role ->
+        return personDetail.roles.map { role ->
             SimpleGrantedAuthority(role.name)
         }.toMutableList()
     }

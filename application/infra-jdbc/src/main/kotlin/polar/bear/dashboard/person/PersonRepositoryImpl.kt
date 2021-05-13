@@ -8,7 +8,7 @@ import polar.bear.dashboard.person.domain.PersonProfile
 import polar.bear.dashboard.person.domain.Role
 import polar.bear.dashboard.person.infra.PersonRepository
 import java.sql.ResultSet
-import java.util.*
+import java.util.Optional
 import javax.sql.DataSource
 
 class PersonRepositoryImpl(
@@ -46,24 +46,20 @@ class PersonRepositoryImpl(
         val currentUserRoles: MutableList<Role> = mutableListOf()
 
         return RowMapper<PersonDetail> { rs: ResultSet, _: Int ->
-            while (rs.next()) {
+            do {
                 val username = rs.getString("username")
                 val password = rs.getString("password")
                 val active = rs.getBoolean("active")
                 if (finalPerson.username.isBlank()) {
-                    PersonDetail(
-                        username = username,
-                        password = password,
-                        isActive = active
-                    )
-                    currentUserRoles.add(Role.valueOf(rs.getString("name")))
+                    finalPerson.username = username
+                    finalPerson.password = password
+                    finalPerson.isActive = active
                 }
-                currentUserRoles.add(Role.valueOf(rs.getString("name")))
-            }
+                currentUserRoles.add(Role.convertToRole(rs.getString("name")))
 
-            print("FOUND USER:")
-            println(finalPerson.toString())
+            } while (rs.next())
 
+            finalPerson.roles = currentUserRoles
             finalPerson
 
         }

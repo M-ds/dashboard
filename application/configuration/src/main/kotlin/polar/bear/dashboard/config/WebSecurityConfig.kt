@@ -46,7 +46,9 @@ open class WebSecurityConfig(
                 "/user/auth/_signup"
             ).permitAll()
             // Private endpoints, which need a specific role. (this is better than via Controller)
-            .antMatchers("/rest/user")
+            .antMatchers("/api/user/**")
+            .hasAnyRole(SecurityRole.USER.name, SecurityRole.MEMBER.name, SecurityRole.ADMIN.name)
+            .antMatchers("/api/marketplace")
             .hasAnyRole(SecurityRole.USER.name, SecurityRole.MEMBER.name, SecurityRole.ADMIN.name)
             .anyRequest()
             .authenticated()

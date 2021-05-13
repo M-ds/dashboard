@@ -7,8 +7,9 @@ class TextUtils {
 
     companion object {
 
-        fun hasText(string: String): Boolean {
-            return string.isNotBlank() && containsText(string)
+        fun hasText(string: String?): Boolean {
+            if (string.isNullOrBlank()) return false
+            return containsText(string)
         }
 
         private fun containsText(str: String): Boolean {

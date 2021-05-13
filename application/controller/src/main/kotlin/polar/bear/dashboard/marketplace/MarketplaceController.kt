@@ -8,7 +8,7 @@ import polar.bear.dashboard.marketplace.dto.MarketPlaceInteractablesDto
 @RestController
 class MarketplaceController {
 
-    @GetMapping("/api/secured/marketplace")
+    @GetMapping("/api/marketplace")
     fun interactablesAvailable(): JsonMarketplaceReply {
         val arrayOfInteractablesForMarketplace = arrayListOf<MarketPlaceInteractablesDto>()
         arrayOfInteractablesForMarketplace.add(MarketPlaceInteractablesDto(1, "test", "Description", "testUrl"))
