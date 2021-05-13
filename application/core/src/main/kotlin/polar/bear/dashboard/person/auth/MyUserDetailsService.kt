@@ -17,7 +17,9 @@ class MyUserDetailsService(
 
     override fun loadUserByUsername(username: String): UserDetails {
         val person = personRepository.loadUserByUsername(username)
-        if (person.isEmpty) throw UsernameNotFoundException("Could not find person with username: $username")
+        if (person.isEmpty) {
+            throw UsernameNotFoundException("Could not find person with username: $username")
+        }
 
         return PersonDetails(person.get())
     }
