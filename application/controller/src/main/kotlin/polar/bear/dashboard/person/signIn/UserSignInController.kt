@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import polar.bear.dashboard.person.signIn.reply.JsonLoginReplyModel
 import polar.bear.dashboard.person.signIn.dto.SignInResponseDto
 import polar.bear.dashboard.person.signIn.request.LoginRequest
 import polar.bear.dashboard.person.usecase.SignInUseCase
