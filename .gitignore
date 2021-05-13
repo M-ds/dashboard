@@ -37,7 +37,7 @@ out/
 .vscode/
 
 ### Application.properties ###
-application/configuration/src/main/resources/application.properties
+application/configuration/src/main/resources/application.yml
 
 ### Frontend related stuff ###
 /application/frontend/node_modules
