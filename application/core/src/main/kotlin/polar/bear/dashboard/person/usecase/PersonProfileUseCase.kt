@@ -2,7 +2,7 @@ package polar.bear.dashboard.person.usecase
 
 import polar.bear.dashboard.person.domain.PersonProfile
 
-interface UserProfileUseCase {
+interface PersonProfileUseCase {
 
-    fun getUserProfile(userId: String): PersonProfile
+    fun getPersonProfile(personId: String): PersonProfile
 }

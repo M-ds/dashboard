@@ -11,15 +11,13 @@ import polar.bear.dashboard.person.infra.PersonRepository
  * Spring provides a default version, but for this project we create our own.
  */
 @Service
-class MyUserDetailsService(
+class PersonDetailService(
     private val personRepository: PersonRepository
 ) : UserDetailsService {
 
     override fun loadUserByUsername(username: String): UserDetails {
         val person = personRepository.loadUserByUsername(username)
-        if (person.isEmpty) {
-            throw UsernameNotFoundException("Could not find person with username: $username")
-        }
+        if (person.isEmpty) throw UsernameNotFoundException("Could not find person with username: $username")
 
         return PersonDetails(person.get())
     }

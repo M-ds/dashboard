@@ -13,6 +13,7 @@ class MarketplaceController {
         val arrayOfInteractablesForMarketplace = arrayListOf<MarketPlaceInteractablesDto>()
         arrayOfInteractablesForMarketplace.add(MarketPlaceInteractablesDto(1, "test", "Description", "testUrl"))
         arrayOfInteractablesForMarketplace.add(MarketPlaceInteractablesDto(2, "test-2", "Description-2", "testUrl-2"))
+
         return JsonMarketplaceReply(
                 valid = true,
                 error = null,

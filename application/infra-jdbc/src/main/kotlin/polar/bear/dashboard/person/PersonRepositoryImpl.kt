@@ -41,6 +41,7 @@ class PersonRepositoryImpl(
         }
     }
 
+    //TODO: make it better..
     private fun personDetailsMapper(): RowMapper<PersonDetail> {
         val finalPerson = PersonDetail()
         val currentUserRoles: MutableList<Role> = mutableListOf()
@@ -63,6 +64,21 @@ class PersonRepositoryImpl(
             finalPerson
 
         }
+    }
+
+    override fun usernameExists(username: String): Boolean {
+        val usernameExistsQuery = """
+            SELECT COUNT(1)
+            FROM person p
+            WHERE p.username = ?;
+        """.trimIndent()
+
+        val result = jdbcTemplate.queryForObject(
+            usernameExistsQuery,
+            Int::class.java,
+            username
+        )
+        return result > 0
     }
 
     override fun getPersonProfile(personId: Int): Optional<PersonProfile> {

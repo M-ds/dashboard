@@ -12,7 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
-import polar.bear.dashboard.person.auth.MyUserDetailsService
+import polar.bear.dashboard.person.auth.PersonDetailService
 import polar.bear.dashboard.person.domain.SecurityRole
 import polar.bear.dashboard.security.JwtAuthEntryPoint
 import polar.bear.dashboard.security.JwtRequestFilter
@@ -22,7 +22,7 @@ import polar.bear.dashboard.security.JwtRequestFilter
 open class WebSecurityConfig(
     private val jwtAuthEntryPoint: JwtAuthEntryPoint,
     private val jwtRequestFilter: JwtRequestFilter,
-    private val myUserDetailsService: MyUserDetailsService
+    private val personDetailService: PersonDetailService
 ) : WebSecurityConfigurerAdapter() {
 
     override fun configure(auth: AuthenticationManagerBuilder) {
@@ -62,7 +62,7 @@ open class WebSecurityConfig(
 
     @Autowired
     fun configureGlobal(auth: AuthenticationManagerBuilder) {
-        auth.userDetailsService(myUserDetailsService).passwordEncoder(passwordEncoder())
+        auth.userDetailsService(personDetailService).passwordEncoder(passwordEncoder())
     }
 
     @Bean

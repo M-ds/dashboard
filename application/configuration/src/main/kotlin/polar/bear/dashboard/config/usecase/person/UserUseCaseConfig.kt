@@ -5,8 +5,8 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
 import polar.bear.dashboard.person.impl.SignInUseCaseImpl
 import polar.bear.dashboard.person.infra.PersonRepository
-import polar.bear.dashboard.person.usecase.UserProfileUseCase
-import polar.bear.dashboard.person.impl.UserProfileUseCaseImpl
+import polar.bear.dashboard.person.usecase.PersonProfileUseCase
+import polar.bear.dashboard.person.impl.PersonProfileUseCaseImpl
 import polar.bear.dashboard.person.usecase.SignInUseCase
 import polar.bear.dashboard.util.jwt.JwtUtil
 
@@ -16,8 +16,8 @@ open class UserUseCaseConfig {
     @Bean
     open fun initUserProfileUseCase(
         personRepository: PersonRepository
-    ): UserProfileUseCase {
-        return UserProfileUseCaseImpl(
+    ): PersonProfileUseCase {
+        return PersonProfileUseCaseImpl(
             personRepository
         )
     }
@@ -25,11 +25,13 @@ open class UserUseCaseConfig {
     @Bean
     open fun initSignInUseCase(
         authenticationManager: AuthenticationManager,
-        jwtUtil: JwtUtil
+        jwtUtil: JwtUtil,
+        personRepository: PersonRepository
     ): SignInUseCase {
         return SignInUseCaseImpl(
             authenticationManager = authenticationManager,
-            jwtUtil = jwtUtil
+            jwtUtil = jwtUtil,
+            personRepository = personRepository
         )
     }
 

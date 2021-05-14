@@ -12,6 +12,8 @@ interface PersonRepository {
      */
     fun loadUserByUsername(username: String): Optional<PersonDetail>
 
+    fun usernameExists(username: String): Boolean
+
     fun getPersonProfile(personId: Int): Optional<PersonProfile>
 
 }

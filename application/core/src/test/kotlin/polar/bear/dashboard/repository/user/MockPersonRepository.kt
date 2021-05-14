@@ -7,7 +7,24 @@ import java.util.*
 
 class MockPersonRepository : PersonRepository {
 
+    private var personDetail: Optional<PersonDetail> = Optional.empty()
     private var personProfile: Optional<PersonProfile> = Optional.empty()
+
+    fun loadUser(personDetail: PersonDetail?) {
+        if (personDetail == null || personDetail.roles.isEmpty()) {
+            this.personDetail = Optional.empty()
+        } else {
+            this.personDetail = Optional.of(personDetail)
+        }
+    }
+
+    override fun loadUserByUsername(username: String): Optional<PersonDetail> {
+        return this.personDetail
+    }
+
+    override fun usernameExists(username: String): Boolean {
+        TODO("Not yet implemented")
+    }
 
     fun getUser(personProfile: PersonProfile?) {
         if (personProfile == null) {
@@ -15,10 +32,6 @@ class MockPersonRepository : PersonRepository {
         } else {
             this.personProfile = Optional.of(personProfile)
         }
-    }
-
-    override fun loadUserByUsername(username: String): Optional<PersonDetail> {
-        TODO("Not yet implemented")
     }
 
     override fun getPersonProfile(personId: Int): Optional<PersonProfile> {
