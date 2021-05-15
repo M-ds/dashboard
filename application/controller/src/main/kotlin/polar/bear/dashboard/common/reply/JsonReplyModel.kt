@@ -8,9 +8,9 @@ package polar.bear.dashboard.common.reply
  * @param model: DTO representation of the reply.
  */
 open class JsonReplyModel<T>(
-        private val valid: Boolean,
-        private val error: JsonError?,
-        private val model: T
+        val valid: Boolean,
+        val error: JsonError?,
+        val model: T?
 )
 
 /**
@@ -20,8 +20,8 @@ open class JsonReplyModel<T>(
  * @param models: DTO representation of the reply.
  */
 open class JsonReplyModels<T>(
-        private val valid: Boolean,
-        private val error: JsonError?,
-        private val models: List<T>
+        val valid: Boolean,
+        val error: JsonError?,
+        val models: List<T>
 )
 
