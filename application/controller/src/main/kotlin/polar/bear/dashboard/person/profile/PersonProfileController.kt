@@ -9,13 +9,13 @@ import polar.bear.dashboard.person.usecase.PersonProfileUseCase
 
 @CrossOrigin(origins = ["http://localhost:1994"])
 @RestController
-class UserProfileController(
+class PersonProfileController(
     private val personProfileUseCase: PersonProfileUseCase
 ) {
 
-    @GetMapping("api/user/{userId}/profile")
-    fun getUserProfile(
-        @PathVariable(value = "userId") userId: String
+    @GetMapping("/api/person/{personId}/profile")
+    fun getPersonProfile(
+        @PathVariable(value = "personId") userId: String
     ): UserProfileDto {
         val userProfile = personProfileUseCase.getPersonProfile(userId)
         return UserProfileDto.fromDomainModel(userProfile)

@@ -12,10 +12,10 @@ export default new Router({
       component: () => import(/* webpackChuckName: "newUser" */ "./components/Login")
     },
     {
-      path: "/newUser",
-      name: "NewUser",
+      path: "/newPerson",
+      name: "NewPerson",
       props: false,
-      component: () => import(/* webpackChuckName: "newUser" */ "./components/NewUser")
+      component: () => import(/* webpackChuckName: "newUser" */ "./components/NewPerson")
     },
     {
       path: "/dashboard",

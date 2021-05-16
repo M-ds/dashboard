@@ -11,8 +11,8 @@
             Username
             <input type="text"
                    name="userName"
-                   v-model="user.userName"
-                   :placeholder="user.userName"
+                   v-model="user.username"
+                   :placeholder="user.username"
                    readonly=""
             />
           </label>
@@ -58,8 +58,8 @@ export default {
     }
   },
   async created() {
-    await this.$store.dispatch("UserStore/getUserProfile", 1);
-    this.user = this.$store.getters["UserStore/user"];
+    await this.$store.dispatch("UserStore/getPersonProfile", 1);
+    this.user = this.$store.getters["UserStore/person"];
   }
 }
 </script>

@@ -27,6 +27,9 @@
           </grid-item>
         </grid-layout>
       </div>
+      <div>
+        USER:
+      </div>
     </div>
   </div>
 </template>
@@ -125,7 +128,6 @@ h1 {
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'><circle cx='5' cy='5' r='5' fill='#999999'/></svg>") no-repeat;
   background-position: bottom right;
   padding: 0 8px 8px 0;
-  background-repeat: no-repeat;
   background-origin: content-box;
   box-sizing: border-box;
   cursor: pointer;

@@ -5,8 +5,8 @@
         <div class="card large centered">
           <h1>Login</h1>
           <input type="text"
-                 name="userName"
-                 v-model="input.userName"
+                 name="username"
+                 v-model="input.username"
                  placeholder="Username"
           />
           <input type="password"
@@ -20,7 +20,7 @@
           >Log in
           </button>
           <router-link
-              :to="{name: 'NewUser'}"
+              :to="{name: 'NewPerson'}"
               tag="button"
               class="button"
           >New User
@@ -37,14 +37,14 @@ export default {
   data() {
     return {
       input: {
-        userName: "",
+        username: "",
         password: ""
       }
     }
   },
   methods: {
     login() {
-      const message = `Username: ${this.input.userName} & Password: ${this.input.password}`;
+      const message = `Username: ${this.input.username} & Password: ${this.input.password}`;
       console.log(message);
       // if correct redirect otherwise error
       this.$router.push({name: "Dashboard"});

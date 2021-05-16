@@ -8,7 +8,7 @@
             Username
             <input type="text"
                    name="userName"
-                   v-model="user.userName"
+                   v-model="user.username"
                    placeholder="Username"
             />
           </label>
@@ -61,7 +61,7 @@ export default {
   data() {
     return {
       user: {
-        userName: "",
+        username: "",
         email: "",
         password: "",
         passwordConformation: "",

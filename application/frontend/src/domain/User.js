@@ -1,6 +1,6 @@
 export class Person {
   constructor(rawData) {
-    this.userName = rawData.userName;
+    this.username = rawData.username;
     this.password = rawData.password;
     this.email = rawData.email;
   }

@@ -3,7 +3,7 @@ package polar.bear.dashboard.person.profile.dto
 import polar.bear.dashboard.person.domain.PersonProfile
 
 data class UserProfileDto(
-    val userName: String,
+    val username: String,
     val password: String,
     val email: String
 ){
@@ -13,7 +13,7 @@ data class UserProfileDto(
             personProfile: PersonProfile
         ): UserProfileDto{
             return UserProfileDto(
-                userName = personProfile.userName,
+                username = personProfile.userName,
                 password = personProfile.password,
                 email = personProfile.email
             )
