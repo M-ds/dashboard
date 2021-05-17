@@ -45,7 +45,7 @@ export default {
       },
       loading: false,
       errorMessage: ""
-    }
+    };
   },
   computed: {
     loggedIn() {
@@ -67,9 +67,11 @@ export default {
             () => {
               this.$router.push({ name: "Dashboard" });
             },
-            error => {
+            (error) => {
               this.loading = false;
-              if (error.errorMessage) this.errorMessage = error.errorMessage;
+              if (error.errorMessage) {
+                this.errorMessage = error.errorMessage;
+              }
             }
         );
       } else {

@@ -66,11 +66,11 @@ export default {
         password: "",
         passwordConformation: "",
       }
-    }
+    };
   },
   methods: {
-    signup: function () {
-      this.$router.push({name: "Dashboard"});
+    signup() {
+      this.$router.push({ name: "Dashboard" });
     }
   }
 }

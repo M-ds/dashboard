@@ -9,7 +9,7 @@ function generateEmptyUsernamePasswordMessage(username, password) {
     passwordEmpty = "password";
   }
 
-  let and = ""
+  let and = "";
   if (usernameEmpty !== "" && passwordEmpty !== "") {
     and = "and";
   }

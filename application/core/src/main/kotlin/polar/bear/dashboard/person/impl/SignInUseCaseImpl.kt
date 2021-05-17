@@ -25,7 +25,7 @@ class SignInUseCaseImpl(
                 errorMessage = "Username and password should both be filled in, and can not be empty"
             )
         }
-        
+
         val usernameExists = personRepository.usernameExists(username)
         if (!usernameExists) {
             return SignInUseCase.SignInResponse(

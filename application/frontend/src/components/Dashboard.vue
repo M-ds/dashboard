@@ -48,7 +48,7 @@ export default {
       draggable: Boolean,
       resizable: Boolean,
       index: 0
-    }
+    };
   },
   created() {
     this.layout = [
@@ -72,7 +72,7 @@ export default {
       { "x": 10, "y": 4, "w": 2, "h": 2, "i": "17", static: false },
       { "x": 0, "y": 9, "w": 2, "h": 3, "i": "18", static: false },
       { "x": 2, "y": 6, "w": 2, "h": 2, "i": "19", static: false }
-    ]
+    ];
     this.draggable = this.$store.getters["DashboardStore/draggable"];
     this.resizable = this.$store.getters["DashboardStore/resizable"];
     this.index = this.$store.getters["DashboardStore/index"];

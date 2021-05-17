@@ -7,7 +7,7 @@ class PersonService extends BaseService {
     return await axios.get(
       `${ this.BASE_URL }/api/person/${ personId }/profile`,
       { headers: this.getAuthHeader() }
-    ).then(result => result.data);
+    ).then((result) => result.data);
   }
 
 }

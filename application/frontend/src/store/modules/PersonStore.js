@@ -48,7 +48,7 @@ export const PersonStore = {
     },
     logout(context) {
       authService.logout();
-      context.commit('logout');
+      context.commit("logout");
     },
     async getPersonProfile(context, userId) {
       let rawData = await userService.getPersonProfile(userId);

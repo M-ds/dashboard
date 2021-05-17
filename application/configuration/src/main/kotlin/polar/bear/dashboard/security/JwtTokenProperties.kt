@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Component
 import polar.bear.dashboard.util.jwt.JwtUtil
-import java.util.*
+import java.util.Date
 
 @Component
 class JwtTokenProperties {

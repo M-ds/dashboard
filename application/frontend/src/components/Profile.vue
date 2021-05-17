@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       person: null
-    }
+    };
   },
   async created() {
     const personId = await this.$store.getters["PersonStore/person"].id;

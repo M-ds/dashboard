@@ -2,11 +2,11 @@ package polar.bear.dashboard.util.jwt
 
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
-import java.util.*
+import java.util.Date
 
 class JwtUtil(
-   private val jwtSecret: String,
-   private val jwtTokenExpirationTime: Int
+    private val jwtSecret: String,
+    private val jwtTokenExpirationTime: Int
 ) {
 
     fun generateToken(
