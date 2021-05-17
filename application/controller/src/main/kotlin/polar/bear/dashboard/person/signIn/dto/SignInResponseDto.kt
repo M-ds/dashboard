@@ -3,6 +3,7 @@ package polar.bear.dashboard.person.signIn.dto
 import polar.bear.dashboard.person.domain.SignInPerson
 
 data class SignInResponseDto(
+    val id: Int,
     val token: String,
     val username: String,
     val roles: List<String>
@@ -12,6 +13,7 @@ data class SignInResponseDto(
             signInPerson: SignInPerson
         ): SignInResponseDto {
             return SignInResponseDto(
+                id = signInPerson.id,
                 token = signInPerson.token,
                 username = signInPerson.username,
                 roles = signInPerson.roles

@@ -26,6 +26,10 @@ class MockPersonRepository : PersonRepository {
         TODO("Not yet implemented")
     }
 
+    override fun getPersonIdFromUsername(username: String): String {
+        TODO("Not yet implemented")
+    }
+
     fun getUser(personProfile: PersonProfile?) {
         if (personProfile == null) {
             this.personProfile = Optional.empty()

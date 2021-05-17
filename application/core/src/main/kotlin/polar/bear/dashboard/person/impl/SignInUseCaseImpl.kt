@@ -46,7 +46,10 @@ class SignInUseCaseImpl(
             role.authority
         }.toList()
 
+        val personId = personRepository.getPersonIdFromUsername(username)
+
         val signInPerson = SignInPerson(
+            id = personId,
             token = jwtToken,
             username = personDetail.username,
             roles = roles

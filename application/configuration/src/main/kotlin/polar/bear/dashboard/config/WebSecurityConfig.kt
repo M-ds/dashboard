@@ -31,6 +31,7 @@ open class WebSecurityConfig(
 
     override fun configure(http: HttpSecurity) {
         http.csrf().disable()
+            .cors().and()
             // Make sure we use stateless session: sessions wont' be used to store user's state.
             .exceptionHandling()
             .authenticationEntryPoint(jwtAuthEntryPoint)

@@ -28,17 +28,28 @@
     >
       Marketplace
     </router-link>
+    <button
+        class="button u-cf nav-button"
+        @click.prevent="logOut()"
+    >Log out
+    </button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Navigation"
+  name: "Navigation",
+  methods: {
+    logOut() {
+      this.$store.dispatch("PersonStore/logout");
+      this.$router.push("/");
+    }
+  }
 };
 </script>
 
 <style scoped>
-.nav-button{
+.nav-button {
   width: 100%;
 }
 </style>

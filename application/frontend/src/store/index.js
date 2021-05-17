@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import {DashboardStore} from "./modules/DashboardStore";
-import {PersonStore} from "./modules/PersonStore";
+import { DashboardStore } from "./modules/DashboardStore";
+import { PersonStore } from "./modules/PersonStore";
 
 Vue.use(Vuex);
 

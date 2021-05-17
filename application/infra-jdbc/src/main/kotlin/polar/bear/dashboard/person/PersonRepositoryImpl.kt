@@ -81,6 +81,20 @@ class PersonRepositoryImpl(
         return result > 0
     }
 
+    override fun getPersonIdFromUsername(username: String): Int {
+        val getPersonId = """
+            SELECT id
+            FROM person p
+            WHERE p.username = ?;
+        """.trimIndent()
+
+        return jdbcTemplate.queryForObject(
+            getPersonId,
+            Int::class.java,
+            username
+        )
+    }
+
     override fun getPersonProfile(personId: Int): Optional<PersonProfile> {
         val getUserProfileQuery = """
             SELECT username, password, email

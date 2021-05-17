@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import errorMessage from "@/util/ErrorMessage";
+
 export default {
   name: "Login",
   data() {
@@ -45,24 +47,35 @@ export default {
       errorMessage: ""
     }
   },
+  computed: {
+    loggedIn() {
+      return this.$store.getters["PersonStore/loggedIn"];
+    }
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push({ name: "Dashboard" });
+    }
+  },
   methods: {
     login() {
       this.loading = true;
       const username = this.person.username;
       const password = this.person.password;
       if (username && password) {
-        this.$store.dispatch("UserStore/login", this.person).then(
+        this.$store.dispatch("PersonStore/login", this.person).then(
             () => {
-              console.log(this.$store.getters["UserStore/person"].model);
               this.$router.push({ name: "Dashboard" });
             },
             error => {
               this.loading = false;
-              this.errorMessage = `${error.response.data.error}: ${error.response.data.message}`;
+              this.errorMessage = `${ error.response.data.error }: ${ error.response.data.message }`;
             }
         );
+      } else {
+        this.errorMessage = errorMessage.generateErrorMessage(username, password);
+        this.loading = false;
       }
-      this.loading = false;
     }
   }
 };

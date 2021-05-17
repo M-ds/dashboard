@@ -5,13 +5,12 @@ export class BaseService {
    * This method retrieves the person information from a logged in user.
    * With containing a token which is necessary to do requests.
    *
-   * @returns {{Authorization: string} | {}}
+   * @returns {{}|{Authorization: string, "Access-Control-Allow-Origin": string}}
    */
   getAuthHeader() {
-    let person = JSON.parse(localStorage.getItem("personToken"));
-    debugger;
-    if (person && person.accessToken) {
-      return { Authorization: 'Bearer ' + person.accessToken };
+    let personToken = JSON.parse(localStorage.getItem("personToken"));
+    if (personToken) {
+      return { Authorization: `Bearer ${ personToken }` };
     } else {
       return {};
     }

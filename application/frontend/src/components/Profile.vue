@@ -54,13 +54,13 @@ export default {
   },
   data() {
     return {
-      person: Object
+      person: null
     }
   },
   async created() {
-    debugger;
-    await this.$store.dispatch("PersonStore/getPersonProfile", 1);
-    debugger;
+    const personId = await this.$store.getters["PersonStore/person"].id;
+
+    await this.$store.dispatch("PersonStore/getPersonProfile", personId);
     this.person = this.$store.getters["PersonStore/personProfile"];
   }
 }

@@ -21,10 +21,10 @@ export const PersonStore = {
       state.status.loggedIn = false;
       state.personLoggedIn = null;
     },
-    // logout(state) {
-    //   state.status.loggedIn = false;
-    //   state.user = null;
-    // },
+    logout(state) {
+      state.status.loggedIn = false;
+      state.user = null;
+    },
     // registerSuccess(state) {
     //   state.status.loggedIn = false;
     // },
@@ -40,7 +40,6 @@ export const PersonStore = {
     async login(context, person) {
       return authService.login(person).then(
         loggedInPerson => {
-          debugger;
           context.commit("loginSuccess", loggedInPerson);
           return Promise.resolve(loggedInPerson);
         },
@@ -50,10 +49,10 @@ export const PersonStore = {
         }
       )
     },
-    // logout(context) {
-    //   AuthService.logout();
-    //   context.commit('logout');
-    // },
+    logout(context) {
+      authService.logout();
+      context.commit('logout');
+    },
     async getPersonProfile(context, userId) {
       let rawData = await userService.getPersonProfile(userId);
       if (rawData.valid) {
@@ -69,6 +68,9 @@ export const PersonStore = {
     },
     personProfile: (state) => {
       return state.personProfile;
+    },
+    loggedIn: (state) => {
+      return state.status.loggedIn;
     }
   }
 };
