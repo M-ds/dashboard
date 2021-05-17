@@ -6,7 +6,7 @@
         <Navigation/>
       </div>
       <div class="col-sm-11">
-        <p>This page is only for members.</p>
+        <p>All possible interactables will be displayed here!</p>
       </div>
     </div>
   </div>

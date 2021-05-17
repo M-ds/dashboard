@@ -8,13 +8,6 @@
       Dashboard
     </router-link>
     <router-link
-        :to="{name: 'NewPerson'}"
-        tag="button"
-        class="button u-cf nav-button"
-    >
-      New User
-    </router-link>
-    <router-link
         :to="{name: 'Profile'}"
         tag="button"
         class="button u-cf nav-button"
@@ -30,7 +23,7 @@
     </router-link>
     <button
         class="button u-cf nav-button"
-        @click.prevent="logOut()"
+        @click.prevent="logout()"
     >Log out
     </button>
   </div>
@@ -40,7 +33,7 @@
 export default {
   name: "Navigation",
   methods: {
-    logOut() {
+    logout() {
       this.$store.dispatch("PersonStore/logout");
       this.$router.push("/");
     }

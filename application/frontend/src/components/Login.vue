@@ -69,11 +69,11 @@ export default {
             },
             error => {
               this.loading = false;
-              this.errorMessage = `${ error.response.data.error }: ${ error.response.data.message }`;
+              if (error.errorMessage) this.errorMessage = error.errorMessage;
             }
         );
       } else {
-        this.errorMessage = errorMessage.generateErrorMessage(username, password);
+        this.errorMessage = errorMessage.generateEmptyUsernamePasswordMessage(username, password);
         this.loading = false;
       }
     }
@@ -82,7 +82,8 @@ export default {
 </script>
 
 <style scoped>
-h1 {
+h1,
+h3 {
   text-align: center;
 }
 

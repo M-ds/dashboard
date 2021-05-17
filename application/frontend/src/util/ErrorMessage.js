@@ -1,25 +1,20 @@
-function generateErrorMessage(username, password) {
-  let error = "";
+function generateEmptyUsernamePasswordMessage(username, password) {
+  let usernameEmpty = "";
   if (username != null && username.length <= 0) {
-    error = "Fill in a username";
-  } else {
-    error = "The provided username is not known";
+    usernameEmpty = "username";
   }
 
-  let passwordError = "";
+  let passwordEmpty = "";
   if (password != null && password.length <= 0) {
-    passwordError = "Fill in your password";
-  } else {
-    passwordError = "The provided password is incorrect";
+    passwordEmpty = "password";
   }
 
-  if (error === "") {
-    return passwordError;
-  } else if (passwordError === "") {
-    return error;
-  } else {
-    return `${ error }. ${ passwordError }`;
+  let and = ""
+  if (usernameEmpty !== "" && passwordEmpty !== "") {
+    and = "and";
   }
+
+  return `We need your ${ usernameEmpty } ${ and } ${ passwordEmpty } to login!`;
 }
 
-export default { generateErrorMessage };
+export default { generateEmptyUsernamePasswordMessage };

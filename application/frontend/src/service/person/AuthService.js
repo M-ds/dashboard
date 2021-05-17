@@ -13,7 +13,7 @@ class AuthService extends BaseService {
         }
         return response.data.model;
       }
-      return response.data.error;
+      return response.data;
     });
   }
 

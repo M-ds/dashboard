@@ -38,16 +38,13 @@ export const PersonStore = {
   // Business logic actions are stored here
   actions: {
     async login(context, person) {
-      return authService.login(person).then(
-        loggedInPerson => {
-          context.commit("loginSuccess", loggedInPerson);
-          return Promise.resolve(loggedInPerson);
-        },
-        error => {
-          context.commit("loginFailure");
-          return Promise.reject(error);
-        }
-      )
+      const response = await authService.login(person);
+      if (response.error) {
+        context.commit("loginFailure");
+        return Promise.reject(response.error);
+      }
+      context.commit("loginSuccess", response);
+      return Promise.resolve(response);
     },
     logout(context) {
       authService.logout();

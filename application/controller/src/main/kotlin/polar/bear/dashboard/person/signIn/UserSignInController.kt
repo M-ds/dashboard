@@ -25,22 +25,37 @@ class UserSignInController(
             password = loginRequest.password
         )
 
-        val response = signInUseCase.signIn(request)
+        try {
+            val response = signInUseCase.signIn(request)
 
-        if (!response.valid) {
+            if (!response.valid) {
+                return JsonLoginReply(
+                    valid = response.valid,
+                    error = JsonError(response.errorMessage),
+                    model = null
+                )
+            }
+
             return JsonLoginReply(
-                valid = response.valid,
-                error = JsonError(response.errorMessage),
+                valid = true,
+                error = null,
+                model = SignInResponseDto.from(
+                    response.signInPerson!!
+                )
+            )
+
+        } catch (ex: Exception) {
+            val errorMessage = if (ex.message!!.contains("Bad credentials")) {
+                "Invalid password, please try again."
+            } else {
+                ex.message!!
+            }
+
+            return JsonLoginReply(
+                valid = false,
+                error = JsonError(errorMessage = errorMessage),
                 model = null
             )
         }
-
-        return JsonLoginReply(
-            valid = true,
-            error = null,
-            model = SignInResponseDto.from(
-                response.signInPerson!!
-            )
-        )
     }
 }
