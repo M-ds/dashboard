@@ -4,14 +4,15 @@
       <div class="col-sm-12">
         <div class="card large centered">
           <h1>Login</h1>
+          <h3 v-if="(errorMessage !== '')">{{ errorMessage }}</h3>
           <input type="text"
-                 name="userName"
-                 v-model="input.userName"
+                 name="username"
+                 v-model="person.username"
                  placeholder="Username"
           />
           <input type="password"
                  name="password"
-                 v-model="input.password"
+                 v-model="person.password"
                  placeholder="Password"
           />
           <button
@@ -20,7 +21,7 @@
           >Log in
           </button>
           <router-link
-              :to="{name: 'NewUser'}"
+              :to="{name: 'NewPerson'}"
               tag="button"
               class="button"
           >New User
@@ -32,29 +33,59 @@
 </template>
 
 <script>
+import errorMessage from "@/util/ErrorMessage";
+
 export default {
   name: "Login",
   data() {
     return {
-      input: {
-        userName: "",
+      person: {
+        username: "",
         password: ""
-      }
+      },
+      loading: false,
+      errorMessage: ""
+    };
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.getters["PersonStore/loggedIn"];
+    }
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push({ name: "Dashboard" });
     }
   },
   methods: {
     login() {
-      const message = `Username: ${this.input.userName} & Password: ${this.input.password}`;
-      alert(message);
-      // if correct redirect otherwise error
-      this.$router.push({name: "Dashboard"});
+      this.loading = true;
+      const username = this.person.username;
+      const password = this.person.password;
+      if (username && password) {
+        this.$store.dispatch("PersonStore/login", this.person).then(
+            () => {
+              this.$router.push({ name: "Dashboard" });
+            },
+            (error) => {
+              this.loading = false;
+              if (error.errorMessage) {
+                this.errorMessage = error.errorMessage;
+              }
+            }
+        );
+      } else {
+        this.errorMessage = errorMessage.generateEmptyUsernamePasswordMessage(username, password);
+        this.loading = false;
+      }
     }
   }
 };
 </script>
 
 <style scoped>
-h1 {
+h1,
+h3 {
   text-align: center;
 }
 

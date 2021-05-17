@@ -27,15 +27,6 @@ allprojects {
 subprojects {
     apply(plugin = "io.spring.dependency-management")
 
-    dependencies {
-
-        /**
-         * Dependencies without Bill-Of-Materials
-         */
-        constraints {
-        }
-    }
-
     the<DependencyManagementExtension>().apply {
         imports {
             mavenBom(SpringBootPlugin.BOM_COORDINATES)

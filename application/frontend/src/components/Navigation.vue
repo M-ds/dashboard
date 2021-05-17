@@ -8,30 +8,41 @@
       Dashboard
     </router-link>
     <router-link
-        :to="{name: 'NewUser'}"
-        tag="button"
-        class="button u-cf nav-button"
-    >
-      New User
-    </router-link>
-    <router-link
         :to="{name: 'Profile'}"
         tag="button"
         class="button u-cf nav-button"
     >
       Profile
     </router-link>
+    <router-link
+        :to="{name: 'Marketplace'}"
+        tag="button"
+        class="button u-cf nav-button"
+    >
+      Marketplace
+    </router-link>
+    <button
+        class="button u-cf nav-button"
+        @click.prevent="logout()"
+    >Log out
+    </button>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Navigation"
+  name: "Navigation",
+  methods: {
+    logout() {
+      this.$store.dispatch("PersonStore/logout");
+      this.$router.push("/");
+    }
+  }
 };
 </script>
 
 <style scoped>
-.nav-button{
+.nav-button {
   width: 100%;
 }
 </style>

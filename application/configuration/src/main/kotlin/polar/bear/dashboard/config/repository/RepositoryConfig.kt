@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.jdbc.DataSourceBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import polar.bear.dashboard.user.UserRepositoryImpl
-import polar.bear.dashboard.user.infra.UserRepository
+import polar.bear.dashboard.person.PersonRepositoryImpl
+import polar.bear.dashboard.person.infra.PersonRepository
 import javax.sql.DataSource
 
 @Configuration
@@ -21,8 +21,8 @@ open class RepositoryConfig {
     private val password: String = ""
 
     @Bean
-    open fun initUserRepository(): UserRepository {
-        return UserRepositoryImpl(createDataSource())
+    open fun initUserRepository(): PersonRepository {
+        return PersonRepositoryImpl(createDataSource())
     }
 
     private fun createDataSource(): DataSource {

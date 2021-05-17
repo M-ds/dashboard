@@ -11,8 +11,8 @@
             Username
             <input type="text"
                    name="userName"
-                   v-model="user.userName"
-                   :placeholder="user.userName"
+                   v-model="person.username"
+                   :placeholder="person.username"
                    readonly=""
             />
           </label>
@@ -22,8 +22,8 @@
             Email
             <input type="text"
                    name="email"
-                   v-model="user.email"
-                   :placeholder="user.email"
+                   v-model="person.email"
+                   :placeholder="person.email"
                    readonly=""
             />
           </label>
@@ -33,8 +33,8 @@
             Password
             <input type="password"
                    name="password"
-                   v-model="user.password"
-                   :placeholder="user.password"
+                   v-model="person.password"
+                   :placeholder="person.password"
                    readonly=""
             />
           </label>
@@ -54,12 +54,14 @@ export default {
   },
   data() {
     return {
-      user: Object
-    }
+      person: null
+    };
   },
   async created() {
-    await this.$store.dispatch("UserStore/getUserProfile", 1);
-    this.user = this.$store.getters["UserStore/user"];
+    const personId = await this.$store.getters["PersonStore/person"].id;
+
+    await this.$store.dispatch("PersonStore/getPersonProfile", personId);
+    this.person = this.$store.getters["PersonStore/personProfile"];
   }
 }
 </script>
