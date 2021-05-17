@@ -1,4 +1,4 @@
-export class Person {
+export class PersonProfile {
   constructor(rawData) {
     this.username = rawData.username;
     this.password = rawData.password;

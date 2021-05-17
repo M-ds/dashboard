@@ -8,7 +8,7 @@
       Dashboard
     </router-link>
     <router-link
-        :to="{name: 'NewUser'}"
+        :to="{name: 'NewPerson'}"
         tag="button"
         class="button u-cf nav-button"
     >

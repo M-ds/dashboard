@@ -10,7 +10,7 @@ const debug = process.env.NODE_ENV !== "production";
 const mainStore = new Vuex.Store({
   modules: {
     DashboardStore,
-    UserStore: PersonStore
+    PersonStore
   },
   strict: debug
 });

@@ -1,31 +1,74 @@
-import userService from "@/service/user/PersonService";
-import {Person} from "@/domain/User";
+import authService from "@/service/person/AuthService";
+import userService from "@/service/person/PersonService";
+import { PersonProfile } from "@/domain/PersonProfile";
 
 export const PersonStore = {
   namespaced: true,
   state: {
-    person: null
+    personLoggedIn: null,
+    personProfile: null,
+    status: {
+      loggedIn: false
+    }
   },
   // These only modify the state
   mutations: {
-    setPerson(state, user) {
-      state.person = user;
+    loginSuccess(state, person) {
+      state.status.loggedIn = true;
+      state.personLoggedIn = person;
+    },
+    loginFailure(state) {
+      state.status.loggedIn = false;
+      state.personLoggedIn = null;
+    },
+    // logout(state) {
+    //   state.status.loggedIn = false;
+    //   state.user = null;
+    // },
+    // registerSuccess(state) {
+    //   state.status.loggedIn = false;
+    // },
+    // registerFailure(state) {
+    //   state.status.loggedIn = false;
+    // },
+    setPersonProfile(state, person) {
+      state.personProfile = person;
     }
   },
   // Business logic actions are stored here
   actions: {
+    async login(context, person) {
+      return authService.login(person).then(
+        loggedInPerson => {
+          debugger;
+          context.commit("loginSuccess", loggedInPerson);
+          return Promise.resolve(loggedInPerson);
+        },
+        error => {
+          context.commit("loginFailure");
+          return Promise.reject(error);
+        }
+      )
+    },
+    // logout(context) {
+    //   AuthService.logout();
+    //   context.commit('logout');
+    // },
     async getPersonProfile(context, userId) {
       let rawData = await userService.getPersonProfile(userId);
       if (rawData.valid) {
-        let convertedPerson = new Person(rawData.model);
-        context.commit("setPerson", convertedPerson);
+        let convertedPerson = new PersonProfile(rawData.model);
+        context.commit("setPersonProfile", convertedPerson);
       }
       return Promise.resolve();
     }
   },
   getters: {
     person: (state) => {
-      return state.person;
+      return state.personLoggedIn;
+    },
+    personProfile: (state) => {
+      return state.personProfile;
     }
   }
 };

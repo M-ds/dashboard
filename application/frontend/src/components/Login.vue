@@ -4,14 +4,15 @@
       <div class="col-sm-12">
         <div class="card large centered">
           <h1>Login</h1>
+          <h3 v-if="(errorMessage !== '')">{{ errorMessage }}</h3>
           <input type="text"
                  name="username"
-                 v-model="input.username"
+                 v-model="person.username"
                  placeholder="Username"
           />
           <input type="password"
                  name="password"
-                 v-model="input.password"
+                 v-model="person.password"
                  placeholder="Password"
           />
           <button
@@ -36,18 +37,32 @@ export default {
   name: "Login",
   data() {
     return {
-      input: {
+      person: {
         username: "",
         password: ""
-      }
+      },
+      loading: false,
+      errorMessage: ""
     }
   },
   methods: {
     login() {
-      const message = `Username: ${this.input.username} & Password: ${this.input.password}`;
-      console.log(message);
-      // if correct redirect otherwise error
-      this.$router.push({name: "Dashboard"});
+      this.loading = true;
+      const username = this.person.username;
+      const password = this.person.password;
+      if (username && password) {
+        this.$store.dispatch("UserStore/login", this.person).then(
+            () => {
+              console.log(this.$store.getters["UserStore/person"].model);
+              this.$router.push({ name: "Dashboard" });
+            },
+            error => {
+              this.loading = false;
+              this.errorMessage = `${error.response.data.error}: ${error.response.data.message}`;
+            }
+        );
+      }
+      this.loading = false;
     }
   }
 };
