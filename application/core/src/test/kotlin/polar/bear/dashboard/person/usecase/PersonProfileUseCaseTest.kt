@@ -1,15 +1,14 @@
 package polar.bear.dashboard.person.usecase
 
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
-import polar.bear.dashboard.exception.InvalidUserId
-import polar.bear.dashboard.person.impl.PersonProfileUseCaseImpl
-import polar.bear.dashboard.repository.user.MockPersonRepository
 import polar.bear.dashboard.person.domain.PersonProfile
+import polar.bear.dashboard.person.impl.PersonProfileUseCaseImpl
 import polar.bear.dashboard.person.usecase.UserProfileUseCaseTestSetup.personProfileUseCase
+import polar.bear.dashboard.repository.user.MockPersonRepository
 import polar.bear.dashboard.utils.Marker.GIVEN
 import polar.bear.dashboard.utils.Marker.THEN
 import polar.bear.dashboard.utils.Marker.WHEN
+import java.util.UUID
 
 internal class PersonProfileUseCaseTest {
 
@@ -17,6 +16,8 @@ internal class PersonProfileUseCaseTest {
     private val underTest = personProfileUseCase()
     private val personProfile = PersonProfile("TestUser", "TestPassword", "Test@mail.com")
     private val emptyPersonProfile = PersonProfile("", "", "")
+    private val knownUUID = UUID.randomUUID()
+    private val unKnownUUID = UUID.randomUUID()
 
     @Test
     fun `Happy flow of getting a user profile`() {
@@ -25,7 +26,7 @@ internal class PersonProfileUseCaseTest {
         val expectedResult = personProfile
 
         WHEN
-        val result = underTest.getPersonProfile("1")
+        val result = underTest.getPersonProfile(knownUUID)
 
         THEN
         assert(expectedResult == result)
@@ -38,18 +39,10 @@ internal class PersonProfileUseCaseTest {
         val expectedResult = emptyPersonProfile
 
         WHEN
-        val result = underTest.getPersonProfile("100")
+        val result = underTest.getPersonProfile(unKnownUUID)
 
         THEN
         assert(expectedResult == result)
-    }
-
-    @Test
-    fun `Error is thrown because of invalid userId`() {
-        WHEN
-        assertThrows<InvalidUserId> {
-            underTest.getPersonProfile("ABC")
-        }
     }
 }
 

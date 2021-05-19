@@ -3,6 +3,7 @@ package polar.bear.dashboard.person.infra
 import polar.bear.dashboard.person.domain.PersonDetail
 import polar.bear.dashboard.person.domain.PersonProfile
 import java.util.Optional
+import java.util.UUID
 
 interface PersonRepository {
 
@@ -14,8 +15,8 @@ interface PersonRepository {
 
     fun usernameExists(username: String): Boolean
 
-    fun getPersonIdFromUsername(username: String): Int
+    fun getPersonIdFromUsername(username: String): UUID
 
-    fun getPersonProfile(personId: Int): Optional<PersonProfile>
+    fun getPersonProfile(personId: UUID): Optional<PersonProfile>
 
 }

@@ -9,6 +9,7 @@ import polar.bear.dashboard.person.domain.Role
 import polar.bear.dashboard.person.infra.PersonRepository
 import java.sql.ResultSet
 import java.util.Optional
+import java.util.UUID
 import javax.sql.DataSource
 
 class PersonRepositoryImpl(
@@ -56,7 +57,7 @@ class PersonRepositoryImpl(
                     finalPerson.password = password
                     finalPerson.isActive = active
                 }
-                currentUserRoles.add(Role.convertToRole(rs.getString("name")))
+                currentUserRoles.add(Role.valueOf(rs.getString("name")))
 
             } while (rs.next())
 
@@ -81,7 +82,7 @@ class PersonRepositoryImpl(
         return result > 0
     }
 
-    override fun getPersonIdFromUsername(username: String): Int {
+    override fun getPersonIdFromUsername(username: String): UUID {
         val getPersonId = """
             SELECT id
             FROM person p
@@ -90,12 +91,12 @@ class PersonRepositoryImpl(
 
         return jdbcTemplate.queryForObject(
             getPersonId,
-            Int::class.java,
+            UUID::class.java,
             username
         )
     }
 
-    override fun getPersonProfile(personId: Int): Optional<PersonProfile> {
+    override fun getPersonProfile(personId: UUID): Optional<PersonProfile> {
         val getUserProfileQuery = """
             SELECT username, password, email
             FROM person p

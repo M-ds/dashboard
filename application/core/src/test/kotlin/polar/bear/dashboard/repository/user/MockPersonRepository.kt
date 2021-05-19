@@ -4,6 +4,7 @@ import polar.bear.dashboard.person.domain.PersonDetail
 import polar.bear.dashboard.person.domain.PersonProfile
 import polar.bear.dashboard.person.infra.PersonRepository
 import java.util.Optional
+import java.util.UUID
 
 class MockPersonRepository : PersonRepository {
 
@@ -26,7 +27,7 @@ class MockPersonRepository : PersonRepository {
         TODO("Not yet implemented")
     }
 
-    override fun getPersonIdFromUsername(username: String): Int {
+    override fun getPersonIdFromUsername(username: String): UUID {
         TODO("Not yet implemented")
     }
 
@@ -38,7 +39,7 @@ class MockPersonRepository : PersonRepository {
         }
     }
 
-    override fun getPersonProfile(personId: Int): Optional<PersonProfile> {
+    override fun getPersonProfile(personId: UUID): Optional<PersonProfile> {
         return this.personProfile
     }
 }
