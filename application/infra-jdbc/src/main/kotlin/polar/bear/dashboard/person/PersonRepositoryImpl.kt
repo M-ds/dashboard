@@ -20,11 +20,11 @@ class PersonRepositoryImpl(
 
     override fun loadUserByUsername(username: String): Optional<PersonDetail> {
         val getUserDetails = """
-           SELECT p.username, p.password, p.active, r.name
-           FROM person p
-               JOIN person_roles pr on p.id = pr.person_id
-               JOIN roles r on r.id = pr.role_id
-           WHERE p.username = ?;
+            SELECT p.username, p.password, p.active, r.name
+            FROM person p
+                     JOIN person_role pr ON p.id = pr.person_id
+                     JOIN role r ON r.id = pr.role_id
+            WHERE p.username = ?;
         """.trimIndent()
 
         return try {

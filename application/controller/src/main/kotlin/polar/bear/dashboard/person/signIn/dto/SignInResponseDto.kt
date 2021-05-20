@@ -1,9 +1,10 @@
 package polar.bear.dashboard.person.signIn.dto
 
 import polar.bear.dashboard.person.domain.SignInPerson
+import java.util.UUID
 
 data class SignInResponseDto(
-    val id: Int,
+    val id: UUID,
     val token: String,
     val username: String,
     val roles: List<String>
