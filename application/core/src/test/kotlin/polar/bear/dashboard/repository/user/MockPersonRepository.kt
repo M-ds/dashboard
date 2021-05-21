@@ -10,6 +10,8 @@ class MockPersonRepository : PersonRepository {
 
     private var personDetail: Optional<PersonDetail> = Optional.empty()
     private var personProfile: Optional<PersonProfile> = Optional.empty()
+    private var usernameExists: Boolean = false
+    private var personId: UUID = UUID.randomUUID()
 
     fun loadUser(personDetail: PersonDetail?) {
         if (personDetail == null || personDetail.roles.isEmpty()) {
@@ -23,12 +25,20 @@ class MockPersonRepository : PersonRepository {
         return this.personDetail
     }
 
+    fun setUsernameExits(exists: Boolean){
+        this.usernameExists = exists
+    }
+
     override fun usernameExists(username: String): Boolean {
-        TODO("Not yet implemented")
+        return this.usernameExists
+    }
+
+    fun setPersonIdForUsername(personId: UUID){
+        this.personId = personId
     }
 
     override fun getPersonIdFromUsername(username: String): UUID {
-        TODO("Not yet implemented")
+        return this.personId
     }
 
     fun getUser(personProfile: PersonProfile?) {
