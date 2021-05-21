@@ -1,5 +1,6 @@
 package polar.bear.dashboard.repository.user
 
+import polar.bear.dashboard.person.domain.Person
 import polar.bear.dashboard.person.domain.PersonDetail
 import polar.bear.dashboard.person.domain.PersonProfile
 import polar.bear.dashboard.person.infra.PersonRepository
@@ -33,6 +34,10 @@ class MockPersonRepository : PersonRepository {
         return this.usernameExists
     }
 
+    override fun emailExits(email: String): Boolean {
+        TODO("Not yet implemented")
+    }
+
     fun setPersonIdForUsername(personId: UUID) {
         this.personId = personId
     }
@@ -51,5 +56,9 @@ class MockPersonRepository : PersonRepository {
 
     override fun getPersonProfile(personId: UUID): Optional<PersonProfile> {
         return this.personProfile
+    }
+
+    override fun save(person: Person) {
+        TODO("Not yet implemented")
     }
 }

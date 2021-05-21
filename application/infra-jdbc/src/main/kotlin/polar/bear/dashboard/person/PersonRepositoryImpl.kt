@@ -3,6 +3,8 @@ package polar.bear.dashboard.person
 import org.springframework.dao.DataAccessException
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
+import polar.bear.dashboard.person.domain.Person
 import polar.bear.dashboard.person.domain.PersonDetail
 import polar.bear.dashboard.person.domain.PersonProfile
 import polar.bear.dashboard.person.domain.Role
@@ -82,6 +84,22 @@ class PersonRepositoryImpl(
         return result > 0
     }
 
+    override fun emailExits(email: String): Boolean {
+        val emailExistsQuery = """
+            SELECT COUNT(1)
+            FROM person p
+            WHERE p.email = ?;
+        """.trimIndent()
+
+        val result = jdbcTemplate.queryForObject(
+            emailExistsQuery,
+            Int::class.java,
+            email
+        )
+
+        return result > 0
+    }
+
     override fun getPersonIdFromUsername(username: String): UUID {
         val getPersonId = """
             SELECT id
@@ -124,6 +142,59 @@ class PersonRepositoryImpl(
                 password = rs.getString("password"),
                 email = rs.getString("email")
             )
+        }
+    }
+
+    override fun save(person: Person) {
+        val id = person.id
+        val username = person.username
+        val email = person.email
+        val password = person.password
+        val token = person.token
+        val active = person.active
+        val creationDate = person.creationDate
+        val role = person.role
+
+        val namedParameter = MapSqlParameterSource()
+            .addValue("id", id)
+            .addValue("username", username)
+            .addValue("email", email)
+            .addValue("password", password)
+            .addValue("token", token)
+            .addValue("active", active)
+            .addValue("creation_date", creationDate)
+
+        try {
+            val insertPersonQuery = """
+                INSERT INTO person (id, username, email, password, token, active, creation_date)
+                VALUES (:id, :username, :email, :password, :token, :active, :creation_date)
+            """.trimIndent()
+
+            val affectedRows = jdbcTemplate.update(
+                insertPersonQuery,
+                namedParameter
+            )
+
+            if (affectedRows <= 0) {
+                return
+            }
+
+            val insertRole = """
+                INSERT INTO person_roles (person_id, role_id)
+                VALUES (?, ?);
+            """.trimIndent()
+
+            val updatedRows = jdbcTemplate.update(
+                insertRole,
+                id, role
+            )
+
+            if (updatedRows <= 0) {
+                return
+            }
+
+        } catch (ex: Exception) {
+            print(ex)
         }
     }
 }
