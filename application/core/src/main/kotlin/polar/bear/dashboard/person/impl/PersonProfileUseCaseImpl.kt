@@ -1,6 +1,5 @@
 package polar.bear.dashboard.person.impl
 
-import polar.bear.dashboard.exception.InvalidUserId
 import polar.bear.dashboard.person.domain.PersonProfile
 import polar.bear.dashboard.person.infra.PersonRepository
 import polar.bear.dashboard.person.usecase.PersonProfileUseCase

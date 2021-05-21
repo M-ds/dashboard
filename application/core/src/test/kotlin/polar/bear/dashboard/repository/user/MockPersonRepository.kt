@@ -25,7 +25,7 @@ class MockPersonRepository : PersonRepository {
         return this.personDetail
     }
 
-    fun setUsernameExits(exists: Boolean){
+    fun setUsernameExits(exists: Boolean) {
         this.usernameExists = exists
     }
 
@@ -33,7 +33,7 @@ class MockPersonRepository : PersonRepository {
         return this.usernameExists
     }
 
-    fun setPersonIdForUsername(personId: UUID){
+    fun setPersonIdForUsername(personId: UUID) {
         this.personId = personId
     }
 
