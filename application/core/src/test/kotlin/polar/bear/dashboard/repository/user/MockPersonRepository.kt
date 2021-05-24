@@ -3,6 +3,7 @@ package polar.bear.dashboard.repository.user
 import polar.bear.dashboard.person.domain.Person
 import polar.bear.dashboard.person.domain.PersonDetail
 import polar.bear.dashboard.person.domain.PersonProfile
+import polar.bear.dashboard.person.domain.Role
 import polar.bear.dashboard.person.infra.PersonRepository
 import java.util.Optional
 import java.util.UUID
@@ -58,7 +59,11 @@ class MockPersonRepository : PersonRepository {
         return this.personProfile
     }
 
-    override fun save(person: Person) {
+    override fun save(person: Person): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun getRoleId(role: Role): UUID {
         TODO("Not yet implemented")
     }
 }

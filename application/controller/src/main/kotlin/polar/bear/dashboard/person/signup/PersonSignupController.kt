@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
+import polar.bear.dashboard.common.reply.JsonError
+import polar.bear.dashboard.person.signup.dto.SignupResponseDto
 import polar.bear.dashboard.person.signup.reply.JsonSignupReply
 import polar.bear.dashboard.person.signup.request.SignupRequest
 import polar.bear.dashboard.person.usecase.SignupUseCase
@@ -27,10 +29,22 @@ class PersonSignupController(
 
         val result = signupUseCase.signup(request)
 
-        return JsonSignupReply(
-            valid = true,
-            error = null,
-            model = null
-        )
+        return if (result.valid) {
+            JsonSignupReply(
+                valid = result.valid,
+                error = null,
+                model = SignupResponseDto.fromDomain(
+                    result.signupResponse!!
+                )
+            )
+        } else {
+            JsonSignupReply(
+                valid = result.valid,
+                error = JsonError(
+                    result.errorMessage
+                ),
+                model = null
+            )
+        }
     }
 }

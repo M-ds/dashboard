@@ -11,5 +11,5 @@ data class Person(
     val token: String,
     val active: Boolean,
     val creationDate: LocalDate,
-    val role: Role
+    val role: UUID
 )

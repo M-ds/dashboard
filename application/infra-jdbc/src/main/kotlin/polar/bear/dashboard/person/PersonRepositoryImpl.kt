@@ -4,6 +4,7 @@ import org.springframework.dao.DataAccessException
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert
 import polar.bear.dashboard.person.domain.Person
 import polar.bear.dashboard.person.domain.PersonDetail
 import polar.bear.dashboard.person.domain.PersonProfile
@@ -145,56 +146,56 @@ class PersonRepositoryImpl(
         }
     }
 
-    override fun save(person: Person) {
-        val id = person.id
-        val username = person.username
-        val email = person.email
-        val password = person.password
-        val token = person.token
-        val active = person.active
-        val creationDate = person.creationDate
-        val role = person.role
+    override fun save(person: Person): Boolean {
+        val personParams = mutableMapOf<String, Any>()
+        personParams["id"] = person.id
+        personParams["username"] = person.username
+        personParams["email"] = person.email
+        personParams["password"] = person.password
+        personParams["token"] = person.token
+        personParams["active"] = person.active
+        personParams["creation_date"] = person.creationDate
 
-        val namedParameter = MapSqlParameterSource()
-            .addValue("id", id)
-            .addValue("username", username)
-            .addValue("email", email)
-            .addValue("password", password)
-            .addValue("token", token)
-            .addValue("active", active)
-            .addValue("creation_date", creationDate)
+        val roleParams = mutableMapOf<String, Any>()
+        roleParams["id"] = person.id
+        roleParams["role"] = person.role
+
 
         try {
-            val insertPersonQuery = """
-                INSERT INTO person (id, username, email, password, token, active, creation_date)
-                VALUES (:id, :username, :email, :password, :token, :active, :creation_date)
-            """.trimIndent()
-
-            val affectedRows = jdbcTemplate.update(
-                insertPersonQuery,
-                namedParameter
-            )
-
+            val affectedRows = insertValue(personParams, "person")
             if (affectedRows <= 0) {
-                return
+                return false
             }
 
-            val insertRole = """
-                INSERT INTO person_roles (person_id, role_id)
-                VALUES (?, ?);
-            """.trimIndent()
-
-            val updatedRows = jdbcTemplate.update(
-                insertRole,
-                id, role
-            )
-
+            val updatedRows = insertValue(roleParams, "person_role")
             if (updatedRows <= 0) {
-                return
+                return false
             }
 
         } catch (ex: Exception) {
             print(ex)
+            return false
         }
+        return true
+    }
+
+    private fun insertValue(params: MutableMap<String, Any>, tableName: String): Int {
+        return SimpleJdbcInsert(jdbcTemplate)
+            .withTableName(tableName)
+            .execute(MapSqlParameterSource(params))
+    }
+
+    override fun getRoleId(role: Role): UUID {
+        val getPersonId = """
+            SELECT id
+            FROM role r
+            WHERE r.name = ?;
+        """.trimIndent()
+
+        return jdbcTemplate.queryForObject(
+            getPersonId,
+            UUID::class.java,
+            role.name
+        )
     }
 }

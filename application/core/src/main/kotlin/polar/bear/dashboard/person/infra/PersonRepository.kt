@@ -3,6 +3,7 @@ package polar.bear.dashboard.person.infra
 import polar.bear.dashboard.person.domain.Person
 import polar.bear.dashboard.person.domain.PersonDetail
 import polar.bear.dashboard.person.domain.PersonProfile
+import polar.bear.dashboard.person.domain.Role
 import java.util.Optional
 import java.util.UUID
 
@@ -22,5 +23,7 @@ interface PersonRepository {
 
     fun getPersonProfile(personId: UUID): Optional<PersonProfile>
 
-    fun save(person: Person)
+    fun save(person: Person): Boolean
+
+    fun getRoleId(role: Role): UUID
 }
