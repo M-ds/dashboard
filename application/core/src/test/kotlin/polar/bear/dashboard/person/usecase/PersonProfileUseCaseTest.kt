@@ -44,6 +44,19 @@ internal class PersonProfileUseCaseTest {
         THEN
         assert(expectedResult == result)
     }
+
+    @Test
+    fun `Userprofile is null, thus empty result is returned`() {
+        GIVEN
+        mockUserRepository.getUser(null)
+        val expectedResult = emptyPersonProfile
+
+        WHEN
+        val result = underTest.getPersonProfile(unKnownUUID)
+
+        THEN
+        assert(expectedResult == result)
+    }
 }
 
 object UserProfileUseCaseTestSetup {

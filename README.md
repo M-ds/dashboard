@@ -10,3 +10,6 @@ tabs
 | person      | test123     |
 | member      | test1234    |
 | admin       | test12345   |
+
+## Documentation
+[Wiki](https://youneedawiki.com/app/page/1Y0G6aHAE5Dw3vQDLFjaBPvpDFKqI0HZq)
