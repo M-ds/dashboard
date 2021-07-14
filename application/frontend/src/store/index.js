@@ -1,3 +1,4 @@
+/* @flow */
 import Vue from "vue";
 import Vuex from "vuex";
 import { DashboardStore } from "./modules/DashboardStore";

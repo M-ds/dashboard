@@ -1,4 +1,5 @@
-function generateEmptyUsernamePasswordMessage(username, password) {
+/* @flow */
+function generateEmptyUsernamePasswordMessage(username: string, password: string): string {
   let usernameEmpty = "";
   if (username != null && username.length <= 0) {
     usernameEmpty = "username";
