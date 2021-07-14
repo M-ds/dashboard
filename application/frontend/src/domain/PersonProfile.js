@@ -1,3 +1,4 @@
+/* @flow */
 export class PersonProfile {
   constructor(rawData) {
     this.username = rawData.username;

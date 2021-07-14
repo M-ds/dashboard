@@ -1,3 +1,4 @@
+/* @flow */
 import authService from "@/service/person/AuthService";
 import userService from "@/service/person/PersonService";
 import { PersonProfile } from "@/domain/PersonProfile";

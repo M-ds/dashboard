@@ -41,3 +41,4 @@ application/configuration/src/main/resources/application.yml
 
 ### Frontend related stuff ###
 /application/frontend/node_modules
+*.log
