@@ -1,9 +1,16 @@
 /* @Flow */
-let Registration = {
+export type Registration = {
+  username: string;
+  email: string;
+  password: string;
+  passwordConformation: string;
+}
+
+let RegistrationInput = {
   username: "",
   email: "",
   password: "",
   passwordConformation: ""
 }
 
-export default Registration;
+export default RegistrationInput;

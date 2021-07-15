@@ -10,10 +10,6 @@ export const PersonStore = {
   },
   // These only modify the state
   mutations: {
-    logout(state) {
-      state.status.loggedIn = false;
-      state.user = null;
-    },
     // registerSuccess(state) {
     //   state.status.loggedIn = false;
     // },
@@ -26,9 +22,8 @@ export const PersonStore = {
   },
   // Business logic actions are stored here
   actions: {
-    logout(context) {
+    logout() {
       logoutService.logout();
-      context.commit("logout");
     },
     async getPersonProfile(context, userId) {
       let rawData = await userService.getPersonProfile(userId);

@@ -18,6 +18,9 @@ export const PersonLoginStore = {
       state.status.loggedIn = false;
       state.personLoggedIn = null;
     },
+    logout(state) {
+      state.status.loggedIn = false;
+    }
   },
   actions: {
     async login(context, person) {
@@ -29,6 +32,9 @@ export const PersonLoginStore = {
       context.commit("loginSuccess", response);
       return Promise.resolve(response);
     },
+    logout(context) {
+      context.commit("logout")
+    }
   },
   getters: {
     person: (state) => {

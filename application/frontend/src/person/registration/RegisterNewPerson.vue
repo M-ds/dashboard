@@ -1,73 +1,85 @@
 <template>
   <div class="container">
-    <form class="card large centered">
-      <h1>Create a new user</h1>
-      <div class="row">
-        <div class="col-sm-12 col-md-12">
-          <label>
-            Username
-            <input type="text"
-                   name="userName"
-                   v-model="registration.username"
-                   placeholder="Username"
-            />
-          </label>
+    <div class="card large centered">
+      <form method="post">
+        <h1>Create a new user</h1>
+        <div class="row">
+          <div v-if="(error !== '')" class="col-sm-12 col-md-12">
+            {{ error }}
+          </div>
+          <div class="col-sm-12 col-md-12">
+            <label>
+              Username
+              <input type="text"
+                     name="userName"
+                     v-model="registrationInput.username"
+                     placeholder="Username"
+              />
+            </label>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12 col-md-12">
-          <label>
-            Email
-            <input type="text"
-                   name="email"
-                   v-model="registration.email"
-                   placeholder="example@email.com"
-            />
-          </label>
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <label>
+              Email
+              <input type="text"
+                     name="email"
+                     v-model="registrationInput.email"
+                     placeholder="example@email.com"
+              />
+            </label>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12 col-md-12">
-          <label>
-            Password
-            <input type="text"
-                   name="password"
-                   v-model="registration.password"
-                   placeholder="Password"
-            />
-          </label>
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <label>
+              Password
+              <input type="text"
+                     name="password"
+                     v-model="registrationInput.password"
+                     placeholder="Password"
+              />
+            </label>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12 col-md-12">
-          <label>
-            Repeat password
-            <input type="text"
-                   name="passwordConformation"
-                   v-model="registration.passwordConformation"
-                   placeholder="Password"
-            />
-          </label>
+        <div class="row">
+          <div class="col-sm-12 col-md-12">
+            <label>
+              Repeat password
+              <input type="text"
+                     name="passwordConformation"
+                     v-model="registrationInput.passwordConformation"
+                     placeholder="Password"
+              />
+            </label>
+          </div>
         </div>
-      </div>
-      <button class="u-cf" @click="signup()">Sign up!</button>
-    </form>
+        <button class="u-cf" @click="signup()">Sign up!</button>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
-import registration from "@/person/registration/domain/Registration";
+import RegistrationValidationUtil from "@/person/registration/utils/RegistrationValidationUtil";
+import RegistrationInput from "@/person/registration/domain/Registration";
 
 export default {
   name: "NewUser",
   data() {
     return {
-      registration: registration
+      registrationInput: RegistrationInput,
+      error: ""
     };
   },
   methods: {
     signup() {
-      this.$router.push({ name: "Dashboard" });
+      const valid = RegistrationValidationUtil.validateRegistration(this.registrationInput);
+      if (valid !== "") {
+        this.error = valid;
+      } else {
+        this.$router.push({ name: "Dashboard" });
+      }
     }
   }
 }
