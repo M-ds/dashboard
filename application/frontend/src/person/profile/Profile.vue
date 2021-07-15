@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import Navigation from "@/components/Navigation";
+import Navigation from "@/common/Navigation";
 
 export default {
   name: "Profile",
@@ -58,7 +58,7 @@ export default {
     };
   },
   async created() {
-    const personId = await this.$store.getters["PersonStore/person"].id;
+    const personId = await this.$store.getters["PersonLoginStore/person"].id;
 
     await this.$store.dispatch("PersonStore/getPersonProfile", personId);
     this.person = this.$store.getters["PersonStore/personProfile"];

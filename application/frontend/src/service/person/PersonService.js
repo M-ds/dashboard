@@ -1,16 +1,19 @@
 /* @flow */
 import axios from "axios";
 import { BaseService } from "@/service/BaseService";
+import { PersonProfile } from "@/person/profile/domain/PersonProfile";
 
-class PersonService extends BaseService {
+class PersonProfileService extends BaseService {
 
   async getPersonProfile(personId) {
-    return await axios.get(
+    const test = await axios.get(
       `${ this.BASE_URL }/api/person/${ personId }/profile`,
       { headers: this.getAuthHeader() }
-    ).then((result) => result.data);
+    ).then((result ) => result.data);
+    console.log(test);
+    return test;
   }
 
 }
 
-export default new PersonService();
+export default new PersonProfileService();

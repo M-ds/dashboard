@@ -10,31 +10,31 @@ export default new Router({
     {
       path: "/",
       name: "Login",
-      component: () => import(/* webpackChuckName: "newUser" */ "./components/Login")
+      component: () => import(/* webpackChuckName: "newUser" */ "./person/login/Login")
     },
     {
       path: "/newPerson",
       name: "NewPerson",
       props: false,
-      component: () => import(/* webpackChuckName: "newUser" */ "./components/NewPerson")
+      component: () => import(/* webpackChuckName: "newUser" */ "./person/registration/RegisterNewPerson")
     },
     {
       path: "/dashboard",
       name: "Dashboard",
       props: true,
-      component: () => import(/* webpackChuckName: "dashboard" */ "./components/Dashboard")
+      component: () => import(/* webpackChuckName: "dashboard" */ "./common/Dashboard")
     },
     {
       path: "/profile",
       name: "Profile",
       props: true,
-      component: () => import(/* webpackChuckName: "dashboard" */ "./components/Profile")
+      component: () => import(/* webpackChuckName: "dashboard" */ "./person/profile/Profile")
     },
     {
       path: "/marketplace",
       name: "Marketplace",
       props: true,
-      component: () => import(/* webpackChuckName: "dashboard" */ "./components/Marketplace")
+      component: () => import(/* webpackChuckName: "dashboard" */ "./common/Marketplace")
     }
   ]
 });

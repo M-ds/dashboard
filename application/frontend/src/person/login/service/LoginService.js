@@ -2,7 +2,7 @@
 import axios from "axios";
 import { BaseService } from "@/service/BaseService";
 
-class AuthService extends BaseService {
+class LoginService extends BaseService {
 
   async login(person) {
     return await axios.post(
@@ -17,10 +17,6 @@ class AuthService extends BaseService {
       return response.data;
     });
   }
-
-  logout() {
-    localStorage.removeItem("personToken");
-  }
 }
 
-export default new AuthService();
+export default new LoginService();

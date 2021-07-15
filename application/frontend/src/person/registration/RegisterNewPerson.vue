@@ -8,7 +8,7 @@
             Username
             <input type="text"
                    name="userName"
-                   v-model="user.username"
+                   v-model="registration.username"
                    placeholder="Username"
             />
           </label>
@@ -20,7 +20,7 @@
             Email
             <input type="text"
                    name="email"
-                   v-model="user.email"
+                   v-model="registration.email"
                    placeholder="example@email.com"
             />
           </label>
@@ -32,7 +32,7 @@
             Password
             <input type="text"
                    name="password"
-                   v-model="user.password"
+                   v-model="registration.password"
                    placeholder="Password"
             />
           </label>
@@ -44,7 +44,7 @@
             Repeat password
             <input type="text"
                    name="passwordConformation"
-                   v-model="user.passwordConformation"
+                   v-model="registration.passwordConformation"
                    placeholder="Password"
             />
           </label>
@@ -56,16 +56,13 @@
 </template>
 
 <script>
+import registration from "@/person/registration/domain/Registration";
+
 export default {
   name: "NewUser",
   data() {
     return {
-      user: {
-        username: "",
-        email: "",
-        password: "",
-        passwordConformation: "",
-      }
+      registration: registration
     };
   },
   methods: {

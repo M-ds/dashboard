@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import Navigation from "@/components/Navigation";
+import Navigation from "@/common/Navigation";
 import VueGridLayout from "vue-grid-layout";
 
 export default {

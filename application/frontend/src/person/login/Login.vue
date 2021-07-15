@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     loggedIn() {
-      return this.$store.getters["PersonStore/loggedIn"];
+      return this.$store.getters["PersonLoginStore/loggedIn"];
     }
   },
   created() {
@@ -63,7 +63,7 @@ export default {
       const username = this.person.username;
       const password = this.person.password;
       if (username && password) {
-        this.$store.dispatch("PersonStore/login", this.person).then(
+        this.$store.dispatch("PersonLoginStore/login", this.person).then(
             () => {
               this.$router.push({ name: "Dashboard" });
             },
