@@ -1,4 +1,3 @@
-/* @flow */
 import logoutService from "@/person/login/service/LogoutService";
 import userService from "@/service/person/PersonService";
 import { PersonProfile } from "@/person/profile/domain/PersonProfile";

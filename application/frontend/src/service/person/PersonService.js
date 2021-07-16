@@ -1,7 +1,5 @@
-/* @flow */
 import axios from "axios";
 import { BaseService } from "@/service/BaseService";
-import { PersonProfile } from "@/person/profile/domain/PersonProfile";
 
 class PersonProfileService extends BaseService {
 

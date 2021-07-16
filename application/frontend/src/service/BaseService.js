@@ -1,4 +1,3 @@
-/* @flow */
 export class BaseService {
   BASE_URL = "http://localhost:1997";
 

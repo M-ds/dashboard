@@ -1,4 +1,4 @@
-/* @Flow */
+
 import authService from "@/person/login/service/LoginService";
 
 export const PersonLoginStore = {

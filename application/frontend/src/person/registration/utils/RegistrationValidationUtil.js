@@ -1,12 +1,7 @@
-/* @Flow */
-import { Registration } from "@/person/registration/domain/Registration";
-
-/*@private*/
 const USERNAME_REGEX = "/[A-Za-z0-9]+/";
-/*@private*/
 const EMAIL_REGEX = "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$/";
 
-function validateRegistration(registration: Registration): string {
+function validateRegistration(registration) {
   debugger;
   const validUsername = isValidUsername(registration.username);
   if (!validUsername) return "Username is not valid!";
@@ -26,22 +21,19 @@ function validateRegistration(registration: Registration): string {
   return "";
 }
 
-/*@private*/
-function isValidUsername(username: string): boolean {
+function isValidUsername(username) {
   if (username.trim() === "") return false;
-  const validUsername = username.match(this.USERNAME_REGEX);
+  const validUsername = username.match(USERNAME_REGEX);
   return validUsername !== "";
 }
 
-/*@private*/
-function isSimilarPassword(password: string, conformationPassword: string): boolean {
+function isSimilarPassword(password, conformationPassword) {
   return password === conformationPassword;
 }
 
-/*@private*/
-function isValidEmail(email: string): boolean {
+function isValidEmail(email) {
   if (email.trim() === "") return false;
-  const validEmail = email.match(this.EMAIL_REGEX);
+  const validEmail = email.match(EMAIL_REGEX);
   return validEmail !== "";
 }
 

@@ -1,4 +1,3 @@
-/* @flow */
 export const DashboardStore = {
   namespaced: true,
   state: {

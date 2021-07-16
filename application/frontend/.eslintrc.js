@@ -1,13 +1,13 @@
 module.exports = {
+  parserOptions: {
+    "parser": "babel-eslint"
+  },
+  extends: [
+    "plugin:vue/essential",
+    "eslint:recommended"
+  ],
   rules: {
     "no-unused-vars": "warn",
-    "no-console": 1
-  },
-  plugins: [
-    "vue"
-  ],
-  parserOptions: {
-    // Required for certain syntax usages
-    "ecmaVersion": 6
+    "no-console": "warn"
   }
 }
