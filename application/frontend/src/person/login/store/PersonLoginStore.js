@@ -27,10 +27,10 @@ export const PersonLoginStore = {
       const response = await authService.login(person);
       if (response.error) {
         context.commit("loginFailure");
-        return Promise.reject(response.error);
+        return response.error;
       }
       context.commit("loginSuccess", response);
-      return Promise.resolve(response);
+      return response;
     },
     logout(context) {
       context.commit("logout")

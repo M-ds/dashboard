@@ -24,7 +24,7 @@ class PersonSignupController(
             username = signupRequest.username,
             email = signupRequest.email,
             password = signupRequest.password,
-            repeatedPassword = signupRequest.repeatedPassword
+            repeatedPassword = signupRequest.passwordConformation
         )
 
         val result = signupUseCase.signup(request)
