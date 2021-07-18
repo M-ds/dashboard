@@ -10,6 +10,11 @@
           {{ message }}
         </div>
       </div>
+      <div v-if="succesRegistration" class="row">
+        <div class="col-sm-12 col-md-12 centered__text">
+          {{ message }}
+        </div>
+      </div>
       <div class="row">
         <div class="col-sm-12 col-md-12">
           <label>
@@ -72,6 +77,10 @@
               :disabled="this.areNotSimilarPasswords || this.isInvalidEmail || this.isInvalidUsername || this.inputIsEmpty"
       >Sign up!
       </button>
+      <button class="u-cf"
+              @click="loginScreen()"
+      >Login Screen
+      </button>
     </div>
   </div>
 </template>
@@ -92,6 +101,7 @@ export default {
       usernameRegex: new RegExp("^[A-Za-z0-9]*$"),
       emailRegex: new RegExp("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$"),
       errorOccurred: false,
+      succesRegistration: false,
       message: ""
     };
   },
@@ -102,7 +112,9 @@ export default {
         await this.$store.dispatch("PersonRegistrationStore/registerPerson", this.signupRequest);
         if (this.$store.getters["PersonRegistrationStore/registrationSuccess"]) {
           this.loading = false;
-          await this.$router.push({ name: "Dashboard" });
+          this.succesRegistration = true;
+          // this.signupRequest = "";
+          this.message = "SUCCES! Please log in!";
         } else {
           this.errorOccurred = true
           this.message = this.$store.getters["PersonRegistrationStore/getErrorMessage"];
@@ -112,6 +124,9 @@ export default {
         console.log(e);
         this.loading = false;
       }
+    },
+    loginScreen() {
+      this.$router.push({name: "Login"});
     }
   },
   computed: {

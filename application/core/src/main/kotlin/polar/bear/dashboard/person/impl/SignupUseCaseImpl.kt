@@ -14,6 +14,8 @@ class SignupUseCaseImpl(
     private val passwordEncoder: PasswordEncoder
 ) : SignupUseCase {
 
+    private val onlyNumbersOrCharactersRegex = "^[A-Za-z0-9]*\$".toRegex()
+
     override fun signup(request: SignupUseCase.Request): SignupUseCase.Response {
 
         val validRequest = validateRequest(request)
@@ -49,7 +51,7 @@ class SignupUseCaseImpl(
             username = request.username,
             email = request.email,
             password = passwordEncoder.encode(request.password),
-            token = "TODO_GENERATE_TOKEN",
+            token = UUID.randomUUID(),
             active = false,
             creationDate = LocalDate.now(),
             role = roleId
@@ -83,8 +85,8 @@ class SignupUseCaseImpl(
                 errorMessage = "Passwords are not equal!"
             )
         }
-        val usernameIsNotEmpty = request.username.isNotBlank()
-        if (!usernameIsNotEmpty) {
+        val isValidUsername = validUserName(request.username)
+        if (!isValidUsername) {
             return ValidatedRequestResponse(
                 valid = false,
                 errorMessage = "Username has to be filled in!"
@@ -105,6 +107,13 @@ class SignupUseCaseImpl(
 
     private fun checkPasswordForEquality(password: String, repeatedPassword: String): Boolean {
         return password == repeatedPassword
+    }
+
+    private fun validUserName(username: String): Boolean {
+        if (username.isNotBlank()) {
+            return onlyNumbersOrCharactersRegex.matches(username)
+        }
+        return false
     }
 }
 

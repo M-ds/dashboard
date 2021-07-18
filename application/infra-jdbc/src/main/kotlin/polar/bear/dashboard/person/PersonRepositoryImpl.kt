@@ -1,5 +1,6 @@
 package polar.bear.dashboard.person
 
+import java.lang.RuntimeException
 import org.springframework.dao.DataAccessException
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
@@ -14,8 +15,9 @@ import polar.bear.dashboard.person.infra.PersonRepository
 import java.util.Optional
 import java.util.UUID
 import javax.sql.DataSource
+import org.springframework.transaction.annotation.Transactional
 
-class PersonRepositoryImpl(
+open class PersonRepositoryImpl(
     dataSource: DataSource
 ) : PersonRepository {
 
@@ -111,18 +113,23 @@ class PersonRepositoryImpl(
         }
     }
 
-    //TODO - Need to do this in a transaction. And rollback if failing.
+    // TODO: check if this really works in a transaction like this.
+    @Transactional
     override fun save(person: Person): Boolean {
-        val personParams = createPersonParamMap(person)
-        val roleParams = createPersonRoleParamMap(person)
+        try {
+            val personParams = createPersonParamMap(person)
+            val roleParams = createPersonRoleParamMap(person)
 
-        val affectedRows = insertValue(personParams, "person")
-        if (affectedRows <= 0) {
-            return false
-        }
+            val affectedRows = insertValue(personParams, "person")
+            if (affectedRows <= 0) {
+                throw RuntimeException("Could not update person!")
+            }
 
-        val updatedRows = insertValue(roleParams, "person_role")
-        if (updatedRows <= 0) {
+            val updatedRows = insertValue(roleParams, "person_role")
+            if (updatedRows <= 0) {
+                throw RuntimeException("Could not update person_role!")
+            }
+        } catch (error: Exception){
             return false
         }
 
@@ -143,8 +150,8 @@ class PersonRepositoryImpl(
 
     private fun createPersonRoleParamMap(person: Person): MutableMap<String, Any> {
         val roleParams = mutableMapOf<String, Any>()
-        roleParams["id"] = person.id
-        roleParams["role"] = person.role
+        roleParams["person_id"] = person.id
+        roleParams["role_id"] = person.role
         return roleParams
     }
 
