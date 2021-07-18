@@ -4,9 +4,6 @@
       <form method="post">
         <h1>Create a new user</h1>
         <div class="row">
-          <div v-if="(error !== '')" class="col-sm-12 col-md-12">
-            {{ error }}
-          </div>
           <div class="col-sm-12 col-md-12">
             <label>
               Username
@@ -16,6 +13,9 @@
                      placeholder="Username"
               />
             </label>
+            <div v-if="this.isInvalidUsername" class="error__text">
+              {{ "Username is not valid!" }}
+            </div>
           </div>
         </div>
         <div class="row">
@@ -28,13 +28,16 @@
                      placeholder="example@email.com"
               />
             </label>
+            <div v-if="this.isInvalidEmail" class="error__text">
+              {{ "Email is not valid!" }}
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-12 col-md-12">
             <label>
               Password
-              <input type="text"
+              <input type="password"
                      name="password"
                      v-model="registrationInput.password"
                      placeholder="Password"
@@ -46,12 +49,15 @@
           <div class="col-sm-12 col-md-12">
             <label>
               Repeat password
-              <input type="text"
+              <input type="password"
                      name="passwordConformation"
                      v-model="registrationInput.passwordConformation"
                      placeholder="Password"
               />
             </label>
+            <div v-if="this.areNotSimilarPasswords" class="error__text">
+              {{ "Passwords are not similar!" }}
+            </div>
           </div>
         </div>
         <button class="u-cf" @click="signup()">Sign up!</button>
@@ -61,7 +67,6 @@
 </template>
 
 <script>
-import RegistrationValidationUtil from "@/person/registration/utils/RegistrationValidationUtil";
 import RegistrationInput from "@/person/registration/domain/Registration";
 
 export default {
@@ -69,17 +74,26 @@ export default {
   data() {
     return {
       registrationInput: RegistrationInput,
-      error: ""
+      usernameRegex: new RegExp("^[A-Za-z0-9]*$"),
+      emailRegex: new RegExp("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")
     };
   },
   methods: {
     signup() {
-      const valid = RegistrationValidationUtil.validateRegistration(this.registrationInput);
-      if (valid !== "") {
-        this.error = valid;
-      } else {
-        this.$router.push({ name: "Dashboard" });
-      }
+      this.$router.push({ name: "Dashboard" });
+    }
+  },
+  computed: {
+    isInvalidUsername() {
+      return !this.usernameRegex.test(this.registrationInput.username);
+    },
+    areNotSimilarPasswords: function () {
+      if (this.registrationInput.password === "" || this.registrationInput.passwordConformation === "") return false;
+      return this.registrationInput.password !== this.registrationInput.passwordConformation;
+    },
+    isInvalidEmail() {
+      if (this.registrationInput.email === "") return false;
+      return !this.emailRegex.test(this.registrationInput.email);
     }
   }
 }
