@@ -2402,3 +2402,8 @@ span.icon-user {
     overflow: hidden !important
   }
 }
+
+.error__text {
+  color: red;
+  font-weight: bold;
+}

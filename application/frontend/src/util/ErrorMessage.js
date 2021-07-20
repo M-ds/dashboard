@@ -1,3 +1,4 @@
+
 function generateEmptyUsernamePasswordMessage(username, password) {
   let usernameEmpty = "";
   if (username != null && username.length <= 0) {

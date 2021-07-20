@@ -1,30 +1,14 @@
-import authService from "@/service/person/AuthService";
+import logoutService from "@/person/login/service/LogoutService";
 import userService from "@/service/person/PersonService";
-import { PersonProfile } from "@/domain/PersonProfile";
+import { PersonProfile } from "@/person/profile/domain/PersonProfile";
 
 export const PersonStore = {
   namespaced: true,
   state: {
-    personLoggedIn: null,
     personProfile: null,
-    status: {
-      loggedIn: false
-    }
   },
   // These only modify the state
   mutations: {
-    loginSuccess(state, person) {
-      state.status.loggedIn = true;
-      state.personLoggedIn = person;
-    },
-    loginFailure(state) {
-      state.status.loggedIn = false;
-      state.personLoggedIn = null;
-    },
-    logout(state) {
-      state.status.loggedIn = false;
-      state.user = null;
-    },
     // registerSuccess(state) {
     //   state.status.loggedIn = false;
     // },
@@ -37,18 +21,8 @@ export const PersonStore = {
   },
   // Business logic actions are stored here
   actions: {
-    async login(context, person) {
-      const response = await authService.login(person);
-      if (response.error) {
-        context.commit("loginFailure");
-        return Promise.reject(response.error);
-      }
-      context.commit("loginSuccess", response);
-      return Promise.resolve(response);
-    },
-    logout(context) {
-      authService.logout();
-      context.commit("logout");
+    logout() {
+      logoutService.logout();
     },
     async getPersonProfile(context, userId) {
       let rawData = await userService.getPersonProfile(userId);
@@ -60,14 +34,8 @@ export const PersonStore = {
     }
   },
   getters: {
-    person: (state) => {
-      return state.personLoggedIn;
-    },
     personProfile: (state) => {
       return state.personProfile;
-    },
-    loggedIn: (state) => {
-      return state.status.loggedIn;
     }
   }
 };

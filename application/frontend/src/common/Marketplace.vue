@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Navigation from "@/components/Navigation";
+import Navigation from "@/common/Navigation";
 
 export default {
   name: "Marketplace",

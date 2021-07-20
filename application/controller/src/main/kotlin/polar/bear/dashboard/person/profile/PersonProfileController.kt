@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController
 import polar.bear.dashboard.person.profile.dto.UserProfileDto
 import polar.bear.dashboard.person.profile.reply.JsonPersonProfileReply
 import polar.bear.dashboard.person.usecase.PersonProfileUseCase
+import java.util.UUID
 
 @CrossOrigin(origins = ["http://localhost:1994"])
 @RestController
@@ -16,9 +17,9 @@ class PersonProfileController(
 
     @GetMapping("/api/person/{personId}/profile")
     fun getPersonProfile(
-        @PathVariable(value = "personId") userId: String
+        @PathVariable(value = "personId") personId: UUID
     ): JsonPersonProfileReply {
-        val userProfile = personProfileUseCase.getPersonProfile(userId)
+        val userProfile = personProfileUseCase.getPersonProfile(personId)
         return JsonPersonProfileReply(
             valid = true,
             error = null,

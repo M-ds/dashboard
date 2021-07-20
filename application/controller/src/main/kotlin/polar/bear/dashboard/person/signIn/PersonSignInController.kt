@@ -12,7 +12,7 @@ import polar.bear.dashboard.person.usecase.SignInUseCase
 
 @CrossOrigin(origins = ["http://localhost:1994"])
 @RestController
-class UserSignInController(
+class PersonSignInController(
     private val signInUseCase: SignInUseCase
 ) {
 

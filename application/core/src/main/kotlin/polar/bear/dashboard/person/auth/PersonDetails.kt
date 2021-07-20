@@ -7,7 +7,7 @@ import polar.bear.dashboard.person.domain.PersonDetail
 
 class PersonDetails(
     private val personDetail: PersonDetail
-): UserDetails {
+) : UserDetails {
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return personDetail.roles.map { role ->

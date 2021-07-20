@@ -35,6 +35,7 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch("PersonStore/logout");
+      this.$store.dispatch("PersonLoginStore/logout");
       this.$router.push("/");
     }
   }

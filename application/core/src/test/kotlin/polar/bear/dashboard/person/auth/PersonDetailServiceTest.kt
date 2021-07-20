@@ -23,7 +23,7 @@ internal class PersonDetailServiceTest {
     private val emptyPersonDetail = PersonDetail("", "", false, mutableListOf())
 
     @Test
-    fun `Happy flow of PersonDetailService`(){
+    fun `Happy flow of PersonDetailService`() {
         GIVEN
         mockPersonRepository.loadUser(personDetail)
         val personAuthorities = personDetail.roles.map { role -> SimpleGrantedAuthority(role.name) }
@@ -39,7 +39,7 @@ internal class PersonDetailServiceTest {
     }
 
     @Test
-    fun `Exception is thrown because user is empty`(){
+    fun `Exception is thrown because user is empty`() {
         GIVEN
         mockPersonRepository.loadUser(emptyPersonDetail)
 
@@ -50,7 +50,7 @@ internal class PersonDetailServiceTest {
     }
 
     @Test
-    fun `Exception is thrown because username is null`(){
+    fun `Exception is thrown because username is null`() {
         GIVEN
         mockPersonRepository.loadUser(null)
 

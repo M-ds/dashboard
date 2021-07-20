@@ -5,55 +5,81 @@
 -- This is the schema
 CREATE SCHEMA IF NOT EXISTS dashboard;
 
--- User table. This is to keep track of the information linked to a user.
-CREATE TABLE dashboard."person"
+-- Person table. This is to keep track of the information linked to a person.
+CREATE TABLE dashboard.person
 (
-    id       SERIAL,
-    userName VARCHAR(255) UNIQUE NOT NULL,
-    email    VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255)        NOT NULL,
-    token    VARCHAR(255),
-    active   BOOLEAN DEFAULT FALSE,
+    id            UUID UNIQUE         NOT NULL,
+    username      VARCHAR(255) UNIQUE NOT NULL,
+    email         VARCHAR(255) UNIQUE NOT NULL,
+    password      VARCHAR(255)        NOT NULL,
+    token         VARCHAR(255),
+    active        BOOLEAN DEFAULT FALSE,
+    creation_date DATE,
     PRIMARY KEY (id),
-    UNIQUE (email, userName)
+    UNIQUE (username, password)
+);
+
+-- Role table. Within this table all the roles are stored which are used in the application.
+CREATE TABLE dashboard.role
+(
+    id   UUID,
+    name VARCHAR(20) UNIQUE NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE (id, name)
+);
+
+-- This table creates the link between the person table and role table.
+-- These tables have both a many to many relationship.
+CREATE TABLE dashboard.person_role
+(
+    person_id UUID,
+    role_id   UUID,
+    CONSTRAINT FK_person_id
+        FOREIGN KEY (person_id)
+            REFERENCES dashboard.person (id)
+            ON DELETE CASCADE,
+    CONSTRAINT FK_role_id
+        FOREIGN KEY (role_id)
+            REFERENCES dashboard.role (id)
+            ON DELETE NO ACTION
 );
 
 -- This table contains the link between the different tables
 -- All necessary information for a user interactable is stored in this table
-CREATE TABLE dashboard."interactable"
+CREATE TABLE dashboard.interactable
 (
-    id SERIAL,
+    id UUID,
     PRIMARY KEY (id),
-    CONSTRAINT FK_User
+    CONSTRAINT FK_person
         FOREIGN KEY (id)
-            REFERENCES dashboard."person" (id)
+            REFERENCES dashboard.person (id)
             ON DELETE NO ACTION
 );
 
 -- This table references the interactable data necessary to use
-CREATE TABLE dashboard."interactable-setting"
+CREATE TABLE dashboard.interactable_setting
 (
-    id     SERIAL,
+    id     UUID,
     apiKey VARCHAR(255),
     PRIMARY KEY (id),
-    CONSTRAINT FK_Interactable_id_setting
+    CONSTRAINT FK_interactable_id_setting
         FOREIGN KEY (id)
-            REFERENCES dashboard."interactable" (id)
+            REFERENCES dashboard.interactable (id)
             ON DELETE CASCADE,
     UNIQUE (id)
 );
 
 -- This table is used to display the information and actions for an interactable
-CREATE TABLE dashboard."interactable-data"
+CREATE TABLE dashboard.interactable_data
 (
-    id       SERIAL,
+    id       UUID,
     slug     VARCHAR(255),
     title    VARCHAR(255),
     imageUrl VARCHAR(255),
     PRIMARY KEY (id),
-    CONSTRAINT FK_Interactable_id_data
+    CONSTRAINT FK_interactable_id_data
         FOREIGN KEY (id)
-            REFERENCES dashboard."interactable" (id)
+            REFERENCES dashboard.interactable (id)
             ON DELETE CASCADE,
     UNIQUE (id)
 );
@@ -61,23 +87,23 @@ CREATE TABLE dashboard."interactable-data"
 ------------------------------------------------------------------------------
 --                CREATED SOME TEST DATA FOR THE APPLICATION                --
 ------------------------------------------------------------------------------
-INSERT INTO dashboard."person" (username, email, password, token, active)
-VALUES ('testPerson', 'test.person@gmail.com', 'testPassword', 'testToken', true);
+INSERT INTO dashboard.person(id, username, email, password, token, active, creation_date)
+VALUES ('b6e38a2a-334d-4ed2-8f05-b1ca03e9397e', 'person', 'test.person@gmail.com',
+        '$2a$10$2VMmPh4CCyWvjSxMfkfEm.mBxXcg92VkiRHNhbYb.OL6a/bBiirr2', NULL, true, CURRENT_DATE),
+       ('e2143053-0d87-4a7f-9d4e-60e0ea52e4ff', 'member', 'test.member@gmail.com',
+        '$2a$10$s6aC3XaN/sAQC7mhA8k22eF2HSrdKmyGUmyzftorxmBN4hm2u0yeq', NULL, true, CURRENT_DATE),
+       ('97abd3b4-b339-4a50-8cb6-06d71e85588c', 'admin', 'test.admin@gmail.com',
+        '$2a$10$1OW8q.KehgIHbAigXyizf.cyft7rnaHPTNga4tlUoNc94uGoYD7QW', NULL, true, CURRENT_DATE);
 
-INSERT INTO dashboard."interactable"(id)
-VALUES (1);
+INSERT INTO dashboard.role(id, name)
+VALUES ('c2024168-35df-4c47-a2d6-aaf488921675', 'ROLE_USER'),
+       ('1e61e0fb-1e5f-4729-b565-46fadb3287cc', 'ROLE_MEMBER'),
+       ('7bdde250-5ed0-45e5-8c9d-0e135de1d0ed', 'ROLE_ADMIN');
 
-INSERT INTO dashboard."interactable-setting" (apikey)
-VALUES ('testApiKey');
-
-INSERT INTO dashboard."interactable-data" (slug, title, imageurl)
-VALUES ('testSlug', 'testTitle', 'testImageUrl');
-
-------------------------------------------------------------------------------
---         HAVE A BASIC QUERY WHICH CAN BE USED TO CHECK TEST DATA          --
-------------------------------------------------------------------------------
-SELECT *
-FROM dashboard."person" U
-         JOIN dashboard."interactable" I on U.id = I.id
-         JOIN dashboard."interactable-data" D on I.id = D.id
-         JOIN dashboard."interactable-setting" S on I.id = S.id;
+INSERT INTO dashboard.person_role(person_id, role_id)
+VALUES ('b6e38a2a-334d-4ed2-8f05-b1ca03e9397e', 'c2024168-35df-4c47-a2d6-aaf488921675'),
+       ('e2143053-0d87-4a7f-9d4e-60e0ea52e4ff', 'c2024168-35df-4c47-a2d6-aaf488921675'),
+       ('e2143053-0d87-4a7f-9d4e-60e0ea52e4ff', '1e61e0fb-1e5f-4729-b565-46fadb3287cc'),
+       ('97abd3b4-b339-4a50-8cb6-06d71e85588c', 'c2024168-35df-4c47-a2d6-aaf488921675'),
+       ('97abd3b4-b339-4a50-8cb6-06d71e85588c', '1e61e0fb-1e5f-4729-b565-46fadb3287cc'),
+       ('97abd3b4-b339-4a50-8cb6-06d71e85588c', '7bdde250-5ed0-45e5-8c9d-0e135de1d0ed');
