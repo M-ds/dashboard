@@ -25,9 +25,11 @@ export const PersonLoginStore = {
   actions: {
     async login(context, person) {
       const response = await authService.login(person);
-      if (response.error) {
+      debugger;
+      // Dit slaat op een string type..?
+      if (typeof response === 'string') {
         context.commit("loginFailure");
-        return response.error;
+        return null;
       }
       context.commit("loginSuccess", response);
       return response;

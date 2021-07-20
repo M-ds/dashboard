@@ -1,3 +1,5 @@
+import NotificationService from "@/common/notification/NotificationService";
+
 export class BaseService {
   BASE_URL = "http://localhost:1997";
 
@@ -11,6 +13,21 @@ export class BaseService {
       return { Authorization: `Bearer ${ personToken }` };
     }
     return "";
+  }
+
+  handleResponse(response, onSuccessMessage) {
+    if (response.status !== 200) {
+      NotificationService.onError(`Error! ${ response.status }`);
+    } else {
+      const extractedData = response.data;
+      if (!extractedData.valid) {
+        NotificationService.onError(`Something went wrong! ${ extractedData.error.errorMessage }`);
+        return extractedData.error.errorMessage;
+      } else {
+        NotificationService.onSucces(onSuccessMessage);
+        return extractedData.model;
+      }
+    }
   }
 }
 

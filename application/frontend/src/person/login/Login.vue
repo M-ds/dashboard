@@ -58,22 +58,14 @@ export default {
     }
   },
   methods: {
-    login() {
+    async login() {
       this.loading = true;
       const username = this.person.username;
       const password = this.person.password;
       if (username && password) {
-        this.$store.dispatch("PersonLoginStore/login", this.person).then(
-            () => {
-              this.$router.push({ name: "Dashboard" });
-            },
-            (error) => {
-              this.loading = false;
-              if (error.errorMessage) {
-                this.errorMessage = error.errorMessage;
-              }
-            }
-        );
+        const result = await this.$store.dispatch("PersonLoginStore/login", this.person);
+        if (result === null) this.loading = false;
+        else await this.$router.push({ name: "Dashboard" });
       } else {
         this.errorMessage = errorMessage.generateEmptyUsernamePasswordMessage(username, password);
         this.loading = false;

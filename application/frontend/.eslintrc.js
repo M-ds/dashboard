@@ -8,6 +8,7 @@ module.exports = {
   ],
   rules: {
     "no-unused-vars": "warn",
-    "no-console": "warn"
+    "no-console": "warn",
+    "no-debugger": "warn"
   }
 }
