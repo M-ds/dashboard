@@ -8,9 +8,12 @@ import polar.bear.dashboard.person.infra.PersonRepository
 import polar.bear.dashboard.person.usecase.SignupUseCase
 import java.time.LocalDate
 import java.util.UUID
+import polar.bear.dashboard.person.signup.domain.Token
+import polar.bear.dashboard.person.signup.infra.TokenRepository
 
 class SignupUseCaseImpl(
     private val personRepository: PersonRepository,
+    private val tokenRepository: TokenRepository,
     private val passwordEncoder: PasswordEncoder
 ) : SignupUseCase {
 
@@ -46,20 +49,24 @@ class SignupUseCaseImpl(
         }
 
         val roleId = personRepository.getRoleId(Role.ROLE_MEMBER)
+        val personId = UUID.randomUUID()
+
+        val token = generateValidationToken(personId)
         val person = Person(
-            id = UUID.randomUUID(),
+            id = personId,
             username = request.username,
             email = request.email,
             password = passwordEncoder.encode(request.password),
-            tokenId = UUID.randomUUID(),
+            tokenId = token.id,
             active = false,
             creationDate = LocalDate.now(),
             role = roleId
         )
 
-        val success = personRepository.save(person)
+        val personSuccessfulSaved = personRepository.save(person)
+        val successfulSaveToken = tokenRepository.saveToken(token)
 
-        return if (success) {
+        return if (successfulSaveToken && personSuccessfulSaved) {
             SignupUseCase.Response(
                 signupResponse = SignupResponse(
                     message = "Person is successfully registered.",
@@ -114,6 +121,10 @@ class SignupUseCaseImpl(
             return onlyNumbersOrCharactersRegex.matches(username)
         }
         return false
+    }
+
+    private fun generateValidationToken(personId: UUID): Token {
+        return Token.createToken(personId)
     }
 }
 

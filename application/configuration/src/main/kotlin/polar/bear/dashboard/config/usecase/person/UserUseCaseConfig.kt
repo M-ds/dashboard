@@ -8,6 +8,7 @@ import polar.bear.dashboard.person.impl.PersonProfileUseCaseImpl
 import polar.bear.dashboard.person.impl.SignInUseCaseImpl
 import polar.bear.dashboard.person.impl.SignupUseCaseImpl
 import polar.bear.dashboard.person.infra.PersonRepository
+import polar.bear.dashboard.person.signup.infra.TokenRepository
 import polar.bear.dashboard.person.usecase.PersonProfileUseCase
 import polar.bear.dashboard.person.usecase.SignInUseCase
 import polar.bear.dashboard.person.usecase.SignupUseCase
@@ -41,10 +42,12 @@ open class UserUseCaseConfig {
     @Bean
     open fun initSignupUseCase(
         personRepository: PersonRepository,
+        tokenRepository: TokenRepository,
         passwordEncoder: PasswordEncoder
     ): SignupUseCase {
         return SignupUseCaseImpl(
             personRepository =  personRepository,
+            tokenRepository = tokenRepository,
             passwordEncoder = passwordEncoder
         )
     }

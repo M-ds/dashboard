@@ -121,12 +121,12 @@ open class PersonRepositoryImpl(
             val roleParams = createPersonRoleParamMap(person)
 
             val affectedRows = insertValue(personParams, "person")
-            if (affectedRows <= 0) {
+            if (affectedRows != 1) {
                 throw RuntimeException("Could not update person!")
             }
 
             val updatedRows = insertValue(roleParams, "person_role")
-            if (updatedRows <= 0) {
+            if (updatedRows != 1) {
                 throw RuntimeException("Could not update person_role!")
             }
         } catch (error: Exception){

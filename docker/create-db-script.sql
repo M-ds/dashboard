@@ -50,7 +50,7 @@ CREATE TABLE dashboard.token
 (
     id          UUID NOT NULL,
     token       UUID NOT NULL,
-    expiry_date DATE,
+    expiry_date TIMESTAMP,
     person_id   UUID NOT NULL,
     CONSTRAINT FK_person_id
         FOREIGN KEY (person_id)
