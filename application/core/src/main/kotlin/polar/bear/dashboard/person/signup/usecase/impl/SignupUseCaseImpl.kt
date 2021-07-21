@@ -1,20 +1,22 @@
-package polar.bear.dashboard.person.impl
+package polar.bear.dashboard.person.signup.usecase.impl
 
 import org.springframework.security.crypto.password.PasswordEncoder
 import polar.bear.dashboard.person.domain.Person
 import polar.bear.dashboard.person.domain.Role
-import polar.bear.dashboard.person.domain.SignupResponse
+import polar.bear.dashboard.person.signup.domain.SignupResponse
 import polar.bear.dashboard.person.infra.PersonRepository
-import polar.bear.dashboard.person.usecase.SignupUseCase
+import polar.bear.dashboard.person.signup.usecase.SignupUseCase
 import java.time.LocalDate
 import java.util.UUID
 import polar.bear.dashboard.person.signup.domain.Token
+import polar.bear.dashboard.person.signup.infra.SendEmail
 import polar.bear.dashboard.person.signup.infra.TokenRepository
 
 class SignupUseCaseImpl(
     private val personRepository: PersonRepository,
     private val tokenRepository: TokenRepository,
-    private val passwordEncoder: PasswordEncoder
+    private val passwordEncoder: PasswordEncoder,
+    private val sendEmail: SendEmail
 ) : SignupUseCase {
 
     private val onlyNumbersOrCharactersRegex = "^[A-Za-z0-9]*\$".toRegex()
@@ -66,11 +68,21 @@ class SignupUseCaseImpl(
         val personSuccessfulSaved = personRepository.save(person)
         val successfulSaveToken = tokenRepository.saveToken(token)
 
+        if (successfulSaveToken && personSuccessfulSaved) {
+            sendEmail.sendEmail(
+                SendEmail.Request(
+                    username = person.username,
+                    email = person.email,
+                    token = token.token,
+                    verifyUrl = request.siteUrl
+                )
+            )
+        }
+
         return if (successfulSaveToken && personSuccessfulSaved) {
             SignupUseCase.Response(
                 signupResponse = SignupResponse(
-                    message = "Person is successfully registered.",
-                    emailToken = ""
+                    message = "Person is successfully registered."
                 ),
                 valid = true,
                 errorMessage = ""

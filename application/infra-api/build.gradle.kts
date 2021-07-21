@@ -11,7 +11,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
 
-    runtimeOnly("org.postgresql:postgresql")
+    implementation("org.springframework.boot:spring-boot-starter-mail:2.2.0.RELEASE")
 
-    implementation("org.junit.jupiter:junit-jupiter:5.4.2")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
 }

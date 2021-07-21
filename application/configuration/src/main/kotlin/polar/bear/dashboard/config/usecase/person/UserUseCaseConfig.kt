@@ -6,12 +6,13 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.crypto.password.PasswordEncoder
 import polar.bear.dashboard.person.impl.PersonProfileUseCaseImpl
 import polar.bear.dashboard.person.impl.SignInUseCaseImpl
-import polar.bear.dashboard.person.impl.SignupUseCaseImpl
+import polar.bear.dashboard.person.signup.usecase.impl.SignupUseCaseImpl
 import polar.bear.dashboard.person.infra.PersonRepository
+import polar.bear.dashboard.person.signup.infra.SendEmail
 import polar.bear.dashboard.person.signup.infra.TokenRepository
 import polar.bear.dashboard.person.usecase.PersonProfileUseCase
 import polar.bear.dashboard.person.usecase.SignInUseCase
-import polar.bear.dashboard.person.usecase.SignupUseCase
+import polar.bear.dashboard.person.signup.usecase.SignupUseCase
 import polar.bear.dashboard.util.jwt.JwtUtil
 
 @Configuration
@@ -43,11 +44,13 @@ open class UserUseCaseConfig {
     open fun initSignupUseCase(
         personRepository: PersonRepository,
         tokenRepository: TokenRepository,
+        sendEmail: SendEmail,
         passwordEncoder: PasswordEncoder
     ): SignupUseCase {
         return SignupUseCaseImpl(
             personRepository =  personRepository,
             tokenRepository = tokenRepository,
+            sendEmail = sendEmail,
             passwordEncoder = passwordEncoder
         )
     }
