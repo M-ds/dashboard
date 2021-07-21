@@ -142,9 +142,9 @@ open class PersonRepositoryImpl(
         personParams["username"] = person.username
         personParams["email"] = person.email
         personParams["password"] = person.password
-        personParams["token"] = person.token
         personParams["active"] = person.active
         personParams["creation_date"] = person.creationDate
+        personParams["token_id"] = person.tokenId
         return personParams
     }
 

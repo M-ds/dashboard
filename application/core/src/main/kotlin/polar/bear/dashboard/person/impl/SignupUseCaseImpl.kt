@@ -51,7 +51,7 @@ class SignupUseCaseImpl(
             username = request.username,
             email = request.email,
             password = passwordEncoder.encode(request.password),
-            token = UUID.randomUUID(),
+            tokenId = UUID.randomUUID(),
             active = false,
             creationDate = LocalDate.now(),
             role = roleId

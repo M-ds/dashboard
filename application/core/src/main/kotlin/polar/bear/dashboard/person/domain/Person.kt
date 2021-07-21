@@ -8,8 +8,8 @@ data class Person(
     val username: String,
     val email: String,
     val password: String,
-    val token: UUID,
     val active: Boolean,
     val creationDate: LocalDate,
-    val role: UUID
+    val role: UUID,
+    val tokenId: UUID
 )
