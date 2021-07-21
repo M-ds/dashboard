@@ -7,6 +7,7 @@ import polar.bear.dashboard.person.domain.Role
 import polar.bear.dashboard.person.infra.PersonRepository
 import java.util.Optional
 import java.util.UUID
+import polar.bear.dashboard.person.verifytoken.domain.PersonRegisteredSuccess
 
 class MockPersonRepository : PersonRepository {
 
@@ -64,6 +65,10 @@ class MockPersonRepository : PersonRepository {
     }
 
     override fun getRoleId(role: Role): UUID {
+        TODO("Not yet implemented")
+    }
+
+    override fun successfulRegistered(personRegistered: PersonRegisteredSuccess) {
         TODO("Not yet implemented")
     }
 }

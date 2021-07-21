@@ -8,7 +8,9 @@ import polar.bear.dashboard.person.PersonRepositoryImpl
 import polar.bear.dashboard.person.infra.PersonRepository
 import javax.sql.DataSource
 import polar.bear.dashboard.person.signup.infra.TokenRepository
+import polar.bear.dashboard.person.token.RetrieveTokenRepositoryImpl
 import polar.bear.dashboard.person.token.TokenRepositoryImpl
+import polar.bear.dashboard.person.verifytoken.infra.RetrieveTokenRepository
 
 @Configuration
 open class RepositoryConfig {
@@ -30,6 +32,11 @@ open class RepositoryConfig {
     @Bean
     open fun initTokenRepository(): TokenRepository {
         return TokenRepositoryImpl(createDataSource())
+    }
+
+    @Bean
+    open fun initRetrieveTokenRepository(): RetrieveTokenRepository {
+        return RetrieveTokenRepositoryImpl(createDataSource())
     }
 
     private fun createDataSource(): DataSource {

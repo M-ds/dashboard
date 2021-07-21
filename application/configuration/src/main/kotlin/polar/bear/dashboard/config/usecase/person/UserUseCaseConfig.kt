@@ -13,6 +13,9 @@ import polar.bear.dashboard.person.signup.infra.TokenRepository
 import polar.bear.dashboard.person.usecase.PersonProfileUseCase
 import polar.bear.dashboard.person.usecase.SignInUseCase
 import polar.bear.dashboard.person.signup.usecase.SignupUseCase
+import polar.bear.dashboard.person.verifytoken.infra.RetrieveTokenRepository
+import polar.bear.dashboard.person.verifytoken.usecase.VerifyTokenUseCase
+import polar.bear.dashboard.person.verifytoken.usecase.impl.VerifyTokenUseCaseImpl
 import polar.bear.dashboard.util.jwt.JwtUtil
 
 @Configuration
@@ -48,10 +51,21 @@ open class UserUseCaseConfig {
         passwordEncoder: PasswordEncoder
     ): SignupUseCase {
         return SignupUseCaseImpl(
-            personRepository =  personRepository,
+            personRepository = personRepository,
             tokenRepository = tokenRepository,
             sendEmail = sendEmail,
             passwordEncoder = passwordEncoder
+        )
+    }
+
+    @Bean
+    open fun initVerifyTokenRepositoryUseCase(
+        retrieveTokenRepository: RetrieveTokenRepository,
+        personRepository: PersonRepository
+    ): VerifyTokenUseCase {
+        return VerifyTokenUseCaseImpl(
+            retrieveTokenRepository = retrieveTokenRepository,
+            personRepository = personRepository
         )
     }
 

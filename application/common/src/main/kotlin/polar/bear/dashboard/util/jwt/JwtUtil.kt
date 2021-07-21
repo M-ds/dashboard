@@ -12,7 +12,7 @@ open class JwtUtil(
     fun generateToken(
         username: String
     ): String {
-        if (username.contains("test")) {
+        if (username.startsWith("test")) {
             return username
         }
         return Jwts

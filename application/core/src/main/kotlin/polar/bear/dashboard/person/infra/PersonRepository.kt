@@ -6,6 +6,7 @@ import polar.bear.dashboard.person.domain.PersonProfile
 import polar.bear.dashboard.person.domain.Role
 import java.util.Optional
 import java.util.UUID
+import polar.bear.dashboard.person.verifytoken.domain.PersonRegisteredSuccess
 
 interface PersonRepository {
 
@@ -26,4 +27,6 @@ interface PersonRepository {
     fun save(person: Person): Boolean
 
     fun getRoleId(role: Role): UUID
+
+    fun successfulRegistered(personRegistered: PersonRegisteredSuccess)
 }

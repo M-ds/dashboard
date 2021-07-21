@@ -40,8 +40,4 @@ class TokenRepositoryImpl(
         insertMap["person_id"] = token.personId
         return insertMap
     }
-
-    override fun retreiveToken(tokenId: UUID): Token {
-        TODO("Not yet implemented")
-    }
 }

@@ -16,6 +16,7 @@ import java.util.Optional
 import java.util.UUID
 import javax.sql.DataSource
 import org.springframework.transaction.annotation.Transactional
+import polar.bear.dashboard.person.verifytoken.domain.PersonRegisteredSuccess
 
 open class PersonRepositoryImpl(
     dataSource: DataSource
@@ -173,5 +174,18 @@ open class PersonRepositoryImpl(
             UUID::class.java,
             role.name
         )
+    }
+
+    override fun successfulRegistered(personRegistered: PersonRegisteredSuccess) {
+        val deleteQuery = "delete from token where person_id = '${personRegistered.personId}'"
+        val updatePersonQuery = """
+            update person
+            set token_id = null,
+                active   = true
+            where id = '${personRegistered.personId}'
+        """.trimIndent()
+
+        jdbcTemplate.update(deleteQuery)
+        jdbcTemplate.update(updatePersonQuery)
     }
 }

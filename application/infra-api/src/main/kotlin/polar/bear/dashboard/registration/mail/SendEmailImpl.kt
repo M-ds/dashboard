@@ -14,7 +14,7 @@ class SendEmailImpl(
         val toAddress = request.email
         val subject = "Registration Email"
 
-        val verifyURL = "${request.verifyUrl}/verify?code=${request.token}"
+        val verifyURL = "${request.verifyUrl}/user/auth/_verify?code=${request.token}"
 
         val content = """
             Dear ${request.username}, <br>
