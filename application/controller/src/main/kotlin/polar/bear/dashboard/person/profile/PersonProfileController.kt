@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 import polar.bear.dashboard.person.profile.dto.UserProfileDto
 import polar.bear.dashboard.person.profile.reply.JsonPersonProfileReply
-import polar.bear.dashboard.person.usecase.PersonProfileUseCase
 import java.util.UUID
+import polar.bear.dashboard.person.profile.usecase.PersonProfileUseCase
 
 @CrossOrigin(origins = ["http://localhost:1994"])
 @RestController

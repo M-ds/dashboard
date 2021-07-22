@@ -1,4 +1,4 @@
-package polar.bear.dashboard.person.domain
+package polar.bear.dashboard.person.profile.domain
 
 data class PersonProfile(
     val userName: String,

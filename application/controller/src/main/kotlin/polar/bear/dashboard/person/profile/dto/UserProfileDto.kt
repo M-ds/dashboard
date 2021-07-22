@@ -1,6 +1,6 @@
 package polar.bear.dashboard.person.profile.dto
 
-import polar.bear.dashboard.person.domain.PersonProfile
+import polar.bear.dashboard.person.profile.domain.PersonProfile
 
 data class UserProfileDto(
     val username: String,

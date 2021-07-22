@@ -1,4 +1,4 @@
-package polar.bear.dashboard.person.domain
+package polar.bear.dashboard.person.auth.domain
 
 data class PersonDetail(
     var username: String = "",

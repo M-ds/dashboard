@@ -1,6 +1,6 @@
-package polar.bear.dashboard.person.usecase
+package polar.bear.dashboard.person.signin.usecase
 
-import polar.bear.dashboard.person.domain.SignInPerson
+import polar.bear.dashboard.person.signin.domain.SignInPerson
 
 interface SignInUseCase {
 

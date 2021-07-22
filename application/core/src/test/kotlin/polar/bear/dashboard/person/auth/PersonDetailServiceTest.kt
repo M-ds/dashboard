@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UsernameNotFoundException
-import polar.bear.dashboard.person.domain.PersonDetail
-import polar.bear.dashboard.person.domain.Role
-import polar.bear.dashboard.repository.user.MockPersonRepository
+import polar.bear.dashboard.person.auth.domain.PersonDetail
+import polar.bear.dashboard.person.auth.domain.Role
+import polar.bear.dashboard.repository.person.MockPersonRepository
 import polar.bear.dashboard.utils.Marker.GIVEN
 import polar.bear.dashboard.utils.Marker.THEN
 import polar.bear.dashboard.utils.Marker.WHEN

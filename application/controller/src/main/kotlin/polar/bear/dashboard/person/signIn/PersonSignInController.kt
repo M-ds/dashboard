@@ -8,7 +8,7 @@ import polar.bear.dashboard.common.reply.JsonError
 import polar.bear.dashboard.person.signIn.dto.SignInResponseDto
 import polar.bear.dashboard.person.signIn.reply.JsonLoginReply
 import polar.bear.dashboard.person.signIn.request.LoginRequest
-import polar.bear.dashboard.person.usecase.SignInUseCase
+import polar.bear.dashboard.person.signin.usecase.SignInUseCase
 
 @CrossOrigin(origins = ["http://localhost:1994"])
 @RestController

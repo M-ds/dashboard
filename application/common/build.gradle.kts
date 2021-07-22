@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm")
     // Uncomment jacoco when tests are present in this module
-//    jacoco
+    jacoco
 }
 
 dependencies {
@@ -9,4 +9,5 @@ dependencies {
     implementation(kotlin("reflect"))
 
     implementation("io.jsonwebtoken:jjwt:0.9.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.4.2")
 }

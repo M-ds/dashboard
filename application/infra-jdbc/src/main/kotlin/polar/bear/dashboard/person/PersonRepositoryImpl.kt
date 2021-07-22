@@ -6,11 +6,9 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert
 import polar.bear.dashboard.person.PersonRowMapperUtil.Companion.personDetailsMapper
-import polar.bear.dashboard.person.PersonRowMapperUtil.Companion.userProfileRowMapper
-import polar.bear.dashboard.person.domain.Person
-import polar.bear.dashboard.person.domain.PersonDetail
-import polar.bear.dashboard.person.domain.PersonProfile
-import polar.bear.dashboard.person.domain.Role
+import polar.bear.dashboard.person.auth.domain.Person
+import polar.bear.dashboard.person.auth.domain.PersonDetail
+import polar.bear.dashboard.person.auth.domain.Role
 import polar.bear.dashboard.person.infra.PersonRepository
 import java.util.Optional
 import java.util.UUID
@@ -91,27 +89,6 @@ open class PersonRepositoryImpl(
             UUID::class.java,
             username
         )
-    }
-
-    override fun getPersonProfile(personId: UUID): Optional<PersonProfile> {
-        val getUserProfileQuery = """
-            SELECT username, password, email
-            FROM person p
-            WHERE p.id = ?
-        """.trimIndent()
-
-        return try {
-            val result = jdbcTemplate.queryForObject(
-                getUserProfileQuery,
-                userProfileRowMapper(),
-                personId
-            )
-
-            return Optional.ofNullable(result)
-
-        } catch (exception: DataAccessException) {
-            Optional.empty()
-        }
     }
 
     // TODO: check if this really works in a transaction like this.

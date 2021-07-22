@@ -1,18 +1,19 @@
-package polar.bear.dashboard.person.usecase
+package polar.bear.dashboard.person.profile
 
 import org.junit.jupiter.api.Test
-import polar.bear.dashboard.person.domain.PersonProfile
-import polar.bear.dashboard.person.impl.PersonProfileUseCaseImpl
-import polar.bear.dashboard.person.usecase.UserProfileUseCaseTestSetup.personProfileUseCase
-import polar.bear.dashboard.repository.user.MockPersonRepository
+import polar.bear.dashboard.person.profile.domain.PersonProfile
+import polar.bear.dashboard.person.profile.usecase.PersonProfileUseCaseImpl
+import polar.bear.dashboard.person.profile.UserProfileUseCaseTestSetup.personProfileUseCase
 import polar.bear.dashboard.utils.Marker.GIVEN
 import polar.bear.dashboard.utils.Marker.THEN
 import polar.bear.dashboard.utils.Marker.WHEN
 import java.util.UUID
+import polar.bear.dashboard.person.profile.usecase.PersonProfileUseCase
+import polar.bear.dashboard.repository.person.MockPersonProfileRepository
 
 internal class PersonProfileUseCaseTest {
 
-    private val mockUserRepository = UserProfileUseCaseTestSetup.mockPersonRepository
+    private val mockUserRepository = UserProfileUseCaseTestSetup.mockPersonProfileRepository
     private val underTest = personProfileUseCase()
     private val personProfile = PersonProfile("TestUser", "TestPassword", "Test@mail.com")
     private val emptyPersonProfile = PersonProfile("", "", "")
@@ -60,9 +61,9 @@ internal class PersonProfileUseCaseTest {
 }
 
 object UserProfileUseCaseTestSetup {
-    val mockPersonRepository = MockPersonRepository()
+    val mockPersonProfileRepository = MockPersonProfileRepository()
 
     fun personProfileUseCase(): PersonProfileUseCase {
-        return PersonProfileUseCaseImpl(mockPersonRepository)
+        return PersonProfileUseCaseImpl(mockPersonProfileRepository)
     }
 }

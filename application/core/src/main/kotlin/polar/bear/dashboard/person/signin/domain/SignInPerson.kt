@@ -1,4 +1,4 @@
-package polar.bear.dashboard.person.domain
+package polar.bear.dashboard.person.signin.domain
 
 import java.util.UUID
 

@@ -1,4 +1,4 @@
-package polar.bear.dashboard.person.usecase
+package polar.bear.dashboard.person.signin
 
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.`when`
@@ -8,11 +8,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import polar.bear.dashboard.person.auth.PersonDetails
-import polar.bear.dashboard.person.domain.PersonDetail
-import polar.bear.dashboard.person.domain.Role
-import polar.bear.dashboard.person.impl.SignInUseCaseImpl
-import polar.bear.dashboard.person.usecase.SingInUseCaseTestSetup.signInUseCase
-import polar.bear.dashboard.repository.user.MockPersonRepository
+import polar.bear.dashboard.person.auth.domain.PersonDetail
+import polar.bear.dashboard.person.auth.domain.Role
+import polar.bear.dashboard.person.signin.usecase.impl.SignInUseCaseImpl
+import polar.bear.dashboard.person.signin.SingInUseCaseTestSetup.signInUseCase
+import polar.bear.dashboard.person.signin.usecase.SignInUseCase
+import polar.bear.dashboard.repository.person.MockPersonRepository
 import polar.bear.dashboard.util.jwt.JwtUtil
 import polar.bear.dashboard.utils.Marker.GIVEN
 import polar.bear.dashboard.utils.Marker.THEN

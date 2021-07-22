@@ -1,4 +1,4 @@
-package polar.bear.dashboard.person.domain
+package polar.bear.dashboard.person.auth.domain
 
 import java.time.LocalDate
 import java.util.UUID

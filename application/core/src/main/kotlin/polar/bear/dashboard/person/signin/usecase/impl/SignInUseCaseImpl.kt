@@ -1,11 +1,11 @@
-package polar.bear.dashboard.person.impl
+package polar.bear.dashboard.person.signin.usecase.impl
 
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import polar.bear.dashboard.person.auth.PersonDetails
-import polar.bear.dashboard.person.domain.SignInPerson
+import polar.bear.dashboard.person.signin.domain.SignInPerson
 import polar.bear.dashboard.person.infra.PersonRepository
-import polar.bear.dashboard.person.usecase.SignInUseCase
+import polar.bear.dashboard.person.signin.usecase.SignInUseCase
 import polar.bear.dashboard.util.jwt.JwtUtil
 
 class SignInUseCaseImpl(

@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration
 import polar.bear.dashboard.person.PersonRepositoryImpl
 import polar.bear.dashboard.person.infra.PersonRepository
 import javax.sql.DataSource
+import polar.bear.dashboard.person.profile.PersonProfileRepositoryImpl
+import polar.bear.dashboard.person.profile.infra.PersonProfileRepository
 import polar.bear.dashboard.person.signup.infra.TokenRepository
 import polar.bear.dashboard.person.token.RetrieveTokenRepositoryImpl
 import polar.bear.dashboard.person.token.TokenRepositoryImpl
@@ -37,6 +39,11 @@ open class RepositoryConfig {
     @Bean
     open fun initRetrieveTokenRepository(): RetrieveTokenRepository {
         return RetrieveTokenRepositoryImpl(createDataSource())
+    }
+
+    @Bean
+    open fun initPersonProfileRepository(): PersonProfileRepository {
+        return PersonProfileRepositoryImpl(createDataSource())
     }
 
     private fun createDataSource(): DataSource {

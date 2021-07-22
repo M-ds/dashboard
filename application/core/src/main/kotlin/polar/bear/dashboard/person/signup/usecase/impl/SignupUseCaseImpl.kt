@@ -1,8 +1,8 @@
 package polar.bear.dashboard.person.signup.usecase.impl
 
 import org.springframework.security.crypto.password.PasswordEncoder
-import polar.bear.dashboard.person.domain.Person
-import polar.bear.dashboard.person.domain.Role
+import polar.bear.dashboard.person.auth.domain.Person
+import polar.bear.dashboard.person.auth.domain.Role
 import polar.bear.dashboard.person.signup.domain.SignupResponse
 import polar.bear.dashboard.person.infra.PersonRepository
 import polar.bear.dashboard.person.signup.usecase.SignupUseCase

@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import polar.bear.dashboard.person.auth.PersonDetailService
-import polar.bear.dashboard.person.domain.SecurityRole
+import polar.bear.dashboard.person.auth.domain.SecurityRole
 import polar.bear.dashboard.security.JwtAuthEntryPoint
 import polar.bear.dashboard.security.JwtRequestFilter
 

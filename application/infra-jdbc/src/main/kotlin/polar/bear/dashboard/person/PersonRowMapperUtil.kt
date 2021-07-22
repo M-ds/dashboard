@@ -1,9 +1,9 @@
 package polar.bear.dashboard.person
 
 import org.springframework.jdbc.core.RowMapper
-import polar.bear.dashboard.person.domain.PersonDetail
-import polar.bear.dashboard.person.domain.PersonProfile
-import polar.bear.dashboard.person.domain.Role
+import polar.bear.dashboard.person.auth.domain.PersonDetail
+import polar.bear.dashboard.person.profile.domain.PersonProfile
+import polar.bear.dashboard.person.auth.domain.Role
 import java.sql.ResultSet
 
 class PersonRowMapperUtil {

@@ -1,18 +1,16 @@
-package polar.bear.dashboard.repository.user
+package polar.bear.dashboard.repository.person
 
-import polar.bear.dashboard.person.domain.Person
-import polar.bear.dashboard.person.domain.PersonDetail
-import polar.bear.dashboard.person.domain.PersonProfile
-import polar.bear.dashboard.person.domain.Role
+import polar.bear.dashboard.person.auth.domain.Person
+import polar.bear.dashboard.person.auth.domain.PersonDetail
+import polar.bear.dashboard.person.auth.domain.Role
 import polar.bear.dashboard.person.infra.PersonRepository
+import polar.bear.dashboard.person.verifytoken.domain.PersonRegisteredSuccess
 import java.util.Optional
 import java.util.UUID
-import polar.bear.dashboard.person.verifytoken.domain.PersonRegisteredSuccess
 
 class MockPersonRepository : PersonRepository {
 
     private var personDetail: Optional<PersonDetail> = Optional.empty()
-    private var personProfile: Optional<PersonProfile> = Optional.empty()
     private var usernameExists: Boolean = false
     private var personId: UUID = UUID.randomUUID()
 
@@ -46,18 +44,6 @@ class MockPersonRepository : PersonRepository {
 
     override fun getPersonIdFromUsername(username: String): UUID {
         return this.personId
-    }
-
-    fun getUser(personProfile: PersonProfile?) {
-        if (personProfile == null) {
-            this.personProfile = Optional.empty()
-        } else {
-            this.personProfile = Optional.of(personProfile)
-        }
-    }
-
-    override fun getPersonProfile(personId: UUID): Optional<PersonProfile> {
-        return this.personProfile
     }
 
     override fun save(person: Person): Boolean {

@@ -1,8 +1,5 @@
-package polar.bear.dashboard.utils
+package polar.bear.dashboard.util.text
 
-/**
- * This class is just a help tool to utilise while writing tests. This can help to create more structure when writing tests.
- */
 object Marker {
     val GIVEN: (description: (String?) -> Any) -> Any = {}
     val WHEN: (description: (String?) -> Any) -> Any = {}
