@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-12 col-s-12">
+      <div class="col-lg-offset-3">
         <div class="centered__box">
           <h1>Login</h1>
           <h3 v-if="(errorMessage !== '')">{{ errorMessage }} </h3>
@@ -16,14 +16,14 @@
                  placeholder="Password"
           />
           <button
-              class="button"
               @click="login()"
+              class="button__left"
           >Log in
           </button>
           <router-link
               :to="{name: 'NewPerson'}"
               tag="button"
-              class="button"
+              class="button__right"
           >New User
           </router-link>
         </div>
