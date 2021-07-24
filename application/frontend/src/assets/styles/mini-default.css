@@ -1007,7 +1007,7 @@ button::-moz-focus-inner,
 }
 
 button,
-html [type=button],
+html [type=button],button
 [type=reset],
 [type=submit] {
   -webkit-appearance: button;

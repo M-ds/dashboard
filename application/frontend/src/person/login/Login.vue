@@ -1,29 +1,37 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-lg-offset-3">
+      <div class="col-lg-offset-3 col-md-offset-3 col-lg-6 col-md-6">
         <div class="centered__box">
           <h1>Login</h1>
-          <h3 v-if="(errorMessage !== '')">{{ errorMessage }} </h3>
-          <input type="text"
-                 name="username"
-                 v-model="person.username"
-                 placeholder="Username"
-          />
-          <input type="password"
-                 name="password"
-                 v-model="person.password"
-                 placeholder="Password"
-          />
+          <h3 v-if="(errorMessage !== '')">{{ errorMessage }}</h3>
+          <div>
+          <label>
+            Username
+            <input type="text"
+                   name="username"
+                   v-model="person.username"
+                   placeholder="Username"
+            />
+          </label>
+          </div>
+          <div>
+          <label>
+            Password
+            <input type="password"
+                   name="password"
+                   v-model="person.password"
+                   placeholder="Password"
+            />
+          </label>
+          </div>
           <button
               @click="login()"
-              class="button__left"
           >Log in
           </button>
           <router-link
               :to="{name: 'NewPerson'}"
               tag="button"
-              class="button__right"
           >New User
           </router-link>
         </div>
