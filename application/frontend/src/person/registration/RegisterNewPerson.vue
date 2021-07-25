@@ -1,78 +1,74 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col-lg-offset-3 col-md-offset-3 col-lg-6 col-md-6">
-        <div class="centered__box">
-          <h1>Create a new user</h1>
-          <div v-if="errorOccurred">
-            <div class="error__text centered__text">
-              {{ message }}
-            </div>
-          </div>
-          <div v-if="succesRegistration">
-            <div class="  centered__text">
-              {{ message }}
-            </div>
-          </div>
-          <div>
-            <label>
-              Username
-              <input type="text"
-                     name="userName"
-                     v-model="signupRequest.username"
-                     placeholder="Username"
-              />
-            </label>
-            <div v-if="this.isInvalidUsername" class="error__text centered__text">
-              {{ "Username is not valid!" }}
-            </div>
-          </div>
-          <div>
-            <label>
-              Email address
-              <input type="text"
-                     name="email"
-                     v-model="signupRequest.email"
-                     placeholder="example@email.com"
-              />
-            </label>
-            <div v-if="this.isInvalidEmail" class="error__text centered__text">
-              {{ "Email is not valid!" }}
-            </div>
-          </div>
-          <div>
-            <label>
-              Password
-              <input type="password"
-                     name="password"
-                     v-model="signupRequest.password"
-                     placeholder="Password"
-              />
-            </label>
-          </div>
-          <div>
-            <label>
-              Repeat password
-              <input type="password"
-                     name="passwordConformation"
-                     v-model="signupRequest.passwordConformation"
-                     placeholder="Password"
-              />
-            </label>
-            <div v-if="this.areNotSimilarPasswords" class="error__text centered__text">
-              {{ "Passwords are not similar!" }}
-            </div>
-          </div>
-          <button @click="signup()"
-                  :disabled="this.areNotSimilarPasswords || this.isInvalidEmail || this.isInvalidUsername || this.inputIsEmpty"
-          >Sign up!
-          </button>
-          <button
-              @click="loginScreen()"
-          >Login Screen
-          </button>
+    <div class="centered__box">
+      <h1>Create a new user</h1>
+      <div v-if="errorOccurred">
+        <div class="error__text centered__text">
+          {{ message }}
         </div>
       </div>
+      <div v-if="succesRegistration">
+        <div class="  centered__text">
+          {{ message }}
+        </div>
+      </div>
+      <div>
+        <label>
+          Username
+          <input type="text"
+                 name="userName"
+                 v-model="signupRequest.username"
+                 placeholder="Username"
+          />
+        </label>
+        <div v-if="this.isInvalidUsername" class="error__text centered__text">
+          {{ "Username is not valid!" }}
+        </div>
+      </div>
+      <div>
+        <label>
+          Email address
+          <input type="text"
+                 name="email"
+                 v-model="signupRequest.email"
+                 placeholder="example@email.com"
+          />
+        </label>
+        <div v-if="this.isInvalidEmail" class="error__text centered__text">
+          {{ "Email is not valid!" }}
+        </div>
+      </div>
+      <div>
+        <label>
+          Password
+          <input type="password"
+                 name="password"
+                 v-model="signupRequest.password"
+                 placeholder="Password"
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Repeat password
+          <input type="password"
+                 name="passwordConformation"
+                 v-model="signupRequest.passwordConformation"
+                 placeholder="Password"
+          />
+        </label>
+        <div v-if="this.areNotSimilarPasswords" class="error__text centered__text">
+          {{ "Passwords are not similar!" }}
+        </div>
+      </div>
+      <button @click="signup()"
+              :disabled="this.areNotSimilarPasswords || this.isInvalidEmail || this.isInvalidUsername || this.inputIsEmpty"
+      >Sign up!
+      </button>
+      <button
+          @click="loginScreen()"
+      >Login Screen
+      </button>
     </div>
   </div>
 </template>

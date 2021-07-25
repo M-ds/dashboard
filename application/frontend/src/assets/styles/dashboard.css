@@ -290,11 +290,12 @@ label {
 }
 
 .centered__box {
-  top: 50%;
+  align-items: center;
   border: 5px solid yellow;
-  margin: calc(1.5 * var(--universal-margin)) var(--universal-margin);
+  margin: 0 auto;
   padding: calc(var(--universal-padding));
   height: auto;
+  width: 25%;
 }
 
 .centered__text {
