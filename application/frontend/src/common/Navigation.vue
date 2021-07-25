@@ -3,26 +3,26 @@
     <router-link
         :to="{name: 'Dashboard'}"
         tag="button"
-        class="button u-cf nav-button"
+        class="button nav-button"
     >
       Dashboard
     </router-link>
     <router-link
         :to="{name: 'Profile'}"
         tag="button"
-        class="button u-cf nav-button"
+        class="button nav-button"
     >
       Profile
     </router-link>
     <router-link
         :to="{name: 'Marketplace'}"
         tag="button"
-        class="button u-cf nav-button"
+        class="button nav-button"
     >
       Marketplace
     </router-link>
     <button
-        class="button u-cf nav-button"
+        class="button nav-button"
         @click.prevent="logout()"
     >Log out
     </button>

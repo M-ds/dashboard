@@ -2,10 +2,10 @@
   <div class="container">
     <h1>Welcome! This is your personal Dashboard!</h1>
     <div class="row">
-      <div class="col-sm-1">
+      <div class="col-lg-1 col-md-1">
         <Navigation/>
       </div>
-      <div class="col-sm-11">
+      <div class="col-lg-11 col-md-11">
         <grid-layout :layout.sync="layout"
                      :col-num="12"
                      :row-height="30"
@@ -93,11 +93,6 @@ export default {
 h1 {
   text-align: center;
 }
-
-.vue-grid-layout {
-  /*background: #eee;*/
-}
-
 .vue-grid-item:not(.vue-grid-placeholder) {
   background: #ccc;
   border: 1px solid black;
