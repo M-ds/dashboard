@@ -133,6 +133,10 @@ button {
   text-align: left;
 }
 
+.Vue-Toastification__close-button {
+  width: 2%;
+}
+
 .button:focus, .button:hover,
 button:focus,
 button:hover,
