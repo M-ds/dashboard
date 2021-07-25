@@ -120,13 +120,17 @@ input[type='submit'] {
 input,
 button {
   display: inline-block;
-  height: 5%;
+  height: auto;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
   width: 99%;
   margin: calc(var(--universal-margin) / 2);
   padding: var(--universal-padding) calc(1.5 * var(--universal-padding));
+}
+
+.text__align_left {
+  text-align: left;
 }
 
 .button:focus, .button:hover,

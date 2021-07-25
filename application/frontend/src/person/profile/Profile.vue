@@ -2,41 +2,44 @@
   <div class="container">
     <h1>Profile</h1>
     <div class="row">
-      <div class="col-sm-1">
+      <div class="col-lg-1 col-md-1">
         <Navigation/>
       </div>
-      <form class="row centered">
-        <div class="col-sm-12 col-md-12">
-          <label class="input-group vertical">
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+          <label>
             Username
             <input type="text"
                    name="userName"
                    v-model="personProfile.username"
                    readonly=""
+                   class="text__align_left"
             />
           </label>
         </div>
-        <div class="col-sm-12 col-md-12">
-          <label class="input-group vertical">
+        <div class="col-lg-12 col-md-12">
+          <label>
             Email
             <input type="text"
                    name="email"
                    v-model="personProfile.email"
                    readonly=""
+                   class="text__align_left"
             />
           </label>
         </div>
-        <div class="col-sm-12 col-md-12">
-          <label class="input-group vertical">
+        <div class="col-lg-12 col-md-12">
+          <label>
             Password
             <input type="password"
                    name="password"
                    v-model="personProfile.password"
                    readonly=""
+                   class="text__align_left"
             />
           </label>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>
@@ -64,15 +67,4 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  text-align: center;
-}
-
-.centered {
-  position: fixed;
-  top: 25%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
 </style>

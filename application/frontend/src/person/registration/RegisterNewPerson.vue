@@ -8,7 +8,7 @@
         </div>
       </div>
       <div v-if="succesRegistration">
-        <div class="  centered__text">
+        <div class="centered__text">
           {{ message }}
         </div>
       </div>

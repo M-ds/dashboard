@@ -1,13 +1,16 @@
 name: Dashboard CI
 
-# Just make sure the CI is ran everytime for a push or pull_request
 on:
   push:
     branches:
-      - *
+      - main
+      - develop
+      - feature/**
   pull_request:
     branches:
-      - *
+      - main
+      - develop
+      - feature/**
 
 jobs:
   build:
