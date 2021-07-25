@@ -2,10 +2,10 @@
   <div class="container">
     <h1>Marketplace</h1>
     <div class="row">
-      <div class="col-sm-1">
+      <div class="col-lg-1 col-md-1">
         <Navigation/>
       </div>
-      <div class="col-sm-11">
+      <div class="col-lg-11 col-md-11">
         <p>All possible interactables will be displayed here!</p>
       </div>
     </div>

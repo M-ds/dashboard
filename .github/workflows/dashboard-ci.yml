@@ -8,7 +8,7 @@ on:
       - feature/**
   pull_request:
     branches:
-      - mail
+      - main
       - develop
       - feature/**
 
