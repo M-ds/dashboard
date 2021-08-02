@@ -27,13 +27,25 @@ export default new Router({
       path: "/profile",
       name: "Profile",
       props: true,
-      component: () => import(/* webpackChuckName: "dashboard" */ "./person/profile/Profile")
+      component: () => import(/* webpackChuckName: "Profile" */ "./person/profile/Profile")
     },
     {
       path: "/marketplace",
       name: "Marketplace",
       props: true,
-      component: () => import(/* webpackChuckName: "dashboard" */ "./common/Marketplace")
+      component: () => import(/* webpackChuckName: "Marketplace" */ "./common/Marketplace")
+    },
+    {
+      path: "/registration/success",
+      name: "Success",
+      props: true,
+      component: () => import(/* webpackChuckName: "Registration Conformation" */ "./person/verification/Success")
+    },
+    {
+      path: "/registration/failure",
+      name: "Failure",
+      props: true,
+      component: () => import(/* webpackChuckName: "Registration Error" */ "./person/verification/Failure")
     }
   ]
 });
