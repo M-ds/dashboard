@@ -1,6 +1,7 @@
 @charset "UTF-8";
 :root {
   --fore-color: #111;
+  --back-color: #fff;
   --secondary-fore-color: #444;
   --universal-margin: 0.5rem;
   --universal-padding: 0.5rem;

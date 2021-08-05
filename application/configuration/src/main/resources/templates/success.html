@@ -1,23 +1,107 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Verification Success</title>
-  <style th:href="@{/css/dashboard.css}" rel="stylesheet"></style>
-  <script type="text/javascript">
-    function loginScreen() {
-      alert("Dit is een voorbeeld");
-    }
-  </script>
 </head>
+<style>
+  /*TODO: Moet ook nog anders worden. Niet zo in de html pagina.*/
+  :root {
+    --fore-color: #111;
+    --back-color: #fff;
+    --secondary-fore-color: #444;
+    --universal-margin: 0.5rem;
+    --universal-padding: 0.5rem;
+    --heading-ratio: 1.19;
+    --universal-border-radius: .4rem;
+    --button-fore-color: #9b4dca;
+    --button-secondary-fore-color: #606c76;
+  }
+
+  * {
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  html {
+    font-size: 16px;
+    font-family: Roboto, Ubuntu, helvetica neue, Helvetica, sans-serif;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    margin: 0;
+    color: var(--fore-color);
+    background: var(--back-color);
+  }
+
+  .container {
+    margin: 0 auto;
+    padding: 0 calc(1.5 * var(--universal-padding));
+  }
+
+  h1 {
+    line-height: 1.2;
+    margin: calc(1.5 * var(--universal-margin)) var(--universal-margin);
+    font-weight: 500;
+    text-align: center;
+    font-size: calc(1rem * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio));
+  }
+
+  p {
+    margin: var(--universal-margin);
+    text-align: center;
+  }
+
+  button {
+    display: inline-block;
+    height: auto;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    width: 99%;
+    margin: calc(var(--universal-margin) / 2);
+    padding: var(--universal-padding) calc(1.5 * var(--universal-padding));
+    background-color: var(--button-fore-color);
+    border: 0.1rem solid var(--button-fore-color);
+    border-radius: var(--universal-border-radius);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .centered__box {
+    align-items: center;
+    border: solid lightgray;
+    border-radius: var(--universal-border-radius);
+    margin: 0 auto;
+    padding: calc(var(--universal-padding));
+    height: auto;
+    width: 25%;
+  }
+
+  hr {
+    color: lightgray;
+  }
+</style>
 <body>
-<div class="container centered__box">
-  <h1>Success!</h1>
-  Please go to the login page to continue!
-
-  See you soon!
-
-  <button onclick="loginScreen();">Back To Login!</button>
+<div class="container">
+  <div class="centered__box">
+    <h1>Success!</h1>
+    <hr>
+    <p>
+      You have confirmed your email address!<br>
+      You can now go to your personal dashboard!
+      <br>
+      See you soon!
+    </p>
+    <br>
+    <button onclick="loginScreen()">Login!</button>
+  </div>
 </div>
 </body>
+<script>
+  function loginScreen() {
+    //TODO: fixen zodat dit niet zo staat, maar uit de backend komt
+    window.location.href = "http://localhost:1994/";
+  }
+</script>
 </html>

@@ -14,23 +14,19 @@ class VerifyRegistrationTokenController(
     private val verifyTokenUseCase: VerifyTokenUseCase
 ) {
 
-    private val redirectionURL = "http://localhost:1997"
-
     @GetMapping("/user/auth/_verify")
     fun verifyToken(
         @RequestParam(value = "code") token: String,
         httpServletRequest: HttpServletRequest
     ): ModelAndView {
-        val baseUrl = httpServletRequest.localName
-        println(baseUrl)
         val request = VerifyTokenUseCase.Request(
             token = token
         )
         val response = verifyTokenUseCase.verify(request)
         return if (response.valid) {
-            ModelAndView("redirect:$redirectionURL/success.html")
+            ModelAndView("redirect:_$SUCCESS")
         } else {
-            ModelAndView("redirect:$redirectionURL/failure.html")
+            ModelAndView("redirect:_$FAILURE")
         }
     }
 
@@ -42,11 +38,6 @@ class VerifyRegistrationTokenController(
     @GetMapping("/user/auth/_failure")
     fun failureScreen(): ModelAndView {
         return ModelAndView(FAILURE)
-    }
-
-    @GetMapping("/user/auth/_welcome")
-    fun welcomeScreen(): ModelAndView {
-        return ModelAndView("welcome")
     }
 }
 
