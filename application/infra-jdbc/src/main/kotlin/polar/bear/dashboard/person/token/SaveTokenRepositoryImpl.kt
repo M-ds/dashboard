@@ -1,17 +1,16 @@
 package polar.bear.dashboard.person.token
 
-import java.lang.RuntimeException
-import java.util.UUID
 import javax.sql.DataSource
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert
+import polar.bear.dashboard.exception.CouldNotInsertException
 import polar.bear.dashboard.person.signup.domain.Token
-import polar.bear.dashboard.person.signup.infra.TokenRepository
+import polar.bear.dashboard.person.signup.infra.SaveTokenRepository
 
-class TokenRepositoryImpl(
+class SaveTokenRepositoryImpl(
     dataSource: DataSource
-) : TokenRepository {
+) : SaveTokenRepository {
 
     private val jdbcTemplate = JdbcTemplate(dataSource)
 
@@ -23,8 +22,7 @@ class TokenRepositoryImpl(
                 .execute(MapSqlParameterSource(tokenParams))
 
             if (affectedRows != 1) {
-                // TODO: Create a different exception
-                throw RuntimeException("Could not insert Person!")
+                throw CouldNotInsertException("Program can not insert token to repository! Inserted values: $token")
             }
         } catch (error: Exception) {
             return false

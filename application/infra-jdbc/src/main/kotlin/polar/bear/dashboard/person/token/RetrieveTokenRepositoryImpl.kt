@@ -16,7 +16,10 @@ class RetrieveTokenRepositoryImpl(
 
     override fun retrieveToken(tokenId: UUID): RegisteredPerson {
         val query = """
-            select p.id as personId, p.active, t.id as tokenId, t.expiry_date
+            select p.id as personId, 
+                   p.active, 
+                   t.id as tokenId, 
+                   t.expiry_date
             from token t
                 join person p on p.id = t.person_id
             where t.token = ?;

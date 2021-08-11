@@ -4,11 +4,15 @@ import java.time.LocalDateTime
 import java.util.UUID
 import polar.bear.dashboard.person.infra.PersonRepository
 import polar.bear.dashboard.person.verifytoken.domain.PersonRegisteredSuccess
+import polar.bear.dashboard.person.verifytoken.domain.UpdateToken
 import polar.bear.dashboard.person.verifytoken.infra.RetrieveTokenRepository
+import polar.bear.dashboard.person.verifytoken.infra.UpdateTokenRepository
 import polar.bear.dashboard.person.verifytoken.usecase.VerifyTokenUseCase
+import polar.bear.dashboard.util.localdate.LocalDateTimeUtil
 
 class VerifyTokenUseCaseImpl(
     val retrieveTokenRepository: RetrieveTokenRepository,
+    val updateTokenRepository: UpdateTokenRepository,
     val personRepository: PersonRepository
 ) : VerifyTokenUseCase {
 
@@ -20,10 +24,9 @@ class VerifyTokenUseCaseImpl(
         val registeredPerson = retrieveTokenRepository.retrieveToken(token)
 
         if (isExpired(registeredPerson.expirationDate)) {
-            //TODO("Everything should be updated!")
             return VerifyTokenUseCase.Response(
                 valid = false,
-                message = "Registration token is expired! Please request a new one!"
+                tokenId = registeredPerson.tokenId
             )
         }
 
@@ -34,9 +37,26 @@ class VerifyTokenUseCaseImpl(
         personRepository.successfulRegistered(personRegistered)
 
         return VerifyTokenUseCase.Response(
-            valid = true,
-            message = "Successfully Registered! Please login now!"
+            valid = true
         )
+    }
+
+    override fun regenerate(
+        regenerateRequest: VerifyTokenUseCase.RegenerateRequest
+    ): VerifyTokenUseCase.RegenerateResponse {
+        val tokenId = regenerateRequest.tokenId
+        val newToken = UUID.randomUUID()
+        val newExpirationDate = LocalDateTimeUtil.createExpirationDate(10)
+
+        val updateToken = UpdateToken(
+            tokenId = tokenId,
+            newToken = newToken, 
+            newExpirationDate = newExpirationDate
+        )
+
+        val success = updateTokenRepository.updateToken(updateToken)
+
+        return VerifyTokenUseCase.RegenerateResponse(success)
     }
 
     private fun isExpired(expirationDate: LocalDateTime): Boolean {

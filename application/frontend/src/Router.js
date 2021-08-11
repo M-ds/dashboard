@@ -34,18 +34,6 @@ export default new Router({
       name: "Marketplace",
       props: true,
       component: () => import(/* webpackChuckName: "Marketplace" */ "./common/Marketplace")
-    },
-    {
-      path: "/registration/success",
-      name: "Success",
-      props: true,
-      component: () => import(/* webpackChuckName: "Registration Conformation" */ "./person/verification/Success")
-    },
-    {
-      path: "/registration/failure",
-      name: "Failure",
-      props: true,
-      component: () => import(/* webpackChuckName: "Registration Error" */ "./person/verification/Failure")
     }
   ]
 });

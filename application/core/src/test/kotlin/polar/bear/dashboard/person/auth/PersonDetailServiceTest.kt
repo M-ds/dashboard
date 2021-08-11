@@ -6,15 +6,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import polar.bear.dashboard.person.auth.domain.PersonDetail
 import polar.bear.dashboard.person.auth.domain.Role
-import polar.bear.dashboard.repository.person.MockPersonRepository
+import polar.bear.dashboard.repository.auth.MockAuthenticationRepository
 import polar.bear.dashboard.utils.Marker.GIVEN
 import polar.bear.dashboard.utils.Marker.THEN
 import polar.bear.dashboard.utils.Marker.WHEN
 
 internal class PersonDetailServiceTest {
-    private val mockPersonRepository = MockPersonRepository()
+    private val mockAuthenticationRepository = MockAuthenticationRepository()
 
-    private val underTest = PersonDetailService(mockPersonRepository)
+    private val underTest = PersonDetailService(mockAuthenticationRepository)
 
     private val validUsername = "Miebels"
     private val emptyUsername = ""
@@ -25,7 +25,7 @@ internal class PersonDetailServiceTest {
     @Test
     fun `Happy flow of PersonDetailService`() {
         GIVEN
-        mockPersonRepository.loadUser(personDetail)
+        mockAuthenticationRepository.loadUser(personDetail)
         val personAuthorities = personDetail.roles.map { role -> SimpleGrantedAuthority(role.name) }
 
         WHEN
@@ -41,7 +41,7 @@ internal class PersonDetailServiceTest {
     @Test
     fun `Exception is thrown because user is empty`() {
         GIVEN
-        mockPersonRepository.loadUser(emptyPersonDetail)
+        mockAuthenticationRepository.loadUser(emptyPersonDetail)
 
         WHEN
         assertThrows<UsernameNotFoundException> {
@@ -52,7 +52,7 @@ internal class PersonDetailServiceTest {
     @Test
     fun `Exception is thrown because username is null`() {
         GIVEN
-        mockPersonRepository.loadUser(null)
+        mockAuthenticationRepository.loadUser(null)
 
         WHEN
         assertThrows<UsernameNotFoundException> {

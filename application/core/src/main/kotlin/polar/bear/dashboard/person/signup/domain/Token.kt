@@ -1,9 +1,8 @@
 package polar.bear.dashboard.person.signup.domain
 
-import java.time.Duration
 import java.time.LocalDateTime
-import java.time.temporal.ChronoUnit
 import java.util.UUID
+import polar.bear.dashboard.util.localdate.LocalDateTimeUtil
 
 data class Token(
     val id: UUID,
@@ -16,7 +15,7 @@ data class Token(
             return Token(
                 id = UUID.randomUUID(),
                 token = UUID.randomUUID(),
-                expirationDate = LocalDateTime.now().plus(Duration.of(10, ChronoUnit.MINUTES)),
+                expirationDate = LocalDateTimeUtil.createExpirationDate(10),
                 personId = personId
             )
         }

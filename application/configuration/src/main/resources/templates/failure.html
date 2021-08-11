@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Verification Failure</title>
@@ -88,8 +88,8 @@
     <h1>Something went wrong!</h1>
     <hr>
     <p>
-      Could be the verification token has expired! <br>
-      Please request a new token!
+      Your verification token has expired!<br>
+      But not to worry! You can just request a new one!<br>
     </p>
     <br>
     <button onclick="requestNewToken()">Request a new token</button>
@@ -97,14 +97,18 @@
   </div>
 </div>
 </body>
-<script>
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  window.tokenId = /*[[${tokenId}]]*/;
+  console.log(window.tokenId)
+  /*]]>*/
   function loginScreen() {
     //TODO: fixen zodat dit niet zo staat, maar uit de backend komt
     window.location.href = "http://localhost:1994/";
   }
 
   function requestNewToken() {
-    alert("NEED TO IMPLEMENT!");
+    alert(window.tokenId);
   }
 </script>
 </html>

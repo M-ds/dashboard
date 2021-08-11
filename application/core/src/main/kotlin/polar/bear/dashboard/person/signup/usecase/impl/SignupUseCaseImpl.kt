@@ -10,11 +10,11 @@ import java.time.LocalDate
 import java.util.UUID
 import polar.bear.dashboard.person.signup.domain.Token
 import polar.bear.dashboard.person.signup.infra.SendEmail
-import polar.bear.dashboard.person.signup.infra.TokenRepository
+import polar.bear.dashboard.person.signup.infra.SaveTokenRepository
 
 class SignupUseCaseImpl(
     private val personRepository: PersonRepository,
-    private val tokenRepository: TokenRepository,
+    private val saveTokenRepository: SaveTokenRepository,
     private val passwordEncoder: PasswordEncoder,
     private val sendEmail: SendEmail
 ) : SignupUseCase {
@@ -66,7 +66,7 @@ class SignupUseCaseImpl(
         )
 
         val personSuccessfulSaved = personRepository.save(person)
-        val successfulSaveToken = tokenRepository.saveToken(token)
+        val successfulSaveToken = saveTokenRepository.saveToken(token)
 
         if (successfulSaveToken && personSuccessfulSaved) {
             sendEmail.sendEmail(

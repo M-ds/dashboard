@@ -22,30 +22,6 @@ open class PersonRepositoryImpl(
 
     private val jdbcTemplate = JdbcTemplate(dataSource)
 
-    override fun loadUserByUsername(username: String): Optional<PersonDetail> {
-        val getUserDetails = """
-            SELECT p.username, p.password, p.active, r.name
-            FROM person p
-                     JOIN person_role pr ON p.id = pr.person_id
-                     JOIN role r ON r.id = pr.role_id
-            WHERE p.username = ?;
-        """.trimIndent()
-
-        return try {
-
-            val result = jdbcTemplate.queryForObject(
-                getUserDetails,
-                personDetailsMapper(),
-                username
-            )
-
-            return Optional.ofNullable(result)
-
-        } catch (exception: DataAccessException) {
-            Optional.empty()
-        }
-    }
-
     override fun usernameExists(username: String): Boolean {
         val usernameExistsQuery = """
             SELECT COUNT(1)
