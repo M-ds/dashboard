@@ -3,6 +3,7 @@ package polar.bear.dashboard.repository.person
 import java.util.UUID
 import polar.bear.dashboard.person.auth.domain.Person
 import polar.bear.dashboard.person.auth.domain.Role
+import polar.bear.dashboard.person.domain.TokenId
 import polar.bear.dashboard.person.infra.PersonRepository
 import polar.bear.dashboard.person.verifytoken.domain.PersonRegisteredSuccess
 
@@ -20,6 +21,10 @@ class MockPersonRepository : PersonRepository {
     }
 
     override fun emailExits(email: String): Boolean {
+        TODO("Not yet implemented")
+    }
+
+    override fun getUsernameAndEmail(tokenId: TokenId): PersonRepository.UsernameAndEmailResponse {
         TODO("Not yet implemented")
     }
 

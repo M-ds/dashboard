@@ -3,17 +3,19 @@ package polar.bear.dashboard.person.verifytoken.usecase.impl
 import java.time.LocalDateTime
 import java.util.UUID
 import polar.bear.dashboard.person.infra.PersonRepository
+import polar.bear.dashboard.person.signup.infra.SendEmail
 import polar.bear.dashboard.person.verifytoken.domain.PersonRegisteredSuccess
 import polar.bear.dashboard.person.verifytoken.domain.UpdateToken
 import polar.bear.dashboard.person.verifytoken.infra.RetrieveTokenRepository
 import polar.bear.dashboard.person.verifytoken.infra.UpdateTokenRepository
 import polar.bear.dashboard.person.verifytoken.usecase.VerifyTokenUseCase
-import polar.bear.dashboard.util.localdate.LocalDateTimeUtil
+import polar.bear.dashboard.util.localdate.DateUtils
 
 class VerifyTokenUseCaseImpl(
     val retrieveTokenRepository: RetrieveTokenRepository,
     val updateTokenRepository: UpdateTokenRepository,
-    val personRepository: PersonRepository
+    val personRepository: PersonRepository,
+    val sendEmail: SendEmail
 ) : VerifyTokenUseCase {
 
     override fun verify(
@@ -46,7 +48,7 @@ class VerifyTokenUseCaseImpl(
     ): VerifyTokenUseCase.RegenerateResponse {
         val tokenId = regenerateRequest.tokenId
         val newToken = UUID.randomUUID()
-        val newExpirationDate = LocalDateTimeUtil.createExpirationDate(10)
+        val newExpirationDate = DateUtils.createExpirationDate(10)
 
         val updateToken = UpdateToken(
             tokenId = tokenId,
@@ -55,6 +57,18 @@ class VerifyTokenUseCaseImpl(
         )
 
         val success = updateTokenRepository.updateToken(updateToken)
+
+        if (success) {
+            val personResponse = personRepository.getUsernameAndEmail(tokenId)
+
+            val request = SendEmail.Request(
+                username = personResponse.username,
+                email = personResponse.email,
+                token = newToken,
+                verifyUrl = regenerateRequest.baseSiteUrl
+            )
+            sendEmail.sendEmail(request)
+        }
 
         return VerifyTokenUseCase.RegenerateResponse(success)
     }

@@ -1,16 +1,16 @@
 package polar.bear.dashboard.person.signup.usecase.impl
 
+import java.time.LocalDate
+import java.util.UUID
 import org.springframework.security.crypto.password.PasswordEncoder
 import polar.bear.dashboard.person.auth.domain.Person
 import polar.bear.dashboard.person.auth.domain.Role
-import polar.bear.dashboard.person.signup.domain.SignupResponse
 import polar.bear.dashboard.person.infra.PersonRepository
-import polar.bear.dashboard.person.signup.usecase.SignupUseCase
-import java.time.LocalDate
-import java.util.UUID
+import polar.bear.dashboard.person.signup.domain.SignupResponse
 import polar.bear.dashboard.person.signup.domain.Token
-import polar.bear.dashboard.person.signup.infra.SendEmail
 import polar.bear.dashboard.person.signup.infra.SaveTokenRepository
+import polar.bear.dashboard.person.signup.infra.SendEmail
+import polar.bear.dashboard.person.signup.usecase.SignupUseCase
 
 class SignupUseCaseImpl(
     private val personRepository: PersonRepository,

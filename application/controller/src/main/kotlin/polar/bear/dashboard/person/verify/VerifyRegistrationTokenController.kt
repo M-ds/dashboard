@@ -1,7 +1,6 @@
 package polar.bear.dashboard.person.verify
 
 import javax.servlet.http.HttpServletRequest
-import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -18,9 +17,7 @@ class VerifyRegistrationTokenController(
 
     @GetMapping("/user/auth/_verify")
     fun verifyToken(
-        @RequestParam(value = "code") token: String,
-        httpServletRequest: HttpServletRequest,
-        model: Model
+        @RequestParam(value = "code") token: String
     ): ModelAndView {
         val request = VerifyTokenUseCase.Request(
             token = token
@@ -35,12 +32,14 @@ class VerifyRegistrationTokenController(
 
     @GetMapping("/user/auth/_regenerate")
     fun regenerateToken(
-        @RequestParam(value = "tokenId") tokenId: String
+        @RequestParam(value = "tokenId") tokenId: String,
+        httpServletRequest: HttpServletRequest,
     ) {
         val request = VerifyTokenUseCase.RegenerateRequest(
-            tokenId = TokenId.fromString(tokenId)
+            tokenId = TokenId.fromString(tokenId),
+            baseSiteUrl = getSiteUrl(httpServletRequest)
         )
-//        val response = verifyTokenUseCase.regenerate(request)
+        val response = verifyTokenUseCase.regenerate(request)
     }
 
     @GetMapping("/user/auth/_success")
@@ -53,6 +52,11 @@ class VerifyRegistrationTokenController(
         @RequestParam("tokenId") tokenId: String
     ): ModelAndView {
         return ModelAndView(FAILURE, mapOf<String, Any>("tokenId" to tokenId))
+    }
+
+    private fun getSiteUrl(httpServletRequest: HttpServletRequest): String {
+        val siteUrl = httpServletRequest.requestURL.toString()
+        return siteUrl.replace(httpServletRequest.servletPath, "")
     }
 }
 

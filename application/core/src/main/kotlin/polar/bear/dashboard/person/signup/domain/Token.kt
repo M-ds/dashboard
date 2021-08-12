@@ -2,7 +2,7 @@ package polar.bear.dashboard.person.signup.domain
 
 import java.time.LocalDateTime
 import java.util.UUID
-import polar.bear.dashboard.util.localdate.LocalDateTimeUtil
+import polar.bear.dashboard.util.localdate.DateUtils
 
 data class Token(
     val id: UUID,
@@ -15,7 +15,7 @@ data class Token(
             return Token(
                 id = UUID.randomUUID(),
                 token = UUID.randomUUID(),
-                expirationDate = LocalDateTimeUtil.createExpirationDate(10),
+                expirationDate = DateUtils.createExpirationDate(10),
                 personId = personId
             )
         }

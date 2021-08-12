@@ -15,7 +15,6 @@ class SendEmailImpl(
         val subject = "Registration Email"
 
         val verifyURL = "${request.verifyUrl}/user/auth/_verify?code=${request.token}"
-//        /user/auth/_verify?code=0b3f2e25-faf4-4a9b-960f-da34023ac035
 
         val content = """
             Dear ${request.username}, <br>

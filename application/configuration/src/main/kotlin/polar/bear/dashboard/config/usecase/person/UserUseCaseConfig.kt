@@ -64,12 +64,14 @@ open class UserUseCaseConfig {
     open fun initVerifyTokenRepositoryUseCase(
         retrieveTokenRepository: RetrieveTokenRepository,
         updateTokenRepository: UpdateTokenRepository,
-        personRepository: PersonRepository
+        personRepository: PersonRepository,
+        sendEmail: SendEmail
     ): VerifyTokenUseCase {
         return VerifyTokenUseCaseImpl(
             retrieveTokenRepository = retrieveTokenRepository,
             updateTokenRepository = updateTokenRepository,
-            personRepository = personRepository
+            personRepository = personRepository,
+            sendEmail = sendEmail
         )
     }
 

@@ -100,7 +100,6 @@
 <script th:inline="javascript">
   /*<![CDATA[*/
   window.tokenId = /*[[${tokenId}]]*/;
-  console.log(window.tokenId)
   /*]]>*/
   function loginScreen() {
     //TODO: fixen zodat dit niet zo staat, maar uit de backend komt
@@ -108,7 +107,8 @@
   }
 
   function requestNewToken() {
-    alert(window.tokenId);
+    window.location = `http://localhost:1997/user/auth/_regenerate?tokenId=${window.tokenId}`;
+    alert(`Your new token is generated! Please check your email!`);
   }
 </script>
 </html>

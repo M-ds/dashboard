@@ -10,6 +10,6 @@ interface VerifyTokenUseCase {
     data class Response(val valid: Boolean, val tokenId: UUID? = null)
 
     fun regenerate(regenerateRequest: RegenerateRequest): RegenerateResponse
-    data class RegenerateRequest(val tokenId: TokenId)
+    data class RegenerateRequest(val tokenId: TokenId, val baseSiteUrl: String)
     data class RegenerateResponse(val success: Boolean)
 }

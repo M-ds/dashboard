@@ -1,19 +1,16 @@
 package polar.bear.dashboard.person
 
-import java.lang.RuntimeException
-import org.springframework.dao.DataAccessException
-import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert
-import polar.bear.dashboard.person.PersonRowMapperUtil.Companion.personDetailsMapper
-import polar.bear.dashboard.person.auth.domain.Person
-import polar.bear.dashboard.person.auth.domain.PersonDetail
-import polar.bear.dashboard.person.auth.domain.Role
-import polar.bear.dashboard.person.infra.PersonRepository
-import java.util.Optional
 import java.util.UUID
 import javax.sql.DataSource
+import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.jdbc.core.RowMapper
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert
 import org.springframework.transaction.annotation.Transactional
+import polar.bear.dashboard.person.auth.domain.Person
+import polar.bear.dashboard.person.auth.domain.Role
+import polar.bear.dashboard.person.domain.TokenId
+import polar.bear.dashboard.person.infra.PersonRepository
 import polar.bear.dashboard.person.verifytoken.domain.PersonRegisteredSuccess
 
 open class PersonRepositoryImpl(
@@ -53,6 +50,29 @@ open class PersonRepositoryImpl(
         return result > 0
     }
 
+    override fun getUsernameAndEmail(tokenId: TokenId): PersonRepository.UsernameAndEmailResponse {
+        val query = """
+            select p.username,
+                   p.email
+            from person p 
+            where p.token_id = ?
+        """.trimIndent()
+
+        return jdbcTemplate.queryForObject(
+            query,
+            toUsernameAndEmailResponse,
+            tokenId.value
+        )!!
+    }
+
+    private val toUsernameAndEmailResponse: RowMapper<PersonRepository.UsernameAndEmailResponse> =
+        RowMapper { rs, _ ->
+            PersonRepository.UsernameAndEmailResponse(
+                username = rs.getString("username"),
+                email = rs.getString("email")
+            )
+        }
+
     override fun getPersonIdFromUsername(username: String): UUID {
         val getPersonId = """
             SELECT id
@@ -83,7 +103,7 @@ open class PersonRepositoryImpl(
             if (updatedRows != 1) {
                 throw RuntimeException("Could not update person_role!")
             }
-        } catch (error: Exception){
+        } catch (error: Exception) {
             return false
         }
 

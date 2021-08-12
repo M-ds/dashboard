@@ -14,18 +14,18 @@ class UpdateTokenRepositoryImpl(
     override fun updateToken(updateToken: UpdateToken): Boolean {
         val updateQuery = """
             update token
-            set token = :newToken,
-                expiry_date = :newExpirationDate
-            where id = :tokenId
+            set token = '${updateToken.newToken}',
+                expiry_date = '${updateToken.newExpirationDate}'
+            where id = '${updateToken.tokenId.value}'
         """.trimIndent()
 
-        val paramsMap = mapOf(
-            "newToken" to updateToken.newToken,
-            "newExpirationDate" to updateToken.newExpirationDate,
-            "tokenId" to updateToken.tokenId.value
-        )
+//        val paramsMap = mapOf(
+//            "newToken" to updateToken.newToken,
+//            "newExpirationDate" to updateToken.newExpirationDate,
+//            "tokenId" to updateToken.tokenId.value
+//        )
 
-        val success = jdbcTemplate.update(updateQuery, paramsMap)
+        val success = jdbcTemplate.update(updateQuery)
         return success > 0
     }
 }
