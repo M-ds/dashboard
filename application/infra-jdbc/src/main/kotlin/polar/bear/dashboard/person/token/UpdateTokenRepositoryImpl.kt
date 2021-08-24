@@ -19,12 +19,6 @@ class UpdateTokenRepositoryImpl(
             where id = '${updateToken.tokenId.value}'
         """.trimIndent()
 
-//        val paramsMap = mapOf(
-//            "newToken" to updateToken.newToken,
-//            "newExpirationDate" to updateToken.newExpirationDate,
-//            "tokenId" to updateToken.tokenId.value
-//        )
-
         val success = jdbcTemplate.update(updateQuery)
         return success > 0
     }

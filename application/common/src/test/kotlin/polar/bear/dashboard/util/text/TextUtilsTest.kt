@@ -3,11 +3,11 @@ package polar.bear.dashboard.util.text
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import polar.bear.dashboard.util.text.Marker.GIVEN
-import polar.bear.dashboard.util.text.Marker.THEN
-import polar.bear.dashboard.util.text.Marker.WHEN
+import polar.bear.dashboard.util.Marker.GIVEN
+import polar.bear.dashboard.util.Marker.THEN
+import polar.bear.dashboard.util.Marker.WHEN
 
-class TextUtilsTest {
+internal class TextUtilsTest {
 
     @Test
     fun `Valid characters in text`() {

@@ -1,4 +1,4 @@
-package polar.bear.dashboard.util.text
+package polar.bear.dashboard.util
 
 object Marker {
     val GIVEN: (description: (String?) -> Any) -> Any = {}

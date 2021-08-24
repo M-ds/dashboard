@@ -74,6 +74,6 @@ class VerifyTokenUseCaseImpl(
     }
 
     private fun isExpired(expirationDate: LocalDateTime): Boolean {
-        return LocalDateTime.now().isAfter(expirationDate)
+        return DateUtils.currentTimeIsAfterTimeToCheck(expirationDate)
     }
 }

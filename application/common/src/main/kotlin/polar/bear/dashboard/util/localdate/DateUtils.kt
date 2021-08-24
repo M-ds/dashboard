@@ -6,6 +6,7 @@ import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
 class DateUtils {
+
     companion object {
         fun createExpirationDate(minutes: Long): LocalDateTime = LocalDateTime.now().plus(
             Duration.of(
@@ -13,5 +14,9 @@ class DateUtils {
                 ChronoUnit.MINUTES
             )
         )
+
+        fun currentTimeIsBeforeTimeToCheck(timeToCheck: LocalDateTime) = LocalDateTime.now().isBefore(timeToCheck)
+
+        fun currentTimeIsAfterTimeToCheck(timeToCheck: LocalDateTime) = LocalDateTime.now().isAfter(timeToCheck)
     }
 }
