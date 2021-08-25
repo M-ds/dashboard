@@ -4,7 +4,8 @@ export const PersonRegistrationStore = {
   namespaced: true,
   state: {
     success: false,
-    errorMessage: ""
+    errorMessage: "",
+    successMessage: ""
   },
   mutations: {
     registrationSuccess(state) {
@@ -14,17 +15,19 @@ export const PersonRegistrationStore = {
     registrationFailure(state, errorMessage) {
       state.success = false;
       state.errorMessage = errorMessage;
+    },
+    setSuccessMessage(state, successMessage) {
+      state.successMessage = successMessage;
     }
   },
   actions: {
     async registerPerson(context, signupRequest) {
-      const result = await RegistrationService.register(signupRequest);
-      if (result.valid) {
+      const response = await RegistrationService.register(signupRequest);
+      // @param - successMessage | String
+      if (response.successMessage) {
         context.commit("registrationSuccess");
-      } else {
-        const errorMessage = result.error.errorMessage;
-        context.commit("registrationFailure", errorMessage);
-      }
+        context.commit("setSuccessMessage", response.successMessage);
+      } else context.commit("registrationFailure", response);
     }
   },
   getters: {
@@ -33,6 +36,9 @@ export const PersonRegistrationStore = {
     },
     getErrorMessage: (state) => {
       return state.errorMessage;
+    },
+    getSuccessMessage: (state) => {
+      return state.successMessage;
     }
   }
 };

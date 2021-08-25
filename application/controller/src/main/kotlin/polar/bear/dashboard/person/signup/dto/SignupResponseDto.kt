@@ -3,12 +3,12 @@ package polar.bear.dashboard.person.signup.dto
 import polar.bear.dashboard.person.signup.domain.SignupResponse
 
 data class SignupResponseDto(
-    val message: String
+    val successMessage: String
 ) {
     companion object {
         fun fromDomain(signupResponse: SignupResponse): SignupResponseDto {
             return SignupResponseDto (
-                message = signupResponse.message
+                successMessage = signupResponse.message
             )
         }
     }

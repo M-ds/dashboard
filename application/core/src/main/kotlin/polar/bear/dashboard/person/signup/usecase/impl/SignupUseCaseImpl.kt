@@ -82,7 +82,7 @@ class SignupUseCaseImpl(
         return if (successfulSaveToken && personSuccessfulSaved) {
             SignupUseCase.Response(
                 signupResponse = SignupResponse(
-                    message = "Person is successfully registered."
+                    message = "Person is successfully registered. Please check your email address to confirm your registration."
                 ),
                 valid = true,
                 errorMessage = ""
@@ -91,7 +91,7 @@ class SignupUseCaseImpl(
             SignupUseCase.Response(
                 signupResponse = null,
                 valid = false,
-                errorMessage = "Could not create a new user in the database.. Please contact a developer.."
+                errorMessage = "Something went wrong while trying to create a user. Please contact the support, with your username and email address trying to create your account."
             )
         }
     }

@@ -98,10 +98,8 @@ export default {
       try {
         await this.$store.dispatch("PersonRegistrationStore/registerPerson", this.signupRequest);
         if (this.$store.getters["PersonRegistrationStore/registrationSuccess"]) {
-          this.loading = false;
           this.succesRegistration = true;
-          // this.signupRequest = "";
-          this.message = "SUCCES! Please log in!";
+          this.message = this.$store.getters["PersonRegistrationStore/getSuccessMessage"];
         } else {
           this.errorOccurred = true
           this.message = this.$store.getters["PersonRegistrationStore/getErrorMessage"];
