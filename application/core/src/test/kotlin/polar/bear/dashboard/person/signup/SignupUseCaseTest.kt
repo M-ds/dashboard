@@ -21,6 +21,7 @@ internal class SignupUseCaseTest {
 
     private val mockPersonRepository = SignupUseCaseTestSetup.mockPersonRepository
     private val mockSaveTokenRepository = SignupUseCaseTestSetup.mockSaveTokenRepository
+    private val encodePassword = `when`(SignupUseCaseTestSetup.mockedPasswordEncoder.encode(anyString())).thenReturn("Encrypted")
 
     private val underTest = SignupUseCaseTestSetup.signupUseCase()
 
@@ -34,7 +35,7 @@ internal class SignupUseCaseTest {
         mockPersonRepository.setSuccessFulSave(true)
         mockSaveTokenRepository.setSaveToken(true)
 
-        `when`(SignupUseCaseTestSetup.mockedPasswordEncoder.encode(anyString())).thenReturn("Encrypted")
+        encodePassword
 
         WHEN
         val response = underTest.signup(request)
@@ -150,7 +151,7 @@ internal class SignupUseCaseTest {
         mockPersonRepository.setSuccessFulSave(true)
         mockSaveTokenRepository.setSaveToken(false)
 
-        `when`(SignupUseCaseTestSetup.mockedPasswordEncoder.encode(anyString())).thenReturn("Encrypted")
+        encodePassword
 
         WHEN
         val response = underTest.signup(request)
@@ -174,7 +175,7 @@ internal class SignupUseCaseTest {
         mockPersonRepository.setSuccessFulSave(false)
         mockSaveTokenRepository.setSaveToken(true)
 
-        `when`(SignupUseCaseTestSetup.mockedPasswordEncoder.encode(anyString())).thenReturn("Encrypted")
+        encodePassword
 
         WHEN
         val response = underTest.signup(request)
