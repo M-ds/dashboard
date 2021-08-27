@@ -108,7 +108,7 @@ class SignupUseCaseImpl(
         if (!isValidUsername) {
             return ValidatedRequestResponse(
                 valid = false,
-                errorMessage = "Username has to be filled in!"
+                errorMessage = "Username has to be filled in. And can only contain characters and numbers"
             )
         }
         val emailAddressIsNotEmpty = request.email.isNotBlank()

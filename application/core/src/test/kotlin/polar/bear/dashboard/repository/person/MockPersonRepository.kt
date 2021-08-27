@@ -11,6 +11,9 @@ class MockPersonRepository : PersonRepository {
 
     private var usernameExists: Boolean = false
     private var personId: UUID = UUID.randomUUID()
+    private var emailExists: Boolean = false
+    private var roleId: UUID = UUID.randomUUID()
+    private var successfulSave: Boolean = false
 
     fun setUsernameExits(exists: Boolean) {
         this.usernameExists = exists
@@ -21,7 +24,11 @@ class MockPersonRepository : PersonRepository {
     }
 
     override fun emailExits(email: String): Boolean {
-        TODO("Not yet implemented")
+        return emailExists
+    }
+
+    fun setEmailExists(exists: Boolean) {
+        this.emailExists = exists
     }
 
     override fun getUsernameAndEmail(tokenId: TokenId): PersonRepository.UsernameAndEmailResponse {
@@ -37,11 +44,15 @@ class MockPersonRepository : PersonRepository {
     }
 
     override fun save(person: Person): Boolean {
-        TODO("Not yet implemented")
+        return successfulSave
+    }
+
+    fun setSuccessFulSave(savedSuccess: Boolean) {
+        this.successfulSave = savedSuccess
     }
 
     override fun getRoleId(role: Role): UUID {
-        TODO("Not yet implemented")
+        return this.roleId
     }
 
     override fun successfulRegistered(personRegistered: PersonRegisteredSuccess) {
