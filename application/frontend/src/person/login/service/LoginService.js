@@ -11,7 +11,6 @@ class LoginService extends BaseService {
       return result
     }
     // This will be the error message if we come this far.
-    debugger;
     return result;
   }
 }

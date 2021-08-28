@@ -12,9 +12,9 @@ CREATE TABLE dashboard.person
     username      VARCHAR(255) UNIQUE NOT NULL,
     email         VARCHAR(255) UNIQUE NOT NULL,
     password      VARCHAR(255)        NOT NULL,
-    token         VARCHAR(255),
     active        BOOLEAN DEFAULT FALSE,
     creation_date DATE,
+    token_id      UUID UNIQUE,
     PRIMARY KEY (id),
     UNIQUE (username, password)
 );
@@ -32,8 +32,8 @@ CREATE TABLE dashboard.role
 -- These tables have both a many to many relationship.
 CREATE TABLE dashboard.person_role
 (
-    person_id UUID,
-    role_id   UUID,
+    person_id UUID NOT NULL,
+    role_id   UUID NOT NULL,
     CONSTRAINT FK_person_id
         FOREIGN KEY (person_id)
             REFERENCES dashboard.person (id)
@@ -42,6 +42,20 @@ CREATE TABLE dashboard.person_role
         FOREIGN KEY (role_id)
             REFERENCES dashboard.role (id)
             ON DELETE NO ACTION
+);
+
+-- This table is used to store tokens for the registration process.
+-- Table stores only the token and a link to the person. The expire_date will be set in the code.
+CREATE TABLE dashboard.token
+(
+    id          UUID NOT NULL,
+    token       UUID NOT NULL,
+    expiry_date TIMESTAMP,
+    person_id   UUID NOT NULL,
+    CONSTRAINT FK_person_id
+        FOREIGN KEY (person_id)
+            REFERENCES dashboard.person (id)
+            ON DELETE CASCADE
 );
 
 -- This table contains the link between the different tables
@@ -87,13 +101,13 @@ CREATE TABLE dashboard.interactable_data
 ------------------------------------------------------------------------------
 --                CREATED SOME TEST DATA FOR THE APPLICATION                --
 ------------------------------------------------------------------------------
-INSERT INTO dashboard.person(id, username, email, password, token, active, creation_date)
+INSERT INTO dashboard.person(id, username, email, password, active, creation_date, token_id)
 VALUES ('b6e38a2a-334d-4ed2-8f05-b1ca03e9397e', 'person', 'test.person@gmail.com',
-        '$2a$10$2VMmPh4CCyWvjSxMfkfEm.mBxXcg92VkiRHNhbYb.OL6a/bBiirr2', NULL, true, CURRENT_DATE),
+        '$2a$10$2VMmPh4CCyWvjSxMfkfEm.mBxXcg92VkiRHNhbYb.OL6a/bBiirr2', true, CURRENT_DATE, NULL),
        ('e2143053-0d87-4a7f-9d4e-60e0ea52e4ff', 'member', 'test.member@gmail.com',
-        '$2a$10$s6aC3XaN/sAQC7mhA8k22eF2HSrdKmyGUmyzftorxmBN4hm2u0yeq', NULL, true, CURRENT_DATE),
+        '$2a$10$s6aC3XaN/sAQC7mhA8k22eF2HSrdKmyGUmyzftorxmBN4hm2u0yeq', true, CURRENT_DATE, NULL),
        ('97abd3b4-b339-4a50-8cb6-06d71e85588c', 'admin', 'test.admin@gmail.com',
-        '$2a$10$1OW8q.KehgIHbAigXyizf.cyft7rnaHPTNga4tlUoNc94uGoYD7QW', NULL, true, CURRENT_DATE);
+        '$2a$10$1OW8q.KehgIHbAigXyizf.cyft7rnaHPTNga4tlUoNc94uGoYD7QW', true, CURRENT_DATE, NULL);
 
 INSERT INTO dashboard.role(id, name)
 VALUES ('c2024168-35df-4c47-a2d6-aaf488921675', 'ROLE_USER'),

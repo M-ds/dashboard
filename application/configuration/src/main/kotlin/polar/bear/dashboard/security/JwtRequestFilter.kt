@@ -22,6 +22,7 @@ class JwtRequestFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
+        //TODO: Check if the token is almost expired. If so generate a new one!
         val jwtToken = parseJwt(request)
         if (jwtToken.isNullOrBlank()) {
             filterChain.doFilter(request, response)

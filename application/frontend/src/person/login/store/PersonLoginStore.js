@@ -1,4 +1,3 @@
-
 import authService from "@/person/login/service/LoginService";
 
 export const PersonLoginStore = {
@@ -25,7 +24,6 @@ export const PersonLoginStore = {
   actions: {
     async login(context, person) {
       const response = await authService.login(person);
-      debugger;
       // Dit slaat op een string type..?
       if (typeof response === 'string') {
         context.commit("loginFailure");

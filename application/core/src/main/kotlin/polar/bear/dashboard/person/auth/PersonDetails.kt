@@ -3,7 +3,7 @@ package polar.bear.dashboard.person.auth
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
-import polar.bear.dashboard.person.domain.PersonDetail
+import polar.bear.dashboard.person.auth.domain.PersonDetail
 
 class PersonDetails(
     private val personDetail: PersonDetail

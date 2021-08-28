@@ -1,51 +1,25 @@
 package polar.bear.dashboard.person
 
-import java.lang.RuntimeException
-import org.springframework.dao.DataAccessException
-import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert
-import polar.bear.dashboard.person.PersonRowMapperUtil.Companion.personDetailsMapper
-import polar.bear.dashboard.person.PersonRowMapperUtil.Companion.userProfileRowMapper
-import polar.bear.dashboard.person.domain.Person
-import polar.bear.dashboard.person.domain.PersonDetail
-import polar.bear.dashboard.person.domain.PersonProfile
-import polar.bear.dashboard.person.domain.Role
-import polar.bear.dashboard.person.infra.PersonRepository
-import java.util.Optional
 import java.util.UUID
 import javax.sql.DataSource
+import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.jdbc.core.RowMapper
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert
 import org.springframework.transaction.annotation.Transactional
+import polar.bear.dashboard.error.CouldNotInsertPersonException
+import polar.bear.dashboard.error.CouldNotInsertRoleForPersonException
+import polar.bear.dashboard.person.auth.domain.Person
+import polar.bear.dashboard.person.auth.domain.Role
+import polar.bear.dashboard.person.domain.TokenId
+import polar.bear.dashboard.person.infra.PersonRepository
+import polar.bear.dashboard.person.verifytoken.domain.PersonRegisteredSuccess
 
 open class PersonRepositoryImpl(
     dataSource: DataSource
 ) : PersonRepository {
 
     private val jdbcTemplate = JdbcTemplate(dataSource)
-
-    override fun loadUserByUsername(username: String): Optional<PersonDetail> {
-        val getUserDetails = """
-            SELECT p.username, p.password, p.active, r.name
-            FROM person p
-                     JOIN person_role pr ON p.id = pr.person_id
-                     JOIN role r ON r.id = pr.role_id
-            WHERE p.username = ?;
-        """.trimIndent()
-
-        return try {
-
-            val result = jdbcTemplate.queryForObject(
-                getUserDetails,
-                personDetailsMapper(),
-                username
-            )
-
-            return Optional.ofNullable(result)
-
-        } catch (exception: DataAccessException) {
-            Optional.empty()
-        }
-    }
 
     override fun usernameExists(username: String): Boolean {
         val usernameExistsQuery = """
@@ -78,6 +52,29 @@ open class PersonRepositoryImpl(
         return result > 0
     }
 
+    override fun getUsernameAndEmail(tokenId: TokenId): PersonRepository.UsernameAndEmailResponse {
+        val query = """
+            select p.username,
+                   p.email
+            from person p 
+            where p.token_id = ?
+        """.trimIndent()
+
+        return jdbcTemplate.queryForObject(
+            query,
+            toUsernameAndEmailResponse,
+            tokenId.value
+        )!!
+    }
+
+    private val toUsernameAndEmailResponse: RowMapper<PersonRepository.UsernameAndEmailResponse> =
+        RowMapper { rs, _ ->
+            PersonRepository.UsernameAndEmailResponse(
+                username = rs.getString("username"),
+                email = rs.getString("email")
+            )
+        }
+
     override fun getPersonIdFromUsername(username: String): UUID {
         val getPersonId = """
             SELECT id
@@ -92,27 +89,6 @@ open class PersonRepositoryImpl(
         )
     }
 
-    override fun getPersonProfile(personId: UUID): Optional<PersonProfile> {
-        val getUserProfileQuery = """
-            SELECT username, password, email
-            FROM person p
-            WHERE p.id = ?
-        """.trimIndent()
-
-        return try {
-            val result = jdbcTemplate.queryForObject(
-                getUserProfileQuery,
-                userProfileRowMapper(),
-                personId
-            )
-
-            return Optional.ofNullable(result)
-
-        } catch (exception: DataAccessException) {
-            Optional.empty()
-        }
-    }
-
     // TODO: check if this really works in a transaction like this.
     @Transactional
     override fun save(person: Person): Boolean {
@@ -121,15 +97,15 @@ open class PersonRepositoryImpl(
             val roleParams = createPersonRoleParamMap(person)
 
             val affectedRows = insertValue(personParams, "person")
-            if (affectedRows <= 0) {
-                throw RuntimeException("Could not update person!")
+            if (affectedRows != 1) {
+                throw CouldNotInsertPersonException("Could not insert person with person id: ${person.id}!")
             }
 
             val updatedRows = insertValue(roleParams, "person_role")
-            if (updatedRows <= 0) {
-                throw RuntimeException("Could not update person_role!")
+            if (updatedRows != 1) {
+                throw CouldNotInsertRoleForPersonException("Could not update person_role!")
             }
-        } catch (error: Exception){
+        } catch (error: Exception) {
             return false
         }
 
@@ -142,9 +118,9 @@ open class PersonRepositoryImpl(
         personParams["username"] = person.username
         personParams["email"] = person.email
         personParams["password"] = person.password
-        personParams["token"] = person.token
         personParams["active"] = person.active
         personParams["creation_date"] = person.creationDate
+        personParams["token_id"] = person.tokenId
         return personParams
     }
 
@@ -173,5 +149,18 @@ open class PersonRepositoryImpl(
             UUID::class.java,
             role.name
         )
+    }
+
+    override fun successfulRegistered(personRegistered: PersonRegisteredSuccess) {
+        val deleteQuery = "delete from token where person_id = '${personRegistered.personId}'"
+        val updatePersonQuery = """
+            update person
+            set token_id = null,
+                active   = true
+            where id = '${personRegistered.personId}'
+        """.trimIndent()
+
+        jdbcTemplate.update(deleteQuery)
+        jdbcTemplate.update(updatePersonQuery)
     }
 }
