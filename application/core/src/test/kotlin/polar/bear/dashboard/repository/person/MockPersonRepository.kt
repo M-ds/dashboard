@@ -31,8 +31,14 @@ class MockPersonRepository : PersonRepository {
         this.emailExists = exists
     }
 
+    private var usernameAndEmailResponse: PersonRepository.UsernameAndEmailResponse? = null
+
     override fun getUsernameAndEmail(tokenId: TokenId): PersonRepository.UsernameAndEmailResponse {
-        TODO("Not yet implemented")
+        return this.usernameAndEmailResponse!!
+    }
+
+    fun setUsernameEmailResponse(usernameAndEmailResponse: PersonRepository.UsernameAndEmailResponse){
+        this.usernameAndEmailResponse = usernameAndEmailResponse
     }
 
     fun setPersonIdForUsername(personId: UUID) {
@@ -56,6 +62,6 @@ class MockPersonRepository : PersonRepository {
     }
 
     override fun successfulRegistered(personRegistered: PersonRegisteredSuccess) {
-        TODO("Not yet implemented")
+        //This is a void function. In the real code something really does happen.
     }
 }
