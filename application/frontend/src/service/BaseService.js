@@ -8,10 +8,8 @@ export class BaseService {
    * With containing a token which is necessary to do requests.
    */
   getAuthHeader() {
-    let personToken = JSON.parse(localStorage.getItem("personToken"));
-    if (personToken) {
-      return { Authorization: `Bearer ${ personToken }` };
-    }
+    const personToken = JSON.parse(localStorage.getItem("personToken"));
+    if (personToken) return { Authorization: `Bearer ${ personToken }` };
     return "";
   }
 

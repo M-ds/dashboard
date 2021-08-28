@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert
 import org.springframework.transaction.annotation.Transactional
+import polar.bear.dashboard.error.CouldNotInsertPersonException
+import polar.bear.dashboard.error.CouldNotInsertRoleForPersonException
 import polar.bear.dashboard.person.auth.domain.Person
 import polar.bear.dashboard.person.auth.domain.Role
 import polar.bear.dashboard.person.domain.TokenId
@@ -96,12 +98,12 @@ open class PersonRepositoryImpl(
 
             val affectedRows = insertValue(personParams, "person")
             if (affectedRows != 1) {
-                throw RuntimeException("Could not update person!")
+                throw CouldNotInsertPersonException("Could not insert person with person id: ${person.id}!")
             }
 
             val updatedRows = insertValue(roleParams, "person_role")
             if (updatedRows != 1) {
-                throw RuntimeException("Could not update person_role!")
+                throw CouldNotInsertRoleForPersonException("Could not update person_role!")
             }
         } catch (error: Exception) {
             return false

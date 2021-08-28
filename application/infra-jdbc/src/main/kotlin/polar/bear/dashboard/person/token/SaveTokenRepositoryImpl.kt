@@ -4,7 +4,7 @@ import javax.sql.DataSource
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert
-import polar.bear.dashboard.exception.CouldNotInsertException
+import polar.bear.dashboard.error.CouldNotInsertException
 import polar.bear.dashboard.person.signup.domain.Token
 import polar.bear.dashboard.person.signup.infra.SaveTokenRepository
 

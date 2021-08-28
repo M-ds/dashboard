@@ -52,7 +52,7 @@ class VerifyTokenUseCaseImpl(
 
         val updateToken = UpdateToken(
             tokenId = tokenId,
-            newToken = newToken, 
+            newToken = newToken,
             newExpirationDate = newExpirationDate
         )
 
